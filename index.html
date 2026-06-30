@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SWEEPER.EXE — Found on a hard drive. Do not run.</title>
-<meta name="description" content="Recovered from an unregistered copy of SWEEPER.EXE. Trial expired. Session 00047 of 00003 allowed. Tape is still running.">
+<title>SWEEPER.EXE — Minesweeper with a second life</title>
+<meta name="description" content="Daily Minesweeper and four-level runs inside a Windows 98 desktop. Solve the daily board, share a result, or build a run with tools and modules.">
 <meta name="theme-color" content="#000000">
 <meta property="og:title" content="SWEEPER.EXE">
-<meta property="og:description" content="Recovered from an unregistered copy of SWEEPER.EXE. Trial expired. Session 00047. Tape is still running.">
+<meta property="og:description" content="A shared daily board and timed Minesweeper runs inside a Windows 98 desktop. Free to play, with progress saved in your browser.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sweeperexe.vercel.app">
-<meta property="og:image" content="https://sweeperexe.vercel.app/assets/screenshots/desktop.gif">
+<meta property="og:image" content="https://sweeperexe.vercel.app/assets/screenshots/launcher.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SWEEPER.EXE">
-<meta name="twitter:description" content="Recovered from an unregistered copy of SWEEPER.EXE. Trial expired. Session 00047. Tape is still running.">
-<meta name="twitter:image" content="https://sweeperexe.vercel.app/assets/screenshots/desktop.gif">
+<meta name="twitter:description" content="A shared daily board and timed Minesweeper runs inside a Windows 98 desktop. Free to play, with progress saved in your browser.">
+<meta name="twitter:image" content="https://sweeperexe.vercel.app/assets/screenshots/launcher.png">
 <link rel="canonical" href="https://sweeperexe.vercel.app/">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=VT323&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SWEEPER.EXE","description":"Minesweeper disguised as cursed shareware from 1997. Arcade pressure, escalating depths, CRT monitor, VHS artifacts, Windows 98 desktop.","url":"https://sweeperexe.vercel.app","applicationCategory":"Game","operatingSystem":"Web","author":{"@type":"Person","name":"Thomas Ou","url":"https://thomasou.com"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SWEEPER.EXE","description":"Daily Minesweeper and timed four-level runs with tools, playable modules, and a Windows 98 desktop.","url":"https://sweeperexe.vercel.app","applicationCategory":"Game","operatingSystem":"Web","author":{"@type":"Person","name":"Thomas Ou","url":"https://thomasou.com"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <style>
 :root {
   --bg: #0A0808;
@@ -511,10 +511,10 @@ body{
 .modifier-preview-label{font-size:8px;color:var(--text-dim);letter-spacing:3px;text-transform:uppercase;margin-top:10px;font-family:var(--font-mono);}
 
 /* ======== MODIFIER EFFECTS ======== */
-.cell.fogged{background:rgba(0,0,0,0.85)!important;border-color:rgba(255,255,255,0.02)!important;cursor:not-allowed;box-shadow:none!important;}
+.cell.fogged{background:rgba(0,0,0,0.85)!important;border-color:rgba(255,255,255,0.12)!important;cursor:pointer;box-shadow:none!important;}
 .cell.fogged:hover{transform:none!important;background:rgba(0,0,0,0.85)!important;border-color:rgba(255,255,255,0.02)!important;}
 .cell.echo-fade .num-display{animation:echo-fade 10s ease-out forwards;}
-.cell.echo-fade:hover .num-display{opacity:1!important;}
+.cell.echo-fade:hover .num-display,.cell.echo-fade:focus .num-display,.cell.echo-fade.inspect-source .num-display{opacity:1!important;}
 @keyframes echo-fade{
   0%,40%{opacity:1;}
   100%{opacity:0.08;}
@@ -1265,23 +1265,13 @@ body.exe-mode .combo{color:var(--xta,#0A1163)!important;text-shadow:1px 1px 0 va
   95.5%{top:60%;opacity:0.6;}
   96%{top:-60px;opacity:0;}
 }
-/* ======== MOBILE VIEWPORT GATE ======== */
-#viewport-gate{display:none;position:fixed;inset:0;z-index:9999;background:#000;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;font-family:'Tahoma','Geneva',sans-serif;}
-#viewport-gate .vg-icon{font-size:48px;margin-bottom:24px;color:#808080;}
-#viewport-gate .vg-title{font-size:14px;font-weight:700;color:#C8C8C8;margin-bottom:12px;letter-spacing:1px;}
-#viewport-gate .vg-msg{font-size:11px;color:#808080;line-height:1.6;max-width:280px;}
-@media (max-width:640px){
-  #viewport-gate{display:flex;}
-  #game-root{display:none!important;}
-}
-
 /* ======== TOAST ======== */
 .toast-msg{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-  pointer-events:none;z-index:600;
-  font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  text-shadow:0 0 20px currentColor;
-  animation:toast-anim 1s ease-out forwards;
+  position:fixed;bottom:54px;left:50%;transform:translateX(-50%);
+  pointer-events:none;z-index:600;box-sizing:border-box;
+  width:max-content;max-width:calc(100vw - 32px);padding:10px 14px;
+  border:1px solid #555;background:#fff8d8;box-shadow:2px 2px 0 #111;
+  font:13px/1.45 Tahoma,sans-serif;color:#222!important;text-align:center;
 }
 @keyframes toast-anim{
   0%{opacity:0;transform:translate(-50%,-50%) scale(0.8);}
@@ -1289,15 +1279,158 @@ body.exe-mode .combo{color:var(--xta,#0A1163)!important;text-shadow:1px 1px 0 va
   80%{opacity:1;transform:translate(-50%,-55%) scale(1);}
   100%{opacity:0;transform:translate(-50%,-60%) scale(0.95);}
 }
+
+/* Readable play surfaces inside the original desktop. */
+:root{--num-1:#153e9f;--num-2:#17652b;--num-3:#9c2020;--num-4:#49247f;--num-5:#773b12;--num-6:#075b62;--num-7:#343420;--num-8:#333333;}
+body.exe-mode{padding:20px 16px;}
+body.exe-mode .game-container{width:min(1040px,calc(100vw - 32px));padding:22px 22px 42px;}
+body.exe-mode .exe-wrap,body.exe-mode.exe-closed .exe-wrap{height:clamp(620px,calc(100dvh - 110px),850px);min-height:620px;}
+body.exe-mode .exe-wrap::before{opacity:.18;}
+body.exe-mode .exe-wrap::after{background:radial-gradient(ellipse at 50% 50%,transparent 70%,rgba(0,0,0,.25));}
+body.exe-mode::after{opacity:.14;}
+body.exe-mode .exe-wrap .exe-win{width:min(720px,calc(100% - 110px));max-height:calc(100% - 60px);}
+body.exe-mode .exe-wrap .exe-win[data-win-id="sweeper"]{top:28px;left:55%;}
+body.exe-mode .exe-wrap .exe-win[data-win-id="savedgames"],body.exe-mode .exe-wrap .exe-win[data-win-id="confirm"]{top:70px;left:50%;transform:translateX(-50%);width:min(540px,calc(100% - 32px));}
+body.exe-mode .exe-wrap .exe-desk-icon{width:88px;font-size:12px;line-height:1.35;cursor:pointer;}
+body.exe-mode .exe-wrap .exe-desk-icon.exe-di1{top:16px;left:6px;}
+body.exe-mode .exe-wrap .exe-desk-icon.exe-di2{top:182px;left:6px;}
+body.exe-mode .exe-wrap .exe-desk-icon.exe-di3{top:98px;left:6px;right:auto;}
+body.exe-mode .exe-wrap .exe-desk-icon.exe-di4{top:266px;left:6px;right:auto;}
+body.exe-mode .exe-wrap .exe-desk-icon.exe-di5{top:350px;left:6px;}
+body.exe-mode .exe-wrap .exe-desk-icon.exe-di6{top:434px;left:6px;right:auto;}
+.exe-titlebar{min-height:34px;font-size:13px;padding:4px 5px 4px 9px;}
+.exe-tbtn{width:26px;height:24px;font-size:16px;}
+.exe-toolbar{display:flex;align-items:center;gap:4px;padding:6px 10px;border-bottom:1px solid var(--xsm);}
+.exe-toolbar button{background:none;border:0;padding:7px 9px;font:13px Tahoma,sans-serif;color:#111;cursor:pointer;}
+.exe-toolbar button:hover{background:#dedede;}
+.exe-launcher{color:#171717;padding:18px 22px;}
+.exe-launch-header{padding-bottom:14px;border-bottom:1px solid #929292;margin-bottom:16px;}
+.exe-launch-header h1{font:700 clamp(24px,3vw,28px)/1.15 Tahoma,sans-serif;letter-spacing:-1px;color:#0a2455;margin:0 0 10px;}
+.exe-launch-header p{font:14px/1.65 Tahoma,sans-serif;max-width:470px;}
+.exe-launch-layout{display:grid;grid-template-columns:1fr 1.15fr;gap:28px;}
+.exe-launcher h2{font:700 13px Tahoma,sans-serif;margin-bottom:10px;}
+.exe-level-list{list-style:none;padding:0;font:13px/1.4 Tahoma,sans-serif;}
+.exe-level-list li{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px solid #a7a7a7;}
+.exe-level-list span{color:#454545;font-variant-numeric:tabular-nums;}
+.exe-module-list{display:flex;flex-direction:column;border:1px solid #707070;background:#eee;padding:3px;gap:2px;}
+.exe-module{background:transparent;border:0;text-align:left;font:13px/1.45 Tahoma,sans-serif;color:#171717;padding:7px 10px;cursor:pointer;}
+.exe-module strong,.exe-module small{display:block;}
+.exe-module small{font-size:12px;color:#494949;margin-top:2px;}
+.exe-module[aria-checked="true"]{background:var(--xsel);color:white;}
+.exe-module[aria-checked="true"] small{color:#d6e4ff;}
+.exe-module:disabled{cursor:not-allowed;color:#666;}
+.exe-launch-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+.exe-run-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 14px;flex-wrap:wrap;}
+.exe-run-heading .exe-launch-actions{margin:0;}
+.exe-run-heading h2{margin:0;}
+.exe-launch-actions .exe-btn{min-width:110px;}
+.exe-btn{min-height:36px;font-size:13px;padding:7px 14px;}
+.exe-launch-foot{border-top:1px solid #929292;margin-top:14px;padding-top:10px;font:12px/1.6 Tahoma,sans-serif;display:flex;justify-content:space-between;gap:12px;color:#434343;}
+.exe-launch-note{font:12px/1.4 Tahoma,sans-serif;color:#494949;margin-top:12px;}
+.exe-status{font-size:11px;}
+.exe-sb-cell{font-size:11px;min-height:24px;display:flex;align-items:center;}
+.exe-taskbar{min-height:36px;}
+.exe-start-btn,.exe-taskbar-app{font-size:12px;min-height:28px;}
+.exe-sound-btn,.exe-effects-btn{min-width:30px;min-height:28px;}
+.exe-effects-btn{font:11px Tahoma,sans-serif;padding:4px;color:#111;background:#c0c0c0;border:1px solid #666;cursor:pointer;}
+body.effects-off::after,body.effects-off .exe-wrap::before,body.effects-off .exe-wrap::after,body.effects-off .exe-track,body.effects-off .exe-chroma,body.effects-off .exe-glitchbar,body.effects-off .vhs-tear,body.effects-off .vhs-hold{display:none!important;}
+body.effects-off #screen,body.effects-off .game-container::after{animation:none!important;}
+body.exe-mode .status-bar{padding:12px;gap:10px;}
+body.exe-mode .status-item{padding:4px 10px;min-height:46px;display:flex;flex-direction:column;gap:4px;}
+body.exe-mode .status-label{font-size:11px;font-weight:400;}
+body.exe-mode .status-value{font-size:22px;}
+body.exe-mode .timer-bar-wrap{height:5px;margin:0 12px 8px;}
+body.exe-mode .level-bar{border:0;gap:8px;padding:0 12px 10px;}
+body.exe-mode .level-rune{height:22px;width:22px;font-size:12px;}
+body.exe-mode .powerup-bar:empty{display:none;}
+body.exe-mode .powerup-badge{min-height:32px;font-size:11px;cursor:pointer;}
+body.exe-mode .game-screen{margin:0 12px;background:#9e9e9e;overflow:auto;max-height:calc(100dvh - 320px);padding:7px;}
+body.exe-mode .game-screen::after{display:none;}
+body.exe-mode .grid{width:max-content;margin:auto;}
+body.exe-mode .controls{padding:10px 12px;flex-wrap:wrap;justify-content:space-between;}
+body.exe-mode .controls .btn{min-height:36px;font-size:12px;min-width:56px;padding:6px 12px;}
+.exe-control-group{display:flex;gap:5px;}
+.exe-daily-card{padding:14px;border:1px solid #969696;background:#d2d2d2;margin-bottom:18px;color:#222;}
+.exe-daily-card h2{margin:0 0 6px;font-size:15px;}
+.exe-daily-card p{font:12px/1.5 Tahoma,sans-serif;margin:6px 0;}
+.exe-daily-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.daily-result-note{font:13px/1.5 Tahoma,sans-serif;color:#333;padding:0 18px;}
+.daily-attempt-label{font:12px/1.5 Tahoma,sans-serif;color:#333;}
+body.exe-mode .daily-result .go-actions{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;}
+#daily-copy-text{box-sizing:border-box;width:100%;font:13px/1.5 monospace;padding:10px;resize:vertical;}
+body.exe-mode .cell.daily-start{background:#fff2ba!important;color:#102b5a!important;font-size:12px!important;font-weight:bold;outline:2px solid #102b5a;outline-offset:-4px;}
+.exe-control-group [aria-pressed="true"]{background:#d9d9d9!important;box-shadow:inset 1px 1px #404040!important;}
+.exe-board-hint{font:12px/1.5 Tahoma,sans-serif;color:#353535;padding:0 12px 10px;text-align:center;}
+body.exe-mode .cell.inspect-neighbor{box-shadow:inset 0 0 0 2px #ad7c18!important;}
+body.exe-mode .cell.inspect-source{outline:2px solid #173b6c;outline-offset:-2px;z-index:1;}
+body.exe-mode .cell.review-mine{background:#d1cbc2;color:#292621;border:1px solid #999;}
+body.exe-mode .cell.wrong-flag{background:#f4d7d1;color:#8a1e15;font-weight:bold;}
+body.exe-mode .cell.review-safe{opacity:.6;}
+body.exe-mode .exe-board-hint{min-height:46px;box-sizing:border-box;}
+body.exe-mode .exe-wrap .exe-game-window{display:flex;flex-direction:column;overflow:hidden;}
+body.exe-mode .exe-game-window> :not(.game-screen):not(.modal-overlay){flex-shrink:0;}
+body.exe-mode .exe-game-window .game-screen{flex:0 1 auto;min-height:80px;max-height:none;}
+body.exe-mode .exe-game-window .game-screen.board-paused{overflow:hidden;}
+body.exe-mode .exe-game-window .exe-board-hint{height:54px;min-height:54px;overflow:auto;}
+.exe-pause{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#bcbcbc;color:#111;gap:12px;padding:24px;text-align:center;font:14px/1.5 Tahoma,sans-serif;}
+.exe-pause h2{font-size:24px;color:#0a2455;}
+.exe-save-list{padding:12px;color:#111;font:13px/1.5 Tahoma,sans-serif;}
+.exe-save-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #999;}
+.exe-save-row:last-child{border:0;}
+.exe-save-row small{display:block;color:#4b4b4b;margin-top:4px;}
+.exe-dialog-content{padding:22px;color:#111;font:14px/1.6 Tahoma,sans-serif;}
+.exe-dialog-actions{display:flex;justify-content:flex-end;gap:8px;padding:0 22px 18px;}
+body.exe-mode .modal{min-width:0;width:min(480px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;}
+body.exe-mode .modal h2{font-size:13px;min-height:30px;}
+body.exe-mode .modal .flavor{font:14px/1.5 Tahoma,sans-serif;font-style:normal;}
+body.exe-mode .modal .btn{min-height:36px;font-size:13px;}
+body.exe-mode .modal .shop-grid{display:flex;flex-direction:column;}
+body.exe-mode .modal .shop-item{display:grid;grid-template-columns:1fr auto;gap:5px 12px;text-align:left;padding:10px;}
+body.exe-mode .modal .shop-item .s-name,body.exe-mode .modal .shop-item .s-price{font-size:12px;}
+.s-desc{grid-column:1/-1;font:12px/1.5 Tahoma,sans-serif;}
+body.exe-mode .exe-cbody{font:13px/1.6 Tahoma,sans-serif;}
+.exe-topic{min-height:32px;font-size:12px;}
+body.exe-mode :focus-visible{outline:2px dotted #08106a!important;outline-offset:2px;box-shadow:none;}
+body.exe-mode .cell:focus-visible{outline-offset:-4px;position:relative;z-index:2;}
+body.exe-mode .exe-module:focus-visible{outline-offset:-3px;outline-color:#fff!important;}
+@media(max-width:700px){
+ body.exe-mode{padding:0;justify-content:flex-start;}
+ #screen,#game-wrapper{width:100%;}
+ body.exe-mode .game-container{padding:0;width:100%;max-width:none;border-radius:0;}
+ body.exe-mode .game-container::before,body.exe-mode .game-container::after{display:none;}
+ body.exe-mode .exe-wrap,body.exe-mode.exe-closed .exe-wrap{height:100dvh;min-height:540px;border-radius:0;padding:0;}
+ body.exe-mode .exe-wrap .exe-win{width:calc(100% - 12px);max-height:calc(100% - 56px);left:6px!important;top:6px!important;transform:none!important;}
+ body.exe-mode .exe-wrap .exe-win[data-win-id="sweeper"]{left:6px;}
+ .exe-launcher{padding:18px;}.exe-launch-layout{grid-template-columns:1fr;gap:18px;}
+ .exe-level-overview{display:none;}.exe-launch-header{padding-bottom:14px;margin-bottom:16px;}
+ .exe-launch-foot{display:block;}.exe-launch-foot span{display:block;}
+ .exe-module{min-height:48px;}.exe-btn,.exe-tbtn,body.exe-mode .controls .btn{min-height:44px;}
+ .exe-tbtn{min-width:36px;}.exe-toolbar button{min-height:40px;}
+ body.exe-mode .status-bar{padding:8px;gap:6px;}body.exe-mode .status-item{padding:4px;}
+ body.exe-mode .status-value{font-size:18px;}body.exe-mode .game-screen{margin:0 8px;max-height:calc(100dvh - 310px);}
+ .exe-taskbar-app{max-width:120px;overflow:hidden;}.exe-taskbar-clock{display:none;}
+ .exe-launch-actions{gap:6px;}.exe-launch-actions .exe-btn{flex:1;min-width:90px;}
+ body.exe-mode .controls{gap:8px;padding:8px;}.exe-board-hint{font-size:11px;}
+ .exe-save-row{align-items:flex-start;flex-wrap:wrap;}
+}
+@media(max-height:700px){
+ body.exe-mode{padding:0;}
+ body.exe-mode .game-container{padding:0;}
+ body.exe-mode .exe-wrap,body.exe-mode.exe-closed .exe-wrap{height:100dvh;min-height:0;}
+ body.exe-mode .exe-wrap .exe-win{top:6px!important;max-height:calc(100% - 52px);}
+ body.exe-mode .exe-game-window .status-bar{padding:6px 8px;}
+ body.exe-mode .exe-game-window .level-bar{padding-bottom:5px;}
+}
+@media(max-height:450px){
+ body.exe-mode .exe-game-window .exe-status{display:none;}
+ body.exe-mode .exe-game-window .exe-board-hint{height:40px;min-height:40px;}
+}
+@media(prefers-reduced-motion:reduce){#screen,body.exe-mode::after,body.exe-mode .game-container::after{animation:none!important;}.exe-track,.exe-glitchbar,.vhs-tear,.vhs-hold{display:none!important;}}
+
 </style>
 </head>
 <body class="exe-mode">
 <a href="#game-root" class="skip-link">Skip to game</a>
-<div id="viewport-gate">
-  <div class="vg-icon">&#9632;</div>
-  <div class="vg-title">SWEEPER.EXE</div>
-  <div class="vg-msg">This program requires a wider viewport to run.<br><br>Please use a desktop or laptop computer.<br><br><span style="color:#404040;font-size:10px;">MINIMUM RESOLUTION: 640 x 480</span></div>
-</div>
 <div id="screen">
 
 <noscript><div style="text-align:center;padding:40px;color:#C8C8D4;font-family:monospace;">SWEEPER requires JavaScript to play.</div></noscript>
@@ -1343,8 +1476,17 @@ const ICONS = {
 // ============================================================
 // SOUND ENGINE (atmospheric, darker)
 // ============================================================
+
+function readStored(key,fallback){
+  try{const value=localStorage.getItem(key);return value===null?fallback:JSON.parse(value);}catch{return fallback;}
+}
+function writeStored(key,value){
+  try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{return false;}
+}
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
 class SoundEngine {
-  constructor(){this.muted=false;this.ctx=null;this.ambientNode=null;}
+  constructor(){this.muted=readStored('sweeper_muted',false)===true;this.ctx=null;this.ambientNode=null;}
 
   init(){
     if(this.ctx)return;
@@ -1356,6 +1498,9 @@ class SoundEngine {
 
   toggle(){
     this.muted=!this.muted;
+    writeStored('sweeper_muted',this.muted);
+    const task=document.getElementById('exe-sound-btn');
+    if(task){task.textContent=this.muted?'Sound off':'Sound on';task.setAttribute('aria-pressed',String(!this.muted));}
     const btn=document.getElementById('mute-btn');
     btn.innerHTML=this.muted?'&#215;':'&#9835;';
     btn.setAttribute('aria-pressed',String(this.muted));
@@ -1711,7 +1856,7 @@ const NARRATOR={
   idle:['Process running.','Memory address unknown.','Unauthorized access detected.','Do not close this window.','Session still active.'],
   levelComplete:['Level cleared.','Access granted to next level.','Proceeding...','Deeper into the file system.','Final level reached.'],
   gameOver:['Process terminated unexpectedly.','Session dumped to /dev/null.','Fatal exception.','Segfault.','Restarting...'],
-  danger:['WARNING: Clock underflow imminent.','System resources critical.','Time allocation exhausted.','Kill signal pending.'],
+  danger:['WARNING: Time is running out.','System resources critical.','Time allocation exhausted.','Kill signal pending.'],
   // Reactive lines
   fastClear:['Input speed anomalous.','Rapid traversal logged.','You are ahead of the expected curve.','The process cannot keep up with you.'],
   slowClear:['Methodical.','Careful read/write pattern detected.','Low throughput. Stable.','Each byte verified.'],
@@ -1787,13 +1932,169 @@ const LEVELS=[
   {rows:16,cols:16,mines:50,time:110},
 ];
 const NUM_COLORS=['','var(--num-1)','var(--num-2)','var(--num-3)','var(--num-4)','var(--num-5)','var(--num-6)','var(--num-7)','var(--num-8)'];
+const DAILY_BOARD={rows:12,cols:12,mines:25,time:180,startRow:6,startCol:6,version:'1'};
+function sweeperDailyDate(value){
+  if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value))return null;
+  const date=new Date(value+'T00:00:00Z');
+  return Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===value?value:null;
+}
+function sweeperDailySeed(date){
+  let seed=2166136261;
+  for(const character of 'sweeper-daily-v1:'+date){seed=Math.imul(seed^character.charCodeAt(0),16777619);}
+  return seed>>>0;
+}
+
+function sweeperNeighbors(rows, cols) {
+  return Array.from({length: rows * cols}, (_, id) => {
+    const neighbors = [], row = Math.floor(id / cols), col = id % cols;
+    for (let dr = -1; dr <= 1; dr++) for (let dc = -1; dc <= 1; dc++) {
+      if (!dr && !dc) continue;
+      const r = row + dr, c = col + dc;
+      if (r >= 0 && r < rows && c >= 0 && c < cols) neighbors.push(r * cols + c);
+    }
+    return neighbors;
+  });
+}
+
+// This function receives public information only: -1 means an unrevealed clue.
+function sweeperInferMoves(clues, knownMines, totalMines, neighbors) {
+  const safe = new Set(), mines = new Set(), constraints = [], seen = new Set();
+  const unknown = [];
+  let inferredCount = 0;
+  for (let id = 0; id < clues.length; id++) {
+    if (knownMines[id]) inferredCount++;
+    else if (clues[id] < 0) unknown.push(id);
+  }
+  const remaining = totalMines - inferredCount;
+  if (remaining === 0) return {safe: unknown, mines: []};
+  if (remaining === unknown.length) return {safe: [], mines: unknown};
+
+  const add = (cells, count) => {
+    if (!cells.length) return;
+    if (count === 0) { cells.forEach(id => safe.add(id)); return; }
+    if (count === cells.length) { cells.forEach(id => mines.add(id)); return; }
+    const key = cells.join(',');
+    if (seen.has(key)) return;
+    seen.add(key);
+    constraints.push({cells, count, members: new Set(cells)});
+  };
+  for (let id = 0; id < clues.length; id++) {
+    if (clues[id] < 0) continue;
+    const cells = [];
+    let count = clues[id];
+    for (const neighbor of neighbors[id]) {
+      if (knownMines[neighbor]) count--;
+      else if (clues[neighbor] < 0) cells.push(neighbor);
+    }
+    add(cells, count);
+  }
+  if (safe.size || mines.size) return {safe: [...safe], mines: [...mines]};
+
+  // A subset with a known mine count can be subtracted from a larger set.
+  // The growing array also compares every newly derived constraint.
+  for (let i = 0; i < constraints.length; i++) {
+    for (let j = 0; j < i; j++) {
+      let small = constraints[j], big = constraints[i];
+      if (small.cells.length > big.cells.length) [small, big] = [big, small];
+      if (small.cells.length === big.cells.length) continue;
+      if (!small.cells.every(id => big.members.has(id))) continue;
+      add(big.cells.filter(id => !small.members.has(id)), big.count - small.count);
+    }
+    if (safe.size || mines.size) return {safe: [...safe], mines: [...mines]};
+  }
+  return {safe: [], mines: []};
+}
+
+function sweeperSolveBoard(board, mineCount, start, neighbors) {
+  const clues = new Int8Array(board.length).fill(-1);
+  const knownMines = new Uint8Array(board.length);
+  let revealed = 0, steps = 0;
+  const reveal = id => {
+    const queue = [id];
+    while (queue.length) {
+      const next = queue.pop();
+      if (clues[next] >= 0) continue;
+      // Board truth is consulted only to simulate a requested reveal.
+      if (board[next]) return false;
+      const clue = neighbors[next].reduce((count, neighbor) => count + board[neighbor], 0);
+      clues[next] = clue;
+      revealed++;
+      if (clue === 0) for (const neighbor of neighbors[next]) {
+        if (clues[neighbor] < 0) queue.push(neighbor);
+      }
+    }
+    return true;
+  };
+  if (!reveal(start)) return {solved: false, steps};
+  while (revealed < board.length - mineCount) {
+    const moves = sweeperInferMoves(clues, knownMines, mineCount, neighbors);
+    if (!moves.safe.length && !moves.mines.length) return {solved: false, steps};
+    for (const id of moves.mines) knownMines[id] = 1;
+    for (const id of moves.safe) if (!reveal(id)) return {solved: false, steps};
+    steps++;
+  }
+  return {solved: true, steps};
+}
+
+function sweeperSeededRandom(seed) {
+  return () => {
+    seed = (seed + 0x6D2B79F5) | 0;
+    let value = Math.imul(seed ^ seed >>> 15, seed | 1);
+    value ^= value + Math.imul(value ^ value >>> 7, value | 61);
+    return ((value ^ value >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function sweeperGenerateBoard(rows, cols, mineCount, start, random = Math.random) {
+  const neighbors = sweeperNeighbors(rows, cols);
+  const safeRow = Math.floor(start / cols), safeCol = start % cols;
+  const candidates = Array.from({length: rows * cols}, (_, id) => id).filter(id =>
+    Math.abs(Math.floor(id / cols) - safeRow) > 1 || Math.abs(id % cols - safeCol) > 1);
+  if (mineCount > candidates.length) return null;
+  const candidate = rng => {
+    const positions = [...candidates], board = new Uint8Array(rows * cols);
+    for (let i = 0; i < mineCount; i++) {
+      const j = i + Math.floor(rng() * (positions.length - i));
+      [positions[i], positions[j]] = [positions[j], positions[i]];
+      board[positions[i]] = 1;
+    }
+    return board;
+  };
+  for (let attempt = 0; attempt < 64; attempt++) {
+    const board = candidate(random);
+    const result = sweeperSolveBoard(board, mineCount, start, neighbors);
+    if (result.solved && result.steps > 0) return board;
+  }
+
+  // Verified for every first click in all eight current normal configurations.
+  const fallbackRandom = sweeperSeededRandom(rows * 100000 + mineCount * 1000 + start);
+  for (let attempt = 0; attempt < 64; attempt++) {
+    const board = candidate(fallbackRandom);
+    const result = sweeperSolveBoard(board, mineCount, start, neighbors);
+    if (result.solved && result.steps > 0) return board;
+  }
+
+  // A far-edge mine band is a final, usually trivial, certified fallback.
+  const reverseRows = safeRow < rows / 2, reverseCols = safeCol < cols / 2;
+  const board = new Uint8Array(rows * cols);
+  let placed = 0;
+  for (let row = 0; row < rows && placed < mineCount; row++) {
+    for (let col = 0; col < cols && placed < mineCount; col++) {
+      const r = reverseRows ? rows - row - 1 : row, c = reverseCols ? cols - col - 1 : col;
+      if (Math.abs(r - safeRow) <= 1 && Math.abs(c - safeCol) <= 1) continue;
+      board[r * cols + c] = 1;
+      placed++;
+    }
+  }
+  return sweeperSolveBoard(board, mineCount, start, neighbors).solved ? board : null;
+}
 
 class Game{
-  constructor(){this.hardMode=false;this.gameClass='sweeper';this.reset();}
+  constructor(){this.hardMode=false;this.gameClass='sweeper';this.dailyDate=null;this.dailyAttempt=0;this.reset();}
   reset(){
     this.level=0;this.shards=0;this.powerups=[];
-    this.bargainCurseTime=0;this._fracShards=0;this.scapegoatCharges=0;
-    this.totalDepths=this.hardMode?5:4;
+    this.bargainCurseTime=0;this._fracShards=0;this.scapegoatCharges=0;this._nextModifiers=null;
+    this.totalDepths=this.dailyDate?1:this.hardMode?5:4;
     this.initLevel();
   }
   awardShards(n){
@@ -1805,7 +2106,7 @@ class Game{
     }else{this.shards+=amt;}
   }
   initLevel(){
-    const cfg=LEVELS[this.level];
+    const cfg=this.dailyDate?DAILY_BOARD:LEVELS[this.level];
     this.modifiers=this.hardMode?rollModifiers(this.level):[];
     this.rows=cfg.rows;this.cols=cfg.cols;this.mineCount=cfg.mines;
     if(this.gameClass==='wraith'){this.rows++;this.cols++;}
@@ -1818,19 +2119,32 @@ class Game{
     }
     this.board=Array.from({length:this.rows},()=>Array.from({length:this.cols},()=>({mine:false,revealed:false,flagged:false,adjacent:0})));
     this.gameOver=false;this.gameWon=false;this.firstClick=true;this.revealedCount=0;this.shieldUsed=false;this.aegisCursed=false;
-    this.surged=false;this.timeMultiplier=1;this.chordDisabledUntil=0;
+    this.surged=false;this.pendingSurge=false;this.timeMultiplier=1;this.chordDisabledUntil=0;
+    this._tickAccum=0;this._mannaTick=0;this._clockRemainder=0;this.completionBonus=null;this.lossReason=null;this.hitCell=null;
   }
   hasModifier(id){return this.modifiers.some(m=>m.id===id);}
-  placeMines(safeR,safeC){
-    let placed=0;
-    while(placed<this.mineCount){
-      const r=Math.floor(Math.random()*this.rows),c=Math.floor(Math.random()*this.cols);
-      if(Math.abs(r-safeR)<=1&&Math.abs(c-safeC)<=1)continue;
-      if(this.board[r][c].mine)continue;
-      this.board[r][c].mine=true;placed++;
+  placeMines(safeR, safeC) {
+    if (this.hardMode) {
+      let placed = 0;
+      while (placed < this.mineCount) {
+        const r = Math.floor(Math.random() * this.rows), c = Math.floor(Math.random() * this.cols);
+        if (Math.abs(r - safeR) <= 1 && Math.abs(c - safeC) <= 1) continue;
+        if (this.board[r][c].mine) continue;
+        this.board[r][c].mine = true;
+        placed++;
+      }
+    } else {
+      const random=this.dailyDate?sweeperSeededRandom(sweeperDailySeed(this.dailyDate)):Math.random;
+      const mines = sweeperGenerateBoard(this.rows, this.cols, this.mineCount, safeR * this.cols + safeC,random);
+      if (!mines) return false;
+      for (let r = 0; r < this.rows; r++) for (let c = 0; c < this.cols; c++) {
+        this.board[r][c].mine = Boolean(mines[r * this.cols + c]);
+      }
     }
-    for(let r=0;r<this.rows;r++)for(let c=0;c<this.cols;c++)
-      if(!this.board[r][c].mine)this.board[r][c].adjacent=this.countAdj(r,c);
+    for (let r = 0; r < this.rows; r++) for (let c = 0; c < this.cols; c++) {
+      if (!this.board[r][c].mine) this.board[r][c].adjacent = this.countAdj(r, c);
+    }
+    return true;
   }
   countAdj(r,c){
     let n=0;
@@ -1840,8 +2154,10 @@ class Game{
     }return n;
   }
   chord(r,c){
+    if(this.gameOver||r<0||r>=this.rows||c<0||c>=this.cols)return[];
     const cell=this.board[r][c];
-    if(!cell.revealed||cell.mine||cell.adjacent===0)return[];
+    if(!cell.revealed||cell.mine||cell.dead||cell.adjacent===0)return[];
+    if(this.hasModifier('cryptic')&&cell.adjacent>=4)return[];
     if(Date.now()<this.chordDisabledUntil)return[{chordDisabled:true}];
     let flags=0;
     for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){
@@ -1873,14 +2189,17 @@ class Game{
     if(r<0||r>=this.rows||c<0||c>=this.cols)return[];
     const cell=this.board[r][c];
     if(cell.flagged||cell.revealed||this.gameOver)return[];
-    if(this.firstClick){this.placeMines(r,c);this.firstClick=false;}
+    if(this.firstClick){
+      if(this.dailyDate&&(r!==DAILY_BOARD.startRow||c!==DAILY_BOARD.startCol))return[];
+      if(!this.placeMines(r,c))return[];this.firstClick=false;
+    }
     cell.revealed=true;this.revealedCount++;
     const out=[{r,c}];
     if(cell.mine){
       const si=this.powerups.indexOf('shield');
-      if(si!==-1&&!this.shieldUsed&&!this.aegisCursed){
+      if(si!==-1&&!this.aegisCursed){
         this.shieldUsed=true;this.powerups.splice(si,1);
-        cell.revealed=false;this.revealedCount--;cell.mine=false;
+        cell.revealed=false;this.revealedCount--;cell.mine=false;this.mineCount--;
         cell.adjacent=this.countAdj(r,c);
         for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){
           const nr=r+dr,nc=c+dc;
@@ -1894,7 +2213,7 @@ class Game{
         this.scapegoatCharges--;
         this.timeRemaining=Math.floor(this.timeRemaining/2)+5;
         if(this.scapegoatCharges<=0)this.powerups=this.powerups.filter(p=>p!=='scapegoat');
-        cell.revealed=false;this.revealedCount--;cell.mine=false;
+        cell.revealed=false;this.revealedCount--;cell.mine=false;this.mineCount--;
         cell.adjacent=this.countAdj(r,c);
         for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){
           const nr=r+dr,nc=c+dc;
@@ -1903,11 +2222,11 @@ class Game{
         }
         return[{r,c,scapegoatBlocked:true}];
       }
-      this.gameOver=true;this.gameWon=false;return[{r,c,mine:true}];
+      this.gameOver=true;this.gameWon=false;this.lossReason='mine';this.hitCell={r,c};return[{r,c,mine:true}];
     }
     this.awardShards(1);
     cell.revealedAt=Date.now();
-    if(cell.adjacent===0)
+    if(cell.adjacent===0&&!cell.dead)
       for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){
         if(!dr&&!dc)continue;out.push(...this.reveal(r+dr,c+dc));
       }
@@ -1916,15 +2235,11 @@ class Game{
   checkSurge(){
     if(this.surged||!this.hasModifier('surge'))return;
     const safeTotal=this.rows*this.cols-this.mineCount;
-    if(this.revealedCount>=Math.floor(safeTotal/2)){this.surged=true;this.pendingSurge=true;}
+    if(this.revealedCount>=Math.floor(safeTotal/2)){this.surged=true;this.pendingSurge=true;this.timeMultiplier=1.25;}
   }
   consumeSurge(){const v=this.pendingSurge;this.pendingSurge=false;return v;}
   displayAdjacent(cell){
-    if(cell.dead)return 0;
-    if(cell.adjacent===0)return 0;
-    let n=cell.adjacent;
-    if(this.surged&&this.hasModifier('surge'))n=Math.min(n+1,8);
-    return n;
+    return cell.dead?0:cell.adjacent;
   }
   isVisible(r,c){
     if(!this.hasModifier('fog'))return true;
@@ -1938,14 +2253,18 @@ class Game{
     return false;
   }
   toggleFlag(r,c){
+    if(this.firstClick&&(this.dailyDate||this.gameClass==='solomon'))return false;
     if(r<0||r>=this.rows||c<0||c>=this.cols)return false;
     const cell=this.board[r][c];if(cell.revealed||this.gameOver)return false;
     cell.flagged=!cell.flagged;return true;
   }
   checkWin(){
+    if(this.gameOver)return;
     if(this.revealedCount>=this.rows*this.cols-this.mineCount){
       this.gameWon=true;this.gameOver=true;
+      const before=this.shards;
       this.awardShards(10*(this.level+1)+Math.floor(this.timeRemaining/5));
+      this.completionBonus=this.shards-before;
     }
   }
   get edenSlowdown(){
@@ -1953,8 +2272,24 @@ class Game{
     const deps=['hex','bargain','scapegoat','pyre','tithe'].filter(id=>this.powerups.includes(id)).length;
     return deps>0?1-deps*0.05:1;
   }
-  tick(){if(this.gameOver)return;const mult=this.timeMultiplier||1;const rate=mult*this.edenSlowdown;this._tickAccum=(this._tickAccum||0)+rate;const whole=Math.floor(this._tickAccum);if(whole>0){this._tickAccum-=whole;this.timeRemaining=Math.max(0,this.timeRemaining-whole);}if(this.bargainCurseTime>0)this.bargainCurseTime=Math.max(0,this.bargainCurseTime-1);if(this.gameClass==='manna'){this._mannaTick=(this._mannaTick||0)+1;if(this._mannaTick>=5){this._mannaTick=0;if(this.shards>0)this.shards--;}}if(this.timeRemaining<=0){this.gameOver=true;this.gameWon=false;}}
+  tick(){
+    if(this.gameOver)return;
+    const rate=(this.timeMultiplier||1)*this.edenSlowdown;
+    this._tickAccum+=rate;
+    const whole=Math.floor(this._tickAccum+1e-9);
+    if(whole>0){
+      this._tickAccum=Math.max(0,this._tickAccum-whole);
+      this.timeRemaining=Math.max(0,this.timeRemaining-whole);
+    }
+    if(this.bargainCurseTime>0)this.bargainCurseTime=Math.max(0,this.bargainCurseTime-1);
+    if(this.gameClass==='manna'){
+      this._mannaTick++;
+      if(this._mannaTick>=5){this._mannaTick=0;if(this.shards>0)this.shards--;}
+    }
+    if(this.timeRemaining<=0){this.gameOver=true;this.gameWon=false;}
+  }
   useScan(){
+    if(this.gameOver||this.firstClick)return null;
     const idx=this.powerups.indexOf('scan');if(idx===-1)return null;
     const safe=[];
     for(let r=0;r<this.rows;r++)for(let c=0;c<this.cols;c++)
@@ -1967,21 +2302,27 @@ class Game{
     return revealed.length?revealed:null;
   }
   useTimeWarp(){
+    if(this.gameOver)return false;
     const idx=this.powerups.indexOf('timewarp');if(idx===-1)return false;
-    this.powerups.splice(idx,1);this.timeRemaining=Math.min(this.timeRemaining+20,this.maxTime+20);return true;
+    const added=Math.min(20,this.maxTime+20-this.timeRemaining);
+    if(added<=0)return false;
+    this.powerups.splice(idx,1);this.timeRemaining+=added;return true;
   }
   useCompass(){
+    if(this.gameOver||this.firstClick)return 0;
     const idx=this.powerups.indexOf('compass');if(idx===-1)return 0;
-    this.powerups.splice(idx,1);
     const mines=[];
     for(let r=0;r<this.rows;r++)for(let c=0;c<this.cols;c++)
       if(this.board[r][c].mine&&!this.board[r][c].flagged)mines.push({r,c});
     const shuffled=mines.sort(()=>Math.random()-0.5);
     const toFlag=shuffled.slice(0,3);
+    if(!toFlag.length)return 0;
+    this.powerups.splice(idx,1);
     toFlag.forEach(({r,c})=>{this.board[r][c].flagged=true;});
     return toFlag.length;
   }
   useOracle(){
+    if(this.gameOver||this.firstClick)return null;
     const idx=this.powerups.indexOf('oracle');if(idx===-1)return null;
     const candidates=[];
     for(let r=0;r<this.rows-1;r++)for(let c=0;c<this.cols-1;c++){
@@ -2006,6 +2347,7 @@ class Game{
     return{revealed,flagged};
   }
   useRewind(){
+    if(this.gameOver)return false;
     const idx=this.powerups.indexOf('rewind');if(idx===-1)return false;
     this.powerups.splice(idx,1);
     const keepTime=this.timeRemaining;const keepMax=this.maxTime;
@@ -2014,6 +2356,7 @@ class Game{
     return true;
   }
   useLantern(){
+    if(this.gameOver||this.firstClick)return{status:'none'};
     const idx=this.powerups.indexOf('lantern');if(idx===-1)return{status:'none'};
     const candidates=[];
     for(let r=0;r<this.rows;r++)for(let c=0;c<this.cols;c++){
@@ -2022,7 +2365,7 @@ class Game{
       for(let dr=-1;dr<=1&&!hasEmpty;dr++)for(let dc=-1;dc<=1&&!hasEmpty;dc++){
         if(!dr&&!dc)continue;
         const nr=r+dr,nc=c+dc;
-        if(nr>=0&&nr<this.rows&&nc>=0&&nc<this.cols&&!this.board[nr][nc].mine&&!this.board[nr][nc].revealed)hasEmpty=true;
+        if(nr>=0&&nr<this.rows&&nc>=0&&nc<this.cols&&!this.board[nr][nc].mine&&!this.board[nr][nc].revealed&&!this.board[nr][nc].flagged)hasEmpty=true;
       }
       if(hasEmpty)candidates.push({r,c});
     }
@@ -2040,11 +2383,13 @@ class Game{
     return{status:'ok',revealed};
   }
   useHex(){
+    if(this.gameOver||this.firstClick)return null;
     const idx=this.powerups.indexOf('hex');if(idx===-1)return null;
-    this.powerups.splice(idx,1);
     const safe=[];
     for(let r=0;r<this.rows;r++)for(let c=0;c<this.cols;c++)
       if(!this.board[r][c].mine&&!this.board[r][c].revealed&&!this.board[r][c].flagged)safe.push({r,c});
+    if(!safe.length)return null;
+    this.powerups.splice(idx,1);
     const shuffled=safe.sort(()=>Math.random()-0.5).slice(0,5);
     const revealed=[];
     shuffled.forEach(({r,c})=>{
@@ -2055,6 +2400,7 @@ class Game{
     return revealed.length?revealed:null;
   }
   useTithe(){
+    if(this.gameOver||this.firstClick)return null;
     const idx=this.powerups.indexOf('tithe');if(idx===-1)return null;
     this.powerups.splice(idx,1);
     let removed=0;
@@ -2062,6 +2408,7 @@ class Game{
       if(this.board[r][c].flagged){this.board[r][c].flagged=false;removed++;}
     }
     this.timeRemaining=Math.max(0,this.timeRemaining-20);
+    if(this.timeRemaining===0){this.gameOver=true;this.gameWon=false;}
     const mines=[];
     for(let r=0;r<this.rows;r++)for(let c=0;c<this.cols;c++)
       if(this.board[r][c].mine&&!this.board[r][c].flagged)mines.push({r,c});
@@ -2070,13 +2417,17 @@ class Game{
     return{removed,added:toFlag.length};
   }
   useBargain(){
+    if(this.gameOver)return false;
     const idx=this.powerups.indexOf('bargain');if(idx===-1)return false;
+    const added=Math.min(30,this.maxTime+30-this.timeRemaining);
+    if(added<=0)return false;
     this.powerups.splice(idx,1);
     this.bargainCurseTime+=60;
-    this.timeRemaining=Math.min(this.timeRemaining+30,this.maxTime+30);
+    this.timeRemaining+=added;
     return true;
   }
   useRift(){
+    if(this.gameOver||this.firstClick)return null;
     const idx=this.powerups.indexOf('rift');if(idx===-1)return null;
     const candidates=[];
     for(let r=0;r<this.rows-2;r++)for(let c=0;c<this.cols-2;c++){
@@ -2115,27 +2466,30 @@ class Game{
           this.board[nr][nc].adjacent=this.countAdj(nr,nc);
       }
     }
+    this.checkWin();
     return{revealed,flagged,seeded};
   }
   usePyre(){
+    if(this.gameOver||this.firstClick)return{status:'none'};
     const idx=this.powerups.indexOf('pyre');if(idx===-1)return{status:'none'};
     const flagged=[];
     for(let r=0;r<this.rows;r++)for(let c=0;c<this.cols;c++)
       if(this.board[r][c].flagged)flagged.push({r,c});
     if(!flagged.length)return{status:'none'};
-    this.powerups.splice(idx,1);
     const badFlag=flagged.find(({r,c})=>!this.board[r][c].mine);
-    if(badFlag){this.gameOver=true;this.gameWon=false;return{status:'badFlag',r:badFlag.r,c:badFlag.c};}
-    const revealed=[];
+    if(badFlag){this.powerups.splice(idx,1);this.gameOver=true;this.gameWon=false;return{status:'badFlag',r:badFlag.r,c:badFlag.c};}
+    const targets=[];
     flagged.forEach(({r,c})=>{
       for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){
         if(!dr&&!dc)continue;
         const nr=r+dr,nc=c+dc;
-        if(nr>=0&&nr<this.rows&&nc>=0&&nc<this.cols&&!this.board[nr][nc].mine&&!this.board[nr][nc].revealed){
-          const res=this.reveal(nr,nc);revealed.push(...res);
-        }
+        if(nr>=0&&nr<this.rows&&nc>=0&&nc<this.cols&&!this.board[nr][nc].mine&&!this.board[nr][nc].revealed)
+          targets.push({r:nr,c:nc});
       }
     });
+    if(!targets.length)return{status:'none'};
+    this.powerups.splice(idx,1);
+    const revealed=targets.flatMap(({r,c})=>this.reveal(r,c));
     return{status:'ok',revealed};
   }
   get flagCount(){let n=0;for(let r=0;r<this.rows;r++)for(let c=0;c<this.cols;c++)if(this.board[r][c].flagged)n++;return n;}
@@ -2146,11 +2500,11 @@ class Game{
 // ============================================================
 const CLASSES=[
   {id:'sweeper',name:'genesis.dll',desc:'Default process. No modifications.',icon:'&#x271D;',unlockReq:null},
-  {id:'solomon',name:'solomon.dll',desc:'Correct flags grant +3s. Wrong flags detonate the mine.',icon:'&#x2696;',unlockReq:'clear level 3'},
-  {id:'wraith',name:'lazarus.dll',desc:'Regenerating firewall each level. No firewall purchases. +1 grid size. No time carry.',icon:'&#x2020;',unlockReq:'hit an 8-combo'},
-  {id:'samson',name:'samson.dll',desc:'Combo window +25%. Combos 3+ give bonus keys, 5+ grant +1s. Base time -15%.',icon:'&#x2694;',unlockReq:'hit a 5-combo'},
-  {id:'eden',name:'eden.dll',desc:'Shop offers 3 dependencies. Each dependency slows timer by 5%.',icon:'&#x2668;',unlockReq:'buy 3 dependencies in one run'},
-  {id:'manna',name:'manna.dll',desc:'2&times; keys from all sources. Keys decay by 1 every 5 seconds.',icon:'&#x2615;',unlockReq:'earn 100 keys in one run'},
+  {id:'solomon',name:'solomon.dll',desc:'First correct mark on each mine grants +3s. Wrong marks terminate the run.',icon:'&#x2696;',unlockReq:null},
+  {id:'wraith',name:'lazarus.dll',desc:'Regenerating firewall each level. No firewall purchases. +1 grid size. No time carry.',icon:'&#x2020;',unlockReq:null},
+  {id:'samson',name:'samson.dll',desc:'Combo window +25%. Combos 3+ give bonus keys, 5+ grant +1s. Base time -15%.',icon:'&#x2694;',unlockReq:null},
+  {id:'eden',name:'eden.dll',desc:'Shop offers 3 dependencies. Each held dependency type slows timer by 5%.',icon:'&#x2668;',unlockReq:'requires ROOT.ACCESS'},
+  {id:'manna',name:'manna.dll',desc:'2&times; keys from all sources. Keys decay by 1 every 5 seconds.',icon:'&#x2615;',unlockReq:'requires ROOT.ACCESS'},
 ];
 function classById(id){return CLASSES.find(c=>c.id===id)||CLASSES[0];}
 function isClassUnlocked(id){
@@ -2162,10 +2516,10 @@ function isClassUnlocked(id){
 // LAYER MODIFIERS (ROOT.ACCESS only)
 // ============================================================
 const MODIFIERS=[
-  {id:'fog',name:'LOW_MEMORY',desc:'Only tiles within 2 of revealed are visible',icon:'&#x2601;'},
-  {id:'cryptic',name:'CORRUPT_DATA',desc:'Numbers 4 or higher show as ?',icon:'&#x2753;'},
-  {id:'echo',name:'MEMORY_LEAK',desc:'Numbers fade over 10 seconds, hover to refresh',icon:'&#x2620;'},
-  {id:'surge',name:'STACK_OVERFLOW',desc:'Halfway through, all numbers gain +1',icon:'&#x2623;'},
+  {id:'fog',name:'LOW_MEMORY',desc:'Distant tiles are dimmed. You can still reveal or flag them.',icon:'&#x2601;'},
+  {id:'cryptic',name:'CORRUPT_DATA',desc:'Clues of 4 or more are hidden. These tiles cannot clear neighbors.',icon:'&#x2753;'},
+  {id:'echo',name:'MEMORY_LEAK',desc:'Clues fade over 10 seconds. Hover, focus, or Inspect to read them.',icon:'&#x2620;'},
+  {id:'surge',name:'STACK_OVERFLOW',desc:'After half the safe tiles are cleared, the clock runs 25% faster.',icon:'&#x2623;'},
 ];
 // Hard mode: D1-D3 = 1 modifier, D4-D5 = 2 modifiers stacked
 function rollModifiers(level){
@@ -2182,6 +2536,20 @@ function rollModifiers(level){
 // ============================================================
 // UI
 // ============================================================
+const MODULE_SUMMARIES={sweeper:'Standard rules. Start here.',solomon:'Trade careful flags for more time.',wraith:'A larger board, with mine protection.',samson:'Faster combos. A shorter clock.',eden:'Cursed tools slow the clock.',manna:'Earn more keys. Spend them quickly.'};
+const GAME_TOOLS={
+ timewarp:{name:'BACKUP',price:30,desc:'Add up to 20 seconds, capped at 20 above the starting clock. Kept if full.'},
+ shield:{name:'FIREWALL',price:46,desc:'Automatically absorb one mine hit.'},
+ compass:{name:'SCANDISK',price:36,desc:'Flag up to three hidden mines.'},
+ oracle:{name:'DEFRAG',price:42,desc:'Reveal a 2 × 2 region and flag its mines.'},
+ lantern:{name:'TRACERT',price:48,desc:'Reveal safe tiles next to a correct flag.'},
+ hex:{name:'SPYWARE',price:40,cursed:true,desc:'Reveal five safe tiles without their numbers.'},
+ bargain:{name:'ADWARE',price:30,cursed:true,desc:'Add up to 30 seconds, capped at 30 above the starting clock. Earn half the keys for 60 seconds. Kept if full.'},
+ scapegoat:{name:'BLOATWARE',price:46,cursed:true,desc:'Absorb two mines. Each hit halves the clock, then adds five seconds.'},
+ pyre:{name:'ROOTKIT',price:48,cursed:true,desc:'Reveal around all flags. One wrong flag ends the run.'},
+ tithe:{name:'TROJAN',price:36,cursed:true,desc:'Replace all flags with five correct flags. Lose 20 seconds.'}
+};
+
 class GameUI{
   constructor(){
     this.game=new Game();
@@ -2193,11 +2561,273 @@ class GameUI{
     this._cheats={mines:false,invincible:false,infTime:false};
     this._bindExeChrome();
     this._bindCheatCodes();
-    this._runBootSequence(()=>this._ensureShell());
+    this._runActive=false;this._paused=false;this.inputMode='reveal';this._focusCell={r:0,c:0};
+    this.effects=readStored('sweeper_effects',!matchMedia('(prefers-reduced-motion: reduce)').matches)!==false;
+    document.body.classList.toggle('effects-off',!this.effects);
+    this._ensureShell();this.showStart();
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)this.pauseGame();});
+    window.addEventListener('pagehide',()=>this._autosave());
+    window.addEventListener('resize',()=>{
+      clearTimeout(this._resizeTimer);
+      this._resizeTimer=setTimeout(()=>{if(this._runActive&&!document.getElementById('modal'))this.renderBoard();},120);
+    });
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape'&&this._runActive&&!this.game.gameOver&&!document.querySelector('#exe-win-confirm,#exe-win-savedgames')){
+        e.preventDefault();this._paused?this.resumeGame():this.pauseGame();
+      }
+    });
+  }
+
+  _newRun(){
+    this.stopTimer();this._closeWin('savedgames');this._closeWin('lore');
+    this._recorded=false;this._shopItems=null;this._runStartedAt=Date.now();this._focusCell={r:0,c:0};
+    if(this.game.dailyDate&&this._regularOptions){this.game.gameClass=this._regularOptions.gameClass;this.game.hardMode=this._regularOptions.hardMode;}
+    this.game.dailyDate=null;this.game.dailyAttempt=0;this._setDailyURL(null);
+    this.game.reset();this._runActive=true;this._paused=false;this.startLevel();
+  }
+
+  _dailyStats(date){
+    const value=readStored('sweeper_daily_v1_'+date,{});
+    const valid=r=>r&&typeof r.won==='boolean'&&Number.isInteger(r.seconds)&&r.seconds>=0&&r.seconds<=DAILY_BOARD.time&&Number.isInteger(r.cleared)&&r.cleared>=0&&r.cleared<=119&&Number.isInteger(r.attempt)&&r.attempt>0;
+    return {attempts:Number.isSafeInteger(value?.attempts)&&value.attempts>=0?value.attempts:0,
+      first:valid(value?.first)?value.first:null,best:valid(value?.best)?value.best:null,last:valid(value?.last)?value.last:null};
+  }
+
+  _setDailyURL(date){
+    const url=new URL(location.href);
+    if(date){url.searchParams.set('daily',date);url.searchParams.set('v',DAILY_BOARD.version);}
+    else{url.searchParams.delete('daily');url.searchParams.delete('v');}
+    history.replaceState(null,'',url.pathname+url.search+url.hash);
+  }
+
+  _dailyLink(date){
+    const url=new URL(location.pathname,location.origin);
+    url.searchParams.set('daily',date);url.searchParams.set('v',DAILY_BOARD.version);
+    return url.href;
+  }
+
+  _startDaily(date){
+    if(!sweeperDailyDate(date))return;
+    this.pauseGame();this._autosave();
+    if(!this.game.dailyDate)this._regularOptions={gameClass:this.game.gameClass,hardMode:this.game.hardMode};
+    this.stopTimer();this._closeWin('savedgames');this._closeWin('lore');
+    const g=new Game();g.dailyDate=date;g.reset();this.game=g;
+    this._recorded=false;this._runStartedAt=Date.now();this._cheats={mines:false,invincible:false,infTime:false};
+    this._setDailyURL(date);this.startLevel();
+  }
+
+  _openDaily(date){
+    const saved=readStored('sweeper_daily_autosave',null);
+    if(this._validSave(saved)&&saved.dailyDate===date){this._restoreSave(saved);return;}
+    if(this._validSave(saved)&&saved.dailyDate&&!saved.gameOver&&!saved.firstClick){
+      this._confirm('Replace the paused daily board?',`Your ${saved.dailyDate} daily board is still in progress. Starting this board replaces its autosave. Your ordinary run stays saved.`,()=>this._startDaily(date));return;
+    }
+    this._startDaily(date);
+  }
+
+  _beginDailyAttempt(){
+    const g=this.game;if(!g.dailyDate||g.dailyAttempt)return;
+    const stats=this._dailyStats(g.dailyDate);
+    g.dailyAttempt=stats.attempts+1;stats.attempts=g.dailyAttempt;
+    if(!writeStored('sweeper_daily_v1_'+g.dailyDate,stats))this.showToast('Browser storage unavailable. This attempt cannot be kept.');
+  }
+
+  _recordDaily(){
+    const g=this.game;if(this._recorded||!g.dailyDate||!g.gameOver)return;
+    const result={won:g.gameWon,seconds:Math.min(180,180-g.timeRemaining+(g._clockRemainder>0?1:0)),cleared:g.board.flat().filter(c=>c.revealed&&!c.mine).length,attempt:g.dailyAttempt};
+    const stats=this._dailyStats(g.dailyDate);
+    if(result.attempt===1&&!stats.first)stats.first=result;
+    if(result.won&&(!stats.best||result.seconds<stats.best.seconds))stats.best=result;
+    stats.attempts=Math.max(stats.attempts,g.dailyAttempt);stats.last=result;
+    if(!writeStored('sweeper_daily_v1_'+g.dailyDate,stats))this.showToast('Could not save this result in your browser.');
+    this._recorded=true;
+  }
+
+  _dailyShareText(){
+    const g=this.game;
+    const seconds=Math.min(180,180-g.timeRemaining+(g._clockRemainder>0?1:0));
+    const cleared=g.board.flat().filter(c=>c.revealed&&!c.mine).length;
+    return `SWEEPER.EXE · Daily ${g.dailyDate}\n${g.gameWon?'Cleared':'Not cleared'} · ${cleared}/119 safe tiles · ${this.fmtTime(seconds)} active time\n${g.dailyAttempt===1?'First attempt':'Practice · attempt '+g.dailyAttempt}\n${this._dailyLink(g.dailyDate)}`;
+  }
+
+  async _copyDaily(text,button){
+    try{
+      if(!navigator.clipboard?.writeText)throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(text);
+      button.textContent='Copied';
+    }catch{
+      this.pauseGame();
+      const win=this._renderWin('share',`<div class="exe-titlebar"><div class="exe-ttext">Copy daily board</div><div class="exe-tbtns"><button class="exe-tbtn exe-close-btn" aria-label="Close">&times;</button></div></div><div class="exe-dialog-content"><p>Copy the selected text below.</p><textarea id="daily-copy-text" rows="6" readonly aria-label="Share text"></textarea></div>`);
+      const area=win.querySelector('textarea');area.value=text;area.focus();area.select();
+    }
+  }
+
+  _focusResult(selector){
+    const overlay=document.getElementById('modal');
+    const dialog=overlay?.querySelector('.modal');if(!dialog)return;
+    clearTimeout(this._resultTimer);this._resultTimer=null;
+    dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');
+    const title=dialog.querySelector('h2');title.id='result-title';dialog.setAttribute('aria-labelledby',title.id);
+    for(const sibling of overlay.parentElement.children){if(sibling!==overlay)sibling.inert=true;}
+    const controls=()=>[...dialog.querySelectorAll('button:not(:disabled),[tabindex="0"]')].filter(el=>el.getClientRects().length);
+    overlay.addEventListener('keydown',e=>{
+      if(e.key!=='Tab')return;
+      const items=controls(),first=items[0],last=items.at(-1);
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}
+    });
+    (dialog.querySelector(selector)||controls()[0])?.focus({preventScroll:true});
+  }
+
+  _queueResult(delay){
+    const game=this.game;
+    clearTimeout(this._resultTimer);
+    this._resultTimer=setTimeout(()=>{
+      this._resultTimer=null;
+      if(this.game!==game||!game.gameOver||!this._runActive||!document.getElementById('exe-win-sweeper'))return;
+      game.gameWon?this.showLevelComplete():this.showGameOver();
+    },delay);
+  }
+
+  showDailyResult(){
+    const g=this.game;
+    if(!this._runActive||!g.dailyDate||!g.gameOver||document.getElementById('modal')||!document.getElementById('exe-win-sweeper'))return;
+    this.stopTimer();this._recordDaily();this._autosave();
+    const seconds=Math.min(180,180-g.timeRemaining+(g._clockRemainder>0?1:0));
+    const cleared=g.board.flat().filter(c=>c.revealed&&!c.mine).length;
+    const status=g.dailyAttempt===1?'First attempt':'Practice · attempt '+g.dailyAttempt;
+    document.getElementById('exe-win-sweeper').insertAdjacentHTML('beforeend',`
+      <div class="modal-overlay" id="modal"><div class="modal daily-result">
+        <h2>${g.gameWon?'Daily board cleared':'Daily board ended'}</h2>
+        <div class="flavor">${g.dailyDate} · ${status}</div>
+        <div class="go-body"><div class="go-stat"><span class="go-k">Safe tiles</span><span class="go-v">${cleared} / 119</span></div><div class="go-stat"><span class="go-k">Active time</span><span class="go-v">${this.fmtTime(seconds)}</span></div></div>
+        <p class="daily-result-note">${g.gameWon?'Every safe tile cleared.':g.timeRemaining<=0?'The clock ran out.':'A mine ended this attempt.'} ${g.dailyAttempt>1?'Your first result stays unchanged.':'Results stay in this browser.'}</p>
+        <div class="go-actions"><button class="btn btn-primary" id="daily-copy-result">Copy result</button><button class="btn" id="daily-review">Review board</button><button class="btn" id="daily-replay">Replay</button><button class="btn" id="daily-menu">Menu</button></div>
+      </div></div>`);
+    document.getElementById('daily-copy-result').addEventListener('click',e=>this._copyDaily(this._dailyShareText(),e.currentTarget));
+    document.getElementById('daily-review').addEventListener('click',()=>this.renderBoard());
+    document.getElementById('daily-replay').addEventListener('click',()=>this._startDaily(g.dailyDate));
+    document.getElementById('daily-menu').addEventListener('click',()=>this.showStart());
+    this._focusResult('#daily-copy-result');
+  }
+
+  _validSave(s){
+    if(!s||typeof s!=='object'||!Number.isInteger(s.level)||s.level<0||s.level>=LEVELS.length)return false;
+    if(!CLASSES.some(c=>c.id===(s.gameClass||'sweeper')))return false;
+    for(const key of ['firstClick','hardMode','gameOver','gameWon','surged','pendingSurge','shieldUsed','aegisCursed']){
+      if(s[key]!==undefined&&typeof s[key]!=='boolean')return false;
+    }
+    if(typeof s.firstClick!=='boolean'||(s.level===4&&!s.hardMode))return false;
+    if(s.dailyDate!=null&&(!sweeperDailyDate(s.dailyDate)||s.dailyVersion!==DAILY_BOARD.version||s.level!==0||s.gameClass!=='sweeper'||s.hardMode!==false||s.maxTime!==180||s.timeRemaining>180||!Number.isInteger(s.dailyAttempt)||s.dailyAttempt<0||(!s.firstClick&&s.dailyAttempt===0)||s.powerups?.length||s.modifiers?.length))return false;
+    const cfg=s.dailyDate?DAILY_BOARD:LEVELS[s.level],extra=s.gameClass==='wraith'?1:0;
+    if(s.rows!==cfg.rows+extra||s.cols!==cfg.cols+extra)return false;
+    if(!Number.isSafeInteger(s.timeRemaining)||s.timeRemaining<0||!Number.isSafeInteger(s.maxTime)||s.maxTime<=0)return false;
+    if(!Number.isSafeInteger(s.shards)||s.shards<0||!Array.isArray(s.board)||s.board.length!==s.rows)return false;
+    if(!s.board.every(row=>Array.isArray(row)&&row.length===s.cols&&row.every(c=>c&&['mine','revealed','flagged'].every(k=>typeof c[k]==='boolean'))))return false;
+    if(s.dailyDate){
+      if(s.timeMultiplier!==1||s.board.flat().some(c=>c.dead)||s.firstClick&&(s.dailyAttempt!==0||s.board.flat().some(c=>c.flagged)))return false;
+      if(!s.firstClick&&s.board.flat().filter(c=>c.mine).length!==DAILY_BOARD.mines)return false;
+    }
+    for(const row of s.board)for(const c of row){if(c.dead!==undefined&&typeof c.dead!=='boolean')return false;if(c.flagRewarded!==undefined&&typeof c.flagRewarded!=='boolean')return false;}
+    for(const key of ['_tickAccum','_fracShards'])if(s[key]!==undefined&&(!Number.isFinite(s[key])||s[key]<0||s[key]>=1))return false;
+    if(s._clockRemainder!==undefined&&(!Number.isFinite(s._clockRemainder)||s._clockRemainder<0||s._clockRemainder>=1000))return false;
+    if(s._mannaTick!==undefined&&(!Number.isInteger(s._mannaTick)||s._mannaTick<0||s._mannaTick>=5))return false;
+    for(const key of ['bargainCurseTime','scapegoatCharges','chordLockRemaining'])if(s[key]!==undefined&&(!Number.isFinite(s[key])||s[key]<0))return false;
+    if(s.completionBonus!=null&&(!Number.isInteger(s.completionBonus)||s.completionBonus<0))return false;
+    if(s.timeMultiplier!==undefined&&(!Number.isFinite(s.timeMultiplier)||s.timeMultiplier<=0))return false;
+    if(s.powerups!==undefined&&(!Array.isArray(s.powerups)||!s.powerups.every(id=>Object.hasOwn(GAME_TOOLS,id))))return false;
+    if(s.modifiers!==undefined&&(!Array.isArray(s.modifiers)||!s.modifiers.every(id=>MODIFIERS.some(m=>m.id===id))))return false;
+    if(s._nextModifiers!=null&&(!Array.isArray(s._nextModifiers)||!s._nextModifiers.every(m=>MODIFIERS.some(known=>known.id===m?.id))))return false;
+    if(s.firstClick&&s.board.flat().some(c=>c.mine||c.revealed))return false;
+    if(s.gameWon&&(!s.gameOver||s.board.flat().some(c=>!c.mine&&!c.revealed)))return false;
+    return !s.gameOver||s.gameWon===true||!!s.dailyDate;
+  }
+
+  _snapshot(){
+    const g=this.game;
+    return {...g,version:2,dailyVersion:g.dailyDate?DAILY_BOARD.version:null,savedAt:Date.now(),startedAt:this._runStartedAt,recorded:this._recorded===true,
+      modifiers:g.modifiers.map(m=>m.id),board:g.board.map(row=>row.map(c=>({...c,...(g.hasModifier('echo')&&Number.isFinite(c.revealedAt)&&this._paused?{revealedAt:c.revealedAt+Date.now()-this._pausedAt}:{})}))),
+      chordLockRemaining:Math.max(0,g.chordDisabledUntil-(this._paused?this._pausedAt:Date.now())),
+      shopItems:this._shopItems?.map(p=>({id:p.id,bought:p.bought===true}))||null};
+  }
+
+  _autosave(){
+    if(!this._runActive)return;
+    const g=this.game;
+    if(g.dailyDate){
+      if(g.gameOver)this._recordDaily();
+      const ok=writeStored('sweeper_daily_autosave',this._snapshot());
+      if(!ok&&!this._storageWarning){this._storageWarning=true;this.showToast('Browser storage unavailable. Keep this tab open.');}
+      return;
+    }
+    if(g.gameOver&&!g.gameWon){writeStored('sweeper_autosave',null);return;}
+    const ok=writeStored('sweeper_autosave',this._snapshot());
+    if(!ok&&!this._storageWarning){this._storageWarning=true;this.showToast('Browser storage unavailable. Keep this tab open.');}
+  }
+
+  _restoreSave(s){
+    if(!this._validSave(s)){this.showToast('This save cannot be opened. Start a new run.');return;}
+    if(s.dailyDate&&!this.game.dailyDate)this._regularOptions={gameClass:this.game.gameClass,hardMode:this.game.hardMode};
+    this.stopTimer();this._closeWin('savedgames');this._closeWin('mycomp');this._closeWin('confirm');this._closeWin('lore');
+    const g=new Game();
+    for(const key of Object.keys(g)){if(Object.hasOwn(s,key)&&!['board','modifiers','chordDisabledUntil'].includes(key))g[key]=s[key];}
+    g.board=s.board.map(row=>row.map(c=>({...c})));g.modifiers=(s.modifiers||[]).map(id=>MODIFIERS.find(m=>m.id===id)).filter(Boolean);
+    g.chordDisabledUntil=Date.now()+Math.max(0,Number(s.chordLockRemaining)||0);
+    g.totalDepths=g.dailyDate?1:g.hardMode?5:4;
+    if(g.dailyDate){this._cheats={mines:false,invincible:false,infTime:false};this._setDailyURL(g.dailyDate);}
+    if(g.surged&&g.hasModifier('surge'))g.timeMultiplier=1.25;
+    if(g.hasModifier('echo'))for(const row of g.board)for(const cell of row){
+      if(Number.isFinite(cell.revealedAt))cell.revealedAt+=Math.max(0,Date.now()-(s.savedAt||Date.now()));
+    }
+    g.mineCount=g.firstClick?(g.dailyDate?DAILY_BOARD:LEVELS[g.level]).mines:g.board.flat().filter(c=>c.mine).length;
+    g.revealedCount=g.board.flat().filter(c=>c.revealed&&!c.mine).length;
+    for(let r=0;r<g.rows;r++)for(let c=0;c<g.cols;c++)g.board[r][c].adjacent=g.board[r][c].mine?0:g.countAdj(r,c);
+    this.game=g;this._runActive=true;this._paused=false;this._focusCell={r:0,c:0};
+    if(g.dailyDate&&g.firstClick)this._focusCell={r:DAILY_BOARD.startRow,c:DAILY_BOARD.startCol};
+    this._runStartedAt=Number.isFinite(s.startedAt)?s.startedAt:Date.now();this._recorded=s.recorded===true;
+    this._shopItems=Array.isArray(s.shopItems)?s.shopItems.filter(p=>p&&Object.hasOwn(GAME_TOOLS,p.id)).map(p=>({...GAME_TOOLS[p.id],id:p.id,bought:p.bought===true})):null;
+    g._nextModifiers=Array.isArray(s._nextModifiers)?s._nextModifiers.map(m=>MODIFIERS.find(known=>known.id===m.id)).filter(Boolean):null;
+    this.comboCount=0;this.lastRevealTime=0;this.levelStartTime=Date.now();
+    this.renderBoard();
+    if(g.dailyDate&&g.firstClick)document.querySelector('#grid .daily-start')?.focus({preventScroll:true});
+    if(g.dailyDate&&g.gameOver)this.showDailyResult();else if(g.gameWon)this.showLevelComplete();else if(g.timeRemaining<=0){g.gameOver=true;this.showGameOver();}else this.startTimer();
+  }
+
+  pauseGame(){
+    if(!this._runActive||this._paused||this.game.gameOver)return;
+    this.advanceClock();
+    if(this.game.gameOver)return;
+    this._pausedAt=Date.now();this._paused=true;this.stopTimer();this._autosave();this.renderBoard();
+  }
+
+  resumeGame(){
+    if(!this._runActive||!this._paused||this.game.gameOver)return;
+    const elapsed=Date.now()-this._pausedAt;
+    if(this.game.chordDisabledUntil>this._pausedAt)this.game.chordDisabledUntil+=elapsed;
+    if(this.game.hasModifier('echo'))for(const row of this.game.board)for(const cell of row){if(Number.isFinite(cell.revealedAt))cell.revealedAt+=elapsed;}
+    this.levelStartTime+=elapsed;this._paused=false;this.renderBoard();this.startTimer();
+  }
+
+  _confirm(title,body,action){
+    this.pauseGame();this._confirmAction=action;
+    const win=this._renderWin('confirm',`<div class="exe-titlebar"><div class="exe-ttext">${title}</div><div class="exe-tbtns"><button class="exe-tbtn exe-close-btn" aria-label="Cancel">&times;</button></div></div><div class="exe-dialog-content">${body}</div><div class="exe-dialog-actions"><button class="exe-btn" id="confirm-cancel">Cancel</button><button class="exe-btn default" id="confirm-yes">Continue</button></div>`);
+    win.setAttribute('role','dialog');win.setAttribute('aria-label',title);
+    win.querySelector('#confirm-cancel').addEventListener('click',()=>this._closeWin('confirm'));
+    win.querySelector('#confirm-yes').addEventListener('click',()=>{const run=this._confirmAction;this._closeWin('confirm');run?.();});
+    win.querySelector('#confirm-cancel').focus();
+  }
+
+  _recordRun(won){
+    if(this.game.dailyDate){this._recordDaily();return;}
+    if(this._recorded)return;
+    this._recorded=true;
+    const history=readStored('sweeper_history',[]);
+    writeStored('sweeper_history',[{date:Date.now(),won,level:this.game.level+1,keys:this.game.shards,module:this.game.gameClass},...(Array.isArray(history)?history:[])].slice(0,100));
   }
 
   _bindCheatCodes(){
     document.addEventListener('keydown',e=>{
+      if(this._runActive&&this.game.dailyDate)return;
       if(localStorage.getItem('sweeper_cheatsUnlocked')!=='1')return;
       if(!e.ctrlKey&&!e.metaKey)return;
       const k=e.key.toLowerCase();
@@ -2294,6 +2924,7 @@ class GameUI{
   _doRestart(){
     const wrap=this.root.querySelector('.exe-wrap');
     if(!wrap)return;
+    this.pauseGame();this._autosave();
     sfx.shutdown();
     // Shutdown overlay
     const shutdown=document.createElement('div');
@@ -2312,40 +2943,13 @@ class GameUI{
     },2200);
   }
 
-  // Open any app — shows a Win98 loading dialog then calls the matching show method
   _openApp(view){
-    const APP_MAP={sweeper:'sweeper',lore:'lore',mycomp:'mycomp',recycle:'recycle',terminal:'terminal'};
-    const winId=APP_MAP[view]||view;
-    const LABELS={sweeper:'SWEEPER.EXE',lore:'LORE.HLP',mycomp:'My Computer',recycle:'Recycle Bin',terminal:'TERMINAL'};
-    const SHOW={sweeper:()=>this.showStart(),lore:()=>this.showCodex(),mycomp:()=>this.showMyComputer(),recycle:()=>this.showRecycleBin(),terminal:()=>this.showTerminal()};
-    if(this.root.querySelector(`#exe-win-${winId}`)){this._raiseWin(winId);return;}
-    const wrap=this.root.querySelector('.exe-wrap');
-    if(!wrap||wrap.querySelector('.exe-app-loader')){
-      document.body.classList.remove('exe-closed');
-      (SHOW[view]||SHOW.sweeper)();return;
-    }
-    const label=LABELS[view]||view;
-    const SPEEDS={sweeper:1500,mycomp:1500,lore:900,recycle:700,terminal:700};
-    const speed=SPEEDS[view]||1000;
-    const loader=document.createElement('div');
-    loader.className='exe-app-loader';
-    loader.innerHTML=`
-      <div class="exe-app-loader-box">
-        <div class="exe-app-loader-title">Opening...</div>
-        <div class="exe-app-loader-body">
-          <div class="exe-app-loader-text">Opening ${label}...</div>
-          <div class="exe-app-loader-bar"><div class="exe-app-loader-bar-fill" style="animation-duration:${speed/1000}s;"></div></div>
-        </div>
-      </div>`;
-    wrap.appendChild(loader);
-    setTimeout(()=>{
-      loader.classList.add('gone');
-      setTimeout(()=>{
-        loader.remove();
-        document.body.classList.remove('exe-closed');
-        (SHOW[view]||SHOW.sweeper)();
-      },250);
-    },speed);
+    if(view!=='sweeper'&&this._runActive)this.pauseGame();
+    const existing=this.root.querySelector(`#exe-win-${view}`);
+    if(existing){this._raiseWin(view);this._syncTaskbarApps();return;}
+    document.body.classList.remove('exe-closed');
+    const show={sweeper:()=>{if(this._runActive){this.renderBoard();if(this.game.gameWon)this.showLevelComplete();else if(this.game.gameOver)this.showGameOver();}else this.showStart();},lore:()=>this.showCodex(),mycomp:()=>this.showMyComputer(),recycle:()=>this.showRecycleBin(),terminal:()=>this.showTerminal()};
+    (show[view]||show.sweeper)();
   }
 
   // Desktop icon definitions — stable set, positions persist in localStorage
@@ -2390,7 +2994,7 @@ class GameUI{
       if(!btn)return;
       sfx.init();sfx.toggle();
       btn.classList.toggle('muted',sfx.muted);
-      btn.textContent=sfx.muted?'\u00D7':'\u266B';
+      btn.textContent=sfx.muted?'Sound off':'Sound on';
     });
   }
 
@@ -2450,11 +3054,16 @@ class GameUI{
           <div class="exe-taskbar-apps" id="exe-taskbar-apps"></div>
           <div class="exe-taskbar-divider"></div>
           <div class="exe-taskbar-tray">
-            <button class="exe-sound-btn" id="exe-sound-btn" title="Toggle sound">&#9835;</button>
+            <button class="exe-effects-btn" id="exe-effects-btn" aria-pressed="${this.effects}">CRT ${this.effects?'on':'off'}</button><button class="exe-sound-btn" id="exe-sound-btn" title="Toggle sound" aria-label="Sound" aria-pressed="${!sfx.muted}">${sfx.muted?'Sound off':'Sound on'}</button>
             <span class="exe-taskbar-clock" id="exe-clock">3:47 AM</span>
           </div>
         </div>
       </div>`;
+      this.root.querySelector('#exe-effects-btn').addEventListener('click',e=>{
+        this.effects=!this.effects;writeStored('sweeper_effects',this.effects);
+        document.body.classList.toggle('effects-off',!this.effects);
+        e.currentTarget.textContent='CRT '+(this.effects?'on':'off');e.currentTarget.setAttribute('aria-pressed',String(this.effects));
+      });
       this._applyIconPositions();
       this._startVHSClock();
       this._syncTaskbarApps();
@@ -2474,7 +3083,7 @@ class GameUI{
       win.dataset.winId=winId;
       wrap.appendChild(win);
     }
-    win.innerHTML=innerHTML;
+    win.classList.remove('exe-game-window');win.innerHTML=innerHTML;win.scrollTop=0;
     this._applyWinPosition(winId);
     this._raiseWin(winId);
     this._syncClosedState();
@@ -2502,9 +3111,11 @@ class GameUI{
   // Remove a window from the DOM
   _closeWin(winId){
     const win=this.root.querySelector(`#exe-win-${winId}`);
+    if(winId==='confirm')this._confirmAction=null;
     if(win){win.remove();sfx.winClose();}
     // If SWEEPER closed during game, stop the timer
-    if(winId==='sweeper')this.stopTimer();
+    if(winId==='sweeper'&&this._runActive){this.advanceClock();if(!this._paused)this._pausedAt=Date.now();this._paused=!this.game.gameOver;this.stopTimer();this._autosave();}
+    if(winId==='share')document.querySelector('#modal button:not([disabled]),#resume-game')?.focus({preventScroll:true});
     this._syncClosedState();
     this._syncTaskbarApps();
   }
@@ -2581,8 +3192,9 @@ class GameUI{
           this._iconPositions=this._iconPositions||{};
           this._iconPositions[drag.id]={x:drag.lastX,y:drag.lastY};
           this._saveIconPositions();
+          const dragged=drag.el;
           drag.el._wasDragged=true;
-          setTimeout(()=>{if(drag.el)drag.el._wasDragged=false;},120);
+          setTimeout(()=>{if(dragged)dragged._wasDragged=false;},120);
         }
       }
       drag=null;
@@ -2728,136 +3340,61 @@ class GameUI{
   setFlavor(text){document.getElementById('flavor-text').textContent=text;}
 
   showStart(){
-    // Session counter — increments once per page load
-    let sessions=parseInt(localStorage.getItem('sweeper_sessions')||'46',10);
-    if(!this._sessionIncremented){sessions++;localStorage.setItem('sweeper_sessions',String(sessions));this._sessionIncremented=true;}
-    const sessionStr=String(sessions).padStart(5,'0');
+    this.stopTimer();this._runActive=false;this._paused=false;
+    const saved=readStored('sweeper_autosave',null);
+    const resumable=this._validSave(saved);
     const hardUnlocked=localStorage.getItem('sweeper_hardUnlocked')==='1';
-    const hardActive=this.game.hardMode&&hardUnlocked;
-
-    const modulesHTML=CLASSES.filter(c=>{
-      if((c.id==='eden'||c.id==='manna')&&!isClassUnlocked(c.id))return false;
-      return true;
-    }).map((c,i)=>{
-      const unlocked=isClassUnlocked(c.id);
-      const selected=this.game.gameClass===c.id&&unlocked;
-      const cls=!unlocked?'locked':(selected?'sel':'');
-      const sizeKB=(12+i*8);
-      const filename=c.name.toLowerCase().replace(/^the\s+/,'').replace(/\s+/g,'_');
-      return`<div class="exe-list-item ${cls}" data-class="${c.id}" role="button" tabindex="${unlocked?'0':'-1'}" aria-disabled="${!unlocked}"><span class="exe-fi" aria-hidden="true">&#9632;</span><span class="exe-name">${filename}</span><span class="exe-size">${sizeKB}KB</span></div>`;
-    }).join('');
-
-    const relicList=[
-      ['BACKUP','30','Reclaims 20 seconds'],
-      ['FIREWALL','46','Absorbs your next mine hit'],
-      ['SCANDISK','36','Auto-marks 3 hidden mines'],
-      ['DEFRAG','42','Reveals 2&times;2 region, marks mines'],
-      ['TRACERT','48','Reveals empty tiles touching a correct mark'],
-    ];
-    const cursedList=[
-      ['SPYWARE','40','Reveals 5 safe as dead tiles (no info)','revealed tiles show no numbers'],
-      ['ADWARE','30','+30s time','key gain halved for 60s'],
-      ['BLOATWARE','46','Absorbs 2 mine hits','each hit halves time +5s'],
-      ['ROOTKIT','48','Reveals empty tiles around all flags','one wrong flag ends the game'],
-      ['TROJAN','36','Marks 5 hidden mines','removes all marks &minus;20s'],
-    ];
-
-    const topics={
-      objective:{title:'Objective',body:`<p>Sweep four levels (five with ROOT.ACCESS). Reveal every safe tile before the clock runs out. Hit a mine or reach 00:00 and the process terminates. 30% of your remaining time carries forward.</p><div class="exe-ascii">LEVEL_01 &rarr; LEVEL_02 &rarr; LEVEL_03 &rarr; LEVEL_04 [ &rarr; LEVEL_05 ]</div><p class="exe-note">// if the clock reaches 00:00, the session ends.</p>`},
-      controls:{title:'Controls',body:`<div class="exe-kvr"><span class="exe-k">left-click</span><span class="exe-v">Reveal tile</span></div><div class="exe-kvr"><span class="exe-k">right-click</span><span class="exe-v">Mark tile</span></div><div class="exe-kvr"><span class="exe-k">long-press</span><span class="exe-v">Mark on mobile</span></div><div class="exe-kvr"><span class="exe-k">click num</span><span class="exe-v">Chord: reveal neighbors when mark count matches</span></div><div class="exe-kvr"><span class="exe-k">click badge</span><span class="exe-v">Activate a protocol</span></div>`},
-      levels:{title:'Levels',body:`<table><tr><th>#</th><th>Grid</th><th>Mines</th><th>Time</th></tr><tr><td>01</td><td>8&times;8</td><td>10</td><td>2:30</td></tr><tr><td>02</td><td>10&times;10</td><td>15</td><td>2:20</td></tr><tr><td>03</td><td>12&times;12</td><td>25</td><td>2:10</td></tr><tr><td>04</td><td>14&times;14</td><td>35</td><td>2:00</td></tr>`+(localStorage.getItem('sweeper_hardUnlocked')==='1'?`<tr><td>05</td><td>16&times;16</td><td>50</td><td>1:50</td></tr></table>`:`<tr><td>05</td><td><span class="exe-censor">??&times;??</span></td><td><span class="exe-censor">??</span></td><td><span class="exe-censor">?:??</span></td></tr></table>`)},
-      shards:{title:'Keys',body:`<p>Keys are recovered during a session. Spent on protocols and dependencies between sectors.</p><div class="exe-kvr"><span class="exe-k">per tile</span><span class="exe-v">+1 key</span></div><div class="exe-kvr"><span class="exe-k">combo</span><span class="exe-v">Chain reveals within 800ms: +1 starting at 3rd, caps at +5</span></div><div class="exe-kvr"><span class="exe-k">sector clear</span><span class="exe-v">+10 keys</span></div><div class="exe-kvr"><span class="exe-k">time bonus</span><span class="exe-v">+1 per 5 seconds remaining</span></div>`},
-      classes:{title:'Modules',body:CLASSES.map(c=>{const u=isClassUnlocked(c.id);const censored=(c.id==='eden'||c.id==='manna')&&!u;return censored?`<div class="exe-kvr"><span class="exe-k">${c.name}</span><span class="exe-v"><span class="exe-censor">requires ROOT.ACCESS</span></span></div>`:`<div class="exe-kvr"><span class="exe-k${u?'':' exe-lk'}">${c.name}</span><span class="exe-v${u?'':' exe-lk'}">${u?c.desc:('LOCKED &mdash; '+c.unlockReq)}</span></div>`;}).join('')},
-      relics:{title:'Protocols',body:`<p>Installed between levels. Persist across the session. Click the badge in-game to execute.</p>`+relicList.map(([n,p,d])=>`<div class="exe-kvr"><span class="exe-k">${n}</span><span class="exe-v">${p}&#x26BF; &middot; ${d}</span></div>`).join('')},
-      cursed:{title:'Dependencies',body:`<p class="exe-wr">~30% chance to appear. More powerful but each one installs a hook into your process.</p>`+cursedList.map(([n,p,b,c])=>`<div class="exe-kvr"><span class="exe-k">${n}</span><span class="exe-v">${p}&#x26BF; &middot; ${b} &middot; <span class="exe-wr">${c}</span></span></div>`).join('')},
-      protocol:{title:'ROOT.ACCESS',body:localStorage.getItem('sweeper_hardUnlocked')==='1'?`<p>Unlocks after clearing Level 04. Adds a fifth level. Stacks system errors onto every level.</p><p class="exe-wr">L01-L03: 1 error. L04-L05: 2 errors stacked.</p>`+MODIFIERS.map(m=>`<div class="exe-kvr"><span class="exe-k">${m.name}</span><span class="exe-v">${m.desc}</span></div>`).join(''):`<p><span class="exe-censor">Unlocks after</span> clearing Level 04. <span class="exe-censor">Adds a fifth level.</span> <span class="exe-censor">Stacks system errors onto every level.</span></p><p class="exe-wr"><span class="exe-censor">L01-L03: 1 error.</span> <span class="exe-censor">L04-L05: 2 errors stacked.</span></p><div class="exe-kvr"><span class="exe-k"><span class="exe-censor">REDACTED</span></span><span class="exe-v"><span class="exe-censor">classified information</span></span></div><div class="exe-kvr"><span class="exe-k"><span class="exe-censor">REDACTED</span></span><span class="exe-v"><span class="exe-censor">classified information</span></span></div><div class="exe-kvr"><span class="exe-k"><span class="exe-censor">REDACTED</span></span><span class="exe-v"><span class="exe-censor">classified information</span></span></div>`},
-    };
-    const topicKeys=Object.keys(topics);
-    const topicNavHTML=topicKeys.map((k,i)=>`<div class="exe-topic ${i===0?'sel':''}" data-topic="${k}" role="button" tabindex="0"><span class="exe-arrow" aria-hidden="true">&rsaquo;</span>${topics[k].title}</div>`).join('');
-    const topicBodyHTML=topicKeys.map((k,i)=>`<div class="exe-content ${i===0?'active':''}" data-content="${k}"><div class="exe-chead">${topics[k].title}</div><div class="exe-cbody">${topics[k].body}</div></div>`).join('');
-
-    this._topics=topics;
-    const winHTML=`
-    <div class="exe-titlebar">
-      <div class="exe-ttext"><span class="exe-ic" aria-hidden="true">S</span>SWEEPER.EXE<span class="exe-expired" aria-hidden="true"> &middot; [session ${sessionStr}] &middot; [TRIAL EXPIRED]</span></div>
-      <div class="exe-tbtns"><button class="exe-tbtn exe-reload-btn" title="Reload" aria-label="Reload">&#x21BB;</button><button class="exe-tbtn exe-close-btn" title="Close window" aria-label="Close">&times;</button></div>
-    </div>
-    <div class="exe-sw">
-      <div class="exe-client">
-        <div class="exe-pane active">
-          <div class="exe-section">
-            <div class="exe-section-title">Session</div>
-            <table class="exe-kv">
-              <tr><td>Build</td><td>4.0.1</td></tr>
-              <tr><td>Session</td><td>${sessionStr} of 00003 allowed</td></tr>
-              <tr><td>Uptime</td><td class="exe-val-glitch">47:32:??</td></tr>
-              <tr><td>License</td><td class="exe-val-warn">EXPIRED</td></tr>
-              <tr><td>Modules</td><td>${CLASSES.length} loaded, 1 signed</td></tr>
-            </table>
-          </div>
-          <div class="exe-section">
-            <div class="exe-section-title">Select Module</div>
-            <div class="exe-listbox">${modulesHTML}</div>
-          </div>
-          ${hardUnlocked?`<div class="exe-section">
-            <div class="exe-section-title">Options</div>
-            <div class="exe-check" id="exe-hard" role="checkbox" tabindex="0" aria-checked="${hardActive}">
-              <div class="exe-cbox ${hardActive?'checked':''}" aria-hidden="true"></div>
-              <div>ROOT.ACCESS (5 levels &middot; modifiers active)</div>
-            </div>
-          </div>`:''}
-          <div class="exe-btn-row">
-            <button class="exe-btn default" id="exe-run">Run</button>
-            <button class="exe-btn" id="exe-help">Help</button>
-          </div>
+    const history=readStored('sweeper_history',[]);
+    const runs=Array.isArray(history)?history.filter(r=>r&&Number.isInteger(r.level)):[];
+    const best=runs.length?Math.max(...runs.map(r=>r.level)):0;
+    const modules=CLASSES.filter(c=>isClassUnlocked(c.id));
+    const options=this.game.dailyDate?(this._regularOptions||{gameClass:'sweeper',hardMode:false}):this.game;
+    const params=new URLSearchParams(location.search);
+    const requestedDate=params.get('daily');
+    const invalidDaily=requestedDate!==null&&(!sweeperDailyDate(requestedDate)||(params.has('v')&&params.get('v')!==DAILY_BOARD.version));
+    const dailyDate=!invalidDaily&&requestedDate?requestedDate:new Date().toISOString().slice(0,10);
+    const dailySaved=readStored('sweeper_daily_autosave',null);
+    const dailyResumable=this._validSave(dailySaved)&&dailySaved.dailyDate===dailyDate;
+    const dailyStats=this._dailyStats(dailyDate);
+    const first=dailyStats.first;
+    const dailySummary=first?`First attempt: ${first.won?'cleared in '+this.fmtTime(first.seconds):first.cleared+'/119 safe tiles'}.`:
+      dailyStats.attempts?'First attempt started. Replays count as practice.':'No attempts yet.';
+    const win=this._renderWin('sweeper',`
+      <div class="exe-titlebar"><div class="exe-ttext"><span class="exe-ic">S</span>SWEEPER.EXE</div><div class="exe-tbtns"><button class="exe-tbtn exe-close-btn" aria-label="Close game window">&times;</button></div></div>
+      <nav class="exe-toolbar" aria-label="Game menu"><button id="exe-saves">Saved games</button><button id="exe-help">How to play</button></nav>
+      <div class="exe-launcher">
+        <header class="exe-launch-header"><h1>SWEEPER.EXE</h1><p>Clear every safe tile before the clock runs out. Four levels, a growing minefield, and a few useful tools between rounds.</p></header>
+        <section class="exe-daily-card" aria-label="Daily board">
+          <h2>Daily board · ${dailyDate}</h2>
+          <p>12 × 12 · 25 mines · 3 minutes. Standard rules, no tools. Same start for everyone. Changes at midnight UTC.</p>
+          <p>${invalidDaily?'This shared link has an invalid date or unsupported version. Showing the current daily board.':dailySummary}${dailyStats.best?' Best clear: '+this.fmtTime(dailyStats.best.seconds)+'.':''}</p>
+          <div class="exe-daily-actions"><button class="exe-btn" id="exe-daily">${dailyResumable?dailySaved.gameOver?'View daily result':'Resume daily':dailyStats.attempts?'Replay daily':'Play daily'}</button><button class="exe-btn" id="exe-daily-copy">Copy link</button>${requestedDate&&dailyDate!==new Date().toISOString().slice(0,10)?'<button class="exe-btn" id="exe-daily-today">Current daily</button>':''}</div>
+        </section>
+        <div class="exe-run-heading"><h2>Four-level run</h2><div class="exe-launch-actions">${resumable?`<button class="exe-btn default" id="exe-resume">Resume level ${saved.level+1}</button>`:''}<button class="exe-btn ${resumable?'':'default'}" id="exe-run">New run</button></div></div>
+        <div class="exe-launch-layout">
+          <section class="exe-level-overview"><h2>The run</h2><ol class="exe-level-list">${LEVELS.slice(0,4).map((l,i)=>`<li><strong>Level ${i+1}</strong><span>${l.rows} × ${l.cols} · ${l.mines} mines</span></li>`).join('')}</ol><p class="exe-launch-note">Normal boards can be solved from their clues. Your first reveal and its neighbors are safe.</p><p class="exe-launch-note">Clear all four to unlock ROOT.ACCESS: a fifth level with extra rules.</p></section>
+          <section><h2>Choose a module</h2><div class="exe-module-list" role="radiogroup" aria-label="Playable module">${modules.map(c=>`<button class="exe-module" data-class="${c.id}" role="radio" aria-checked="${options.gameClass===c.id}" tabindex="${options.gameClass===c.id?'0':'-1'}"><strong>${c.name}</strong><small>${MODULE_SUMMARIES[c.id]}</small></button>`).join('')}</div><p class="exe-launch-note" id="module-detail">${classById(options.gameClass).desc}</p></section>
         </div>
+        ${hardUnlocked?`<label class="exe-launch-note" style="display:block"><input type="checkbox" id="exe-hard" ${options.hardMode?'checked':''}> ROOT.ACCESS · five levels with modifiers</label>`:''}
+        <div class="exe-launch-foot"><span>${runs.length?`${runs.length} recent runs · ${runs.filter(r=>r.won).length} cleared · best level ${best}`:'No completed runs yet.'}</span><span>Progress stays in this browser.</span></div>
       </div>
-    </div>
-    <div class="exe-status">
-      <div class="exe-sb-cell" id="exe-sb-msg"><span class="exe-dot warn"></span>UNSIGNED BINARY</div>
-      <div class="exe-sb-cell">v4.0.1</div>
-      <div class="exe-sb-cell">MEM 512K</div>
-    </div>`;
-    const win=this._renderWin('sweeper',winHTML);
-
-    // Module selection (scoped to this window)
-    win.querySelectorAll('.exe-list-item').forEach(el=>{
-      el.addEventListener('click',()=>{
-        if(el.classList.contains('locked'))return;
-        const id=el.dataset.class;
-        this.game.gameClass=id;
-        win.querySelectorAll('.exe-list-item').forEach(x=>x.classList.remove('sel'));
-        el.classList.add('sel');
-      });
+      <div class="exe-status"><div class="exe-sb-cell">SWEEPER.EXE</div><div class="exe-sb-cell">Ready to play</div></div>`);
+    const buttons=[...win.querySelectorAll('[data-class]')];
+    const select=el=>{options.gameClass=el.dataset.class;if(this.game.dailyDate)this._regularOptions=options;win.querySelector('#module-detail').innerHTML=classById(options.gameClass).desc;buttons.forEach(b=>{b.setAttribute('aria-checked',String(b===el));b.tabIndex=b===el?0:-1;});};
+    buttons.forEach((el,i)=>{
+      el.addEventListener('click',()=>select(el));
+      el.addEventListener('keydown',e=>{if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();const next=buttons[(i+(['ArrowUp','ArrowLeft'].includes(e.key)?-1:1)+buttons.length)%buttons.length];select(next);next.focus();});
     });
-
-    // Hard mode checkbox
-    if(hardUnlocked){
-      win.querySelector('#exe-hard').addEventListener('click',()=>{
-        this.game.hardMode=!this.game.hardMode;
-        const el=win.querySelector('#exe-hard');
-        el.setAttribute('aria-checked',String(this.game.hardMode));
-        el.querySelector('.exe-cbox').classList.toggle('checked',this.game.hardMode);
-      });
-    }
-
-    // Show system alert as separate window on first visit
-    if(!this._modalDismissed)this.showSystemAlert(sessionStr);
-
-    // Help button opens the LORE.HLP window on top
-    win.querySelector('#exe-help').addEventListener('click',()=>{this._openApp('lore');});
-
-    // Run button — brief loading delay like an old PC
+    win.querySelector('#exe-hard')?.addEventListener('change',e=>{options.hardMode=e.target.checked;if(this.game.dailyDate)this._regularOptions=options;});
+    win.querySelector('#exe-daily').addEventListener('click',()=>this._openDaily(dailyDate));
+    win.querySelector('#exe-daily-copy').addEventListener('click',e=>this._copyDaily(this._dailyLink(dailyDate),e.currentTarget));
+    win.querySelector('#exe-daily-today')?.addEventListener('click',()=>{this._setDailyURL(null);this.showStart();});
+    win.querySelector('#exe-help').addEventListener('click',()=>this._openApp('lore'));
+    win.querySelector('#exe-saves').addEventListener('click',()=>this.loadGame());
+    win.querySelector('#exe-resume')?.addEventListener('click',()=>this._restoreSave(saved));
     win.querySelector('#exe-run').addEventListener('click',()=>{
-      sfx.init();
-      const btn=win.querySelector('#exe-run');
-      btn.disabled=true;btn.textContent='Loading...';
-      setTimeout(()=>{
-        this.game.reset();
-        const line=NARRATOR.react('startRun');
-        if(line)this.setFlavor(line);
-        this.startLevel();
-      },1200);
+      if(resumable)this._confirm('Start a new run?','This replaces your automatic save. Manual saves stay available.',()=>this._newRun());
+      else this._newRun();
     });
   }
 
@@ -2885,34 +3422,23 @@ class GameUI{
     this._closeWin('sysalert');
     const msg=document.querySelector('#exe-win-sweeper #exe-sb-msg');
     if(msg)msg.innerHTML='<span class="exe-dot"></span>READY';
-    if(wasFirst)this._openApp('lore');
+    if(wasFirst)this._raiseWin('sweeper');
   }
 
   // Standalone LORE.HLP help viewer — its own window, no tabs, no launcher
   showCodex(){
     document.body.classList.remove('exe-closed');
-    const relicList=[
-      ['BACKUP','30','Reclaims 20 seconds'],
-      ['FIREWALL','46','Absorbs your next mine hit'],
-      ['SCANDISK','36','Auto-marks 3 hidden mines'],
-      ['DEFRAG','42','Reveals 2&times;2 region, marks mines'],
-      ['TRACERT','48','Reveals empty tiles touching a correct mark'],
-    ];
-    const cursedList=[
-      ['SPYWARE','40','Reveals 5 safe as dead tiles (no info)','revealed tiles show no numbers'],
-      ['ADWARE','30','+30s time','key gain halved for 60s'],
-      ['BLOATWARE','46','Absorbs 2 mine hits','each hit halves time +5s'],
-      ['ROOTKIT','48','Reveals empty tiles around all flags','one wrong flag ends the game'],
-      ['TROJAN','36','Marks 5 hidden mines','removes all marks &minus;20s'],
-    ];
+    const relicList=Object.values(GAME_TOOLS).filter(p=>!p.cursed);
+    const cursedList=Object.values(GAME_TOOLS).filter(p=>p.cursed);
     const topics={
-      objective:{title:'Objective',body:`<p>Sweep four levels (five with ROOT.ACCESS). Reveal every safe tile before the clock runs out. Hit a mine or reach 00:00 and the process terminates. 30% of your remaining time carries forward.</p><div class="exe-ascii">LEVEL_01 &rarr; LEVEL_02 &rarr; LEVEL_03 &rarr; LEVEL_04 [ &rarr; LEVEL_05 ]</div><p class="exe-note">// if the clock reaches 00:00, the session ends.</p>`},
-      controls:{title:'Controls',body:`<div class="exe-kvr"><span class="exe-k">left-click</span><span class="exe-v">Reveal tile</span></div><div class="exe-kvr"><span class="exe-k">right-click</span><span class="exe-v">Mark tile</span></div><div class="exe-kvr"><span class="exe-k">long-press</span><span class="exe-v">Mark on mobile</span></div><div class="exe-kvr"><span class="exe-k">click num</span><span class="exe-v">Chord: reveal neighbors when mark count matches</span></div><div class="exe-kvr"><span class="exe-k">click badge</span><span class="exe-v">Activate a protocol</span></div>`},
+      objective:{title:'Objective',body:`<p>Sweep four levels (five with ROOT.ACCESS). Reveal every safe tile before the clock runs out. An unprotected mine hit or 00:00 ends the run. Carry 30% of your time into the next level, except with lazarus.dll.</p><div class="exe-ascii">LEVEL_01 &rarr; LEVEL_02 &rarr; LEVEL_03 &rarr; LEVEL_04 [ &rarr; LEVEL_05 ]</div><p class="exe-note">// if the clock reaches 00:00, the session ends.</p>`},
+      controls:{title:'Controls',body:`<div class="exe-kvr"><span class="exe-k">click / tap</span><span class="exe-v">Use the selected Reveal, Flag, or Inspect action</span></div><div class="exe-kvr"><span class="exe-k">right-click / hold</span><span class="exe-v">Place or remove a flag</span></div><div class="exe-kvr"><span class="exe-k">keyboard</span><span class="exe-v">Arrows move; Enter or Space uses the selected action; F flags; Escape pauses</span></div><div class="exe-kvr"><span class="exe-k">click num</span><span class="exe-v">Reveal mode clears neighbors when flags match. Incorrect flags can hit a mine.</span></div><div class="exe-kvr"><span class="exe-k">click badge</span><span class="exe-v">Use a tool; protective tools work automatically</span></div>`},
+      daily:{title:'Daily board',body:`<p>One 12 × 12 board, 25 mines, three minutes. It changes at midnight UTC. Everyone starts at the marked tile, with standard rules and no tools.</p><p>Your first result stays saved in this browser. Replays are practice. Copy a board link to share the same puzzle, or copy your result after finishing. Shared results show active play time; pauses do not count.</p><p>Daily and regular runs have separate autosaves. Use Menu to switch between them.</p>`},
       levels:{title:'Levels',body:`<table><tr><th>#</th><th>Grid</th><th>Mines</th><th>Time</th></tr><tr><td>01</td><td>8&times;8</td><td>10</td><td>2:30</td></tr><tr><td>02</td><td>10&times;10</td><td>15</td><td>2:20</td></tr><tr><td>03</td><td>12&times;12</td><td>25</td><td>2:10</td></tr><tr><td>04</td><td>14&times;14</td><td>35</td><td>2:00</td></tr>`+(localStorage.getItem('sweeper_hardUnlocked')==='1'?`<tr><td>05</td><td>16&times;16</td><td>50</td><td>1:50</td></tr></table>`:`<tr><td>05</td><td><span class="exe-censor">??&times;??</span></td><td><span class="exe-censor">??</span></td><td><span class="exe-censor">?:??</span></td></tr></table>`)},
-      shards:{title:'Keys',body:`<p>Keys are recovered during a session. Spent on protocols and dependencies between sectors.</p><div class="exe-kvr"><span class="exe-k">per tile</span><span class="exe-v">+1 key</span></div><div class="exe-kvr"><span class="exe-k">combo</span><span class="exe-v">Chain reveals within 800ms: +1 starting at 3rd, caps at +5</span></div><div class="exe-kvr"><span class="exe-k">sector clear</span><span class="exe-v">+10 keys</span></div><div class="exe-kvr"><span class="exe-k">time bonus</span><span class="exe-v">+1 per 5 seconds remaining</span></div>`},
+      shards:{title:'Keys',body:`<p>Keys are recovered during a session. Spent on protocols and dependencies between sectors.</p><div class="exe-kvr"><span class="exe-k">per tile</span><span class="exe-v">+1 key</span></div><div class="exe-kvr"><span class="exe-k">combo</span><span class="exe-v">Chain reveals within 800ms: +1 starting at 3rd, caps at +5</span></div><div class="exe-kvr"><span class="exe-k">level clear</span><span class="exe-v">+10 × the level number</span></div><div class="exe-kvr"><span class="exe-k">time bonus</span><span class="exe-v">+1 per 5 seconds remaining</span></div>`},
       classes:{title:'Modules',body:CLASSES.map(c=>{const u=isClassUnlocked(c.id);const censored=(c.id==='eden'||c.id==='manna')&&!u;return censored?`<div class="exe-kvr"><span class="exe-k">${c.name}</span><span class="exe-v"><span class="exe-censor">requires ROOT.ACCESS</span></span></div>`:`<div class="exe-kvr"><span class="exe-k${u?'':' exe-lk'}">${c.name}</span><span class="exe-v${u?'':' exe-lk'}">${u?c.desc:('LOCKED &mdash; '+c.unlockReq)}</span></div>`;}).join('')},
-      relics:{title:'Protocols',body:`<p>Installed between levels. Persist across the session. Click the badge in-game to execute.</p>`+relicList.map(([n,p,d])=>`<div class="exe-kvr"><span class="exe-k">${n}</span><span class="exe-v">${p}&#x26BF; &middot; ${d}</span></div>`).join('')},
-      cursed:{title:'Dependencies',body:`<p class="exe-wr">~30% chance to appear. More powerful but each one installs a hook into your process.</p>`+cursedList.map(([n,p,b,c])=>`<div class="exe-kvr"><span class="exe-k">${n}</span><span class="exe-v">${p}&#x26BF; &middot; ${b} &middot; <span class="exe-wr">${c}</span></span></div>`).join('')},
+      relics:{title:'Protocols',body:`<p>Buy tools between levels. Click a badge to use it. FIREWALL and BLOATWARE protect you automatically.</p>`+relicList.map(p=>`<div class="exe-kvr"><span class="exe-k">${p.name}</span><span class="exe-v">${p.price} keys · ${p.desc}</span></div>`).join('')},
+      cursed:{title:'Dependencies',body:`<p class="exe-wr">Some shops offer dependencies: useful tools with a cost. Eden shops only offer dependencies.</p>`+cursedList.map(p=>`<div class="exe-kvr"><span class="exe-k">${p.name}</span><span class="exe-v">${p.price} keys · ${p.desc}</span></div>`).join('')},
       protocol:{title:'ROOT.ACCESS',body:localStorage.getItem('sweeper_hardUnlocked')==='1'?`<p>Unlocks after clearing Level 04. Adds a fifth level. Stacks system errors onto every level.</p><p class="exe-wr">L01-L03: 1 error. L04-L05: 2 errors stacked.</p>`+MODIFIERS.map(m=>`<div class="exe-kvr"><span class="exe-k">${m.name}</span><span class="exe-v">${m.desc}</span></div>`).join(''):`<p><span class="exe-censor">Unlocks after</span> clearing Level 04. <span class="exe-censor">Adds a fifth level.</span> <span class="exe-censor">Stacks system errors onto every level.</span></p><p class="exe-wr"><span class="exe-censor">L01-L03: 1 error.</span> <span class="exe-censor">L04-L05: 2 errors stacked.</span></p><div class="exe-kvr"><span class="exe-k"><span class="exe-censor">REDACTED</span></span><span class="exe-v"><span class="exe-censor">classified information</span></span></div><div class="exe-kvr"><span class="exe-k"><span class="exe-censor">REDACTED</span></span><span class="exe-v"><span class="exe-censor">classified information</span></span></div><div class="exe-kvr"><span class="exe-k"><span class="exe-censor">REDACTED</span></span><span class="exe-v"><span class="exe-censor">classified information</span></span></div>`},
     };
     const topicKeys=Object.keys(topics);
@@ -3012,7 +3538,7 @@ class GameUI{
       ],
     };
     // SAVES subfolder
-    const saves=JSON.parse(localStorage.getItem('sweeper_saves')||'{}');
+    const saves=readStored('sweeper_saves',{});
     const saveKeys=Object.keys(saves);
     fs['C:\\PROGRAM FILES\\SWEEPER'].push({name:'SAVES',type:'folder',size:'',icon:'\u{1F4C1}'});
     const saveFiles=[{name:'..',type:'up',size:'',icon:'\u{1F4C2}',path:'C:\\PROGRAM FILES\\SWEEPER'}];
@@ -3165,7 +3691,7 @@ class GameUI{
         const g=self.game;
         return`  Module:  ${classById(g.gameClass).name}\n  Level:   ${g.level+1}/${g.totalDepths}\n  Keys:    ${g.shards}\n  Hard:    ${g.hardMode?'YES':'NO'}`;
       },
-      echo:(args)=>args||'',
+      echo:(args)=>escapeHTML(args||''),
     };
     const SECRETS={
       'APPLE':()=>{
@@ -3218,29 +3744,32 @@ class GameUI{
   }
 
   startLevel(){
-    this.stopTimer();this.dangerFlavorShown=false;
-    this.levelStartTime=Date.now();
+    this.stopTimer();this.dangerFlavorShown=false;this._runActive=true;this._paused=false;this._shopItems=null;this.comboCount=0;this.lastRevealTime=0;this._focusCell={r:0,c:0};
+    if(this.game.dailyDate)this._focusCell={r:DAILY_BOARD.startRow,c:DAILY_BOARD.startCol};
+    this.levelStartTime=Date.now();this.inputMode='reveal';this._pausedBoardScroll=null;
     const line=NARRATOR.react('startLevel',{level:this.game.level});
     if(line)this.setFlavor(line);
     this.renderBoard();this.startTimer();
+    if(this.game.dailyDate)document.querySelector('#grid .daily-start')?.focus({preventScroll:true});
   }
 
   renderBoard(){
     const g=this.game;
-    const maxW=Math.min(window.innerWidth*0.92,520);
-    const chromeH=240;
+    const priorGrid=document.getElementById('grid');
+    const keepFocus=!!priorGrid?.contains(document.activeElement);
+    const oldScreen=priorGrid?.parentElement;
+    const scroll=oldScreen?.classList.contains('board-paused')&&this._pausedBoardScroll?this._pausedBoardScroll:{left:oldScreen?.scrollLeft||0,top:oldScreen?.scrollTop||0};
+    if(this._paused)this._pausedBoardScroll=scroll;
     const wrapEl=this.root.querySelector('.exe-wrap');
-    const availH=wrapEl?wrapEl.clientHeight-chromeH:window.innerHeight-chromeH;
-    const cellFromW=Math.floor((maxW-8)/g.cols);
-    const cellFromH=Math.floor((availH-8)/g.rows);
-    const cellSize=Math.min(cellFromW,cellFromH,34);
+    const winWidth=Math.min(720,wrapEl.clientWidth-(window.innerWidth<=700?12:110));
+    const cellSize=Math.max(28,Math.min(44,Math.floor((winWidth-42-g.cols)/g.cols),Math.floor((wrapEl.clientHeight-340)/g.rows)));
 
     let powerupsHTML='';
     if(g.powerups.length>0){
       const PMAP={timewarp:{cls:'timewarp',glyph:ICONS.time_glyph,label:'BACKUP'},shield:{cls:'shield',glyph:ICONS.shield_glyph,label:'FIREWALL'},compass:{cls:'compass',glyph:ICONS.compass_glyph,label:'SCANDISK'},oracle:{cls:'oracle',glyph:ICONS.oracle_glyph,label:'DEFRAG'},rewind:{cls:'rewind',glyph:ICONS.rewind_glyph,label:'REWIND'},lantern:{cls:'lantern',glyph:ICONS.lantern_glyph,label:'TRACERT'},hex:{cls:'cursed',glyph:ICONS.hex_glyph,label:'SPYWARE'},tithe:{cls:'cursed',glyph:ICONS.tithe_glyph,label:'TROJAN'},bargain:{cls:'cursed',glyph:ICONS.bargain_glyph,label:'ADWARE'},scapegoat:{cls:'cursed',glyph:ICONS.scapegoat_glyph,label:'BLOATWARE'},pyre:{cls:'cursed',glyph:ICONS.pyre_glyph,label:'ROOTKIT'}};
       powerupsHTML=g.powerups.map((p,i)=>{
         const m=PMAP[p]||PMAP.timewarp;
-        return`<span class="powerup-badge ${m.cls}" data-powerup="${p}" data-idx="${i}">${m.label}</span>`;
+        return`<button class="powerup-badge ${m.cls}" data-powerup="${p}" data-idx="${i}" title="${GAME_TOOLS[p]?.desc||m.label}" ${this._paused||g.gameOver?'disabled':''}>${m.label}${p==='shield'?' · passive':''}</button>`;
       }).join('');
     }
 
@@ -3254,7 +3783,7 @@ class GameUI{
 
     let modBarHTML='';
     const badges=[];
-    if(g.modifiers.length>0)badges.push(...g.modifiers.map(m=>`<span class="modifier-badge" title="${m.desc}"><span class="mg">${m.icon}</span>${m.name}</span>`));
+    if(g.modifiers.length>0)badges.push(...g.modifiers.map(m=>`<button class="modifier-badge" type="button" data-modifier="${m.id}" title="${m.desc}"><span class="mg">${m.icon}</span>${m.name}${m.id==='surge'&&g.surged?' · 1.25×':''}</button>`));
     if(badges.length>0)modBarHTML=`<div class="modifier-bar">${badges.join('')}</div>`;
 
     const depthStr=String(g.level+1).padStart(2,'0');
@@ -3262,32 +3791,28 @@ class GameUI{
     const sessionStr=String(parseInt(localStorage.getItem('sweeper_sessions')||'47',10)).padStart(5,'0');
     const winHTML=`
     <div class="exe-titlebar">
-      <div class="exe-ttext"><span class="exe-ic">S</span>SWEEPER.EXE &middot; [RUNNING &middot; level_${depthStr} of ${totalStr}]</div>
+      <div class="exe-ttext"><span class="exe-ic">S</span>SWEEPER.EXE · ${g.dailyDate?'Daily '+g.dailyDate:'Level '+(g.level+1)+' of '+g.totalDepths}</div>
       <div class="exe-tbtns"><button class="exe-tbtn exe-close-btn" title="Close window" aria-label="Close">&times;</button></div>
     </div>
     <div class="status-bar">
-      <div class="status-item"><span class="status-label">Level</span><span class="status-value accent">${depthStr}</span></div>
-      <div class="status-item"><span class="status-label">Keys</span><span class="status-value accent" id="shard-val">${g.shards}</span></div>
+      <div class="status-item"><span class="status-label">${g.dailyDate?'Board':'Level'}</span><span class="status-value accent">${g.dailyDate?'Daily':depthStr}</span></div>
+      <div class="status-item"><span class="status-label">${g.dailyDate?'Cleared':'Keys'}</span><span class="status-value accent" id="shard-val">${g.dailyDate?g.board.flat().filter(c=>c.revealed&&!c.mine).length:g.shards}</span></div>
       <div class="status-item"><span class="status-label">Time</span><span class="status-value ${isLow?'danger-text':'accent'}" id="timer-val">${this.fmtTime(g.timeRemaining)}</span></div>
-      <div class="status-item"><span class="status-label">Flags</span><span class="status-value" id="mines-val">${g.mineCount-g.flagCount}</span></div>
+      <div class="status-item"><span class="status-label">Mines left</span><span class="status-value" id="mines-val">${g.mineCount-g.flagCount}</span></div>
     </div>
-    <div class="level-bar">${runesHTML}</div>
+    <div class="level-bar">${g.dailyDate?`<span class="daily-attempt-label">${g.dailyAttempt>1?'Practice · attempt '+g.dailyAttempt:g.dailyAttempt===1?'First attempt':'Same starting tile for everyone'}</span>`:runesHTML}</div>
     ${modBarHTML}
     <div class="timer-bar-wrap"><div class="timer-bar ${isLow?'low':''}" id="timer-bar" style="width:${timerPct}%"></div></div>
     <div class="powerup-bar" id="powerup-bar">${powerupsHTML}</div>
     <div class="game-screen"><div class="grid" id="grid" role="grid" aria-label="Minesweeper board" style="grid-template-columns:repeat(${g.cols},${cellSize}px);gap:1px;padding:4px;"></div></div>
     <div class="controls">
-      <button class="btn btn-primary" id="btn-new">New Game</button>
-      <button class="btn btn-secondary" id="btn-save">Save</button>
-      <button class="btn btn-secondary" id="btn-load">Load</button>
+      <div class="exe-control-group" aria-label="Tile action"><button class="btn" id="btn-reveal" aria-pressed="${this.inputMode==='reveal'}">Reveal</button><button class="btn" id="btn-flag" aria-pressed="${this.inputMode==='flag'}">Flag</button><button class="btn" id="btn-inspect" aria-pressed="${this.inputMode==='inspect'}">Inspect</button></div>
+      <div class="exe-control-group"><button class="btn" id="btn-pause">${g.gameOver?'Results':this._paused?'Resume':'Pause'}</button>${g.dailyDate?'<button class="btn" id="btn-daily-link">Copy link</button>':`<button class="btn" id="btn-save" ${g.gameOver?'disabled':''}>Save</button>`}<button class="btn" id="btn-new">Menu</button></div>
     </div>
-    <div class="exe-status">
-      <div class="exe-sb-cell" id="exe-sb-msg"><span class="exe-dot"></span>RUNNING</div>
-      <div class="exe-sb-cell">level_${depthStr}</div>
-      <div class="exe-sb-cell">session ${sessionStr}</div>
-      <div class="exe-sb-cell">MEM 512K</div>
-    </div>`;
+    <div class="exe-board-hint" id="board-hint" role="status" aria-live="polite">${this.boardHint()}</div>
+    <div class="exe-status"><div class="exe-sb-cell">${g.dailyDate?'Daily · UTC':classById(g.gameClass).name}</div><div class="exe-sb-cell" id="exe-sb-msg">${this._paused?'Paused':g.firstClick?'Ready':g.gameOver?'Run ended':'Autosaved in this browser'}</div><div class="exe-sb-cell">${g.rows} × ${g.cols}</div></div>`;
     const win=this._renderWin('sweeper',winHTML);
+    win.classList.add('exe-game-window');
 
     this.container.classList.toggle('danger',isLow&&!g.gameOver);
 
@@ -3300,59 +3825,96 @@ class GameUI{
         el.style.fontSize=Math.max(cellSize*0.42,10)+'px';
         el.dataset.r=r;el.dataset.c=c;
         el.setAttribute('role','gridcell');
-        el.tabIndex=0;
+        el.tabIndex=r===this._focusCell.r&&c===this._focusCell.c?0:-1;
+        el.setAttribute('aria-rowindex',r+1);el.setAttribute('aria-colindex',c+1);
         this.applyCellClass(el,cell,r,c);
         grid.appendChild(el);
       }
     }
 
-    grid.addEventListener('click',e=>this.handleClick(e));
-    grid.addEventListener('contextmenu',e=>{e.preventDefault();this.handleRightClick(e);});
-    let touchTimer=null,touchMoved=false;
-    grid.addEventListener('touchstart',e=>{touchMoved=false;touchTimer=setTimeout(()=>{if(!touchMoved)this.handleRightClick(e);},400);},{passive:true});
-    grid.addEventListener('touchmove',()=>{touchMoved=true;clearTimeout(touchTimer);},{passive:true});
-    grid.addEventListener('touchend',()=>clearTimeout(touchTimer),{passive:true});
-    // Keyboard navigation: arrows to move, Enter/Space to reveal, F to flag
+    let touchTimer=null;
+    grid.addEventListener('click',e=>{if(Date.now()<(this._ignoreTouchClickUntil||0)){e.preventDefault();return;}const t=this.getCellEl(e);if(!t)return;if(this.inputMode==='inspect'||g.gameOver){this.inspectCell(t.r,t.c);return;}this.inputMode==='flag'?this.handleRightClick(e):this.handleClick(e);});
+    grid.addEventListener('contextmenu',e=>{e.preventDefault();if(Date.now()>=(this._ignoreTouchClickUntil||0))this.handleRightClick(e);});
+    grid.addEventListener('touchstart',e=>{if(this.inputMode==='inspect'||g.gameOver)return;touchTimer=setTimeout(()=>{this._ignoreTouchClickUntil=Date.now()+750;this.handleRightClick(e);},450);},{passive:true});
+    const cancelTouch=()=>clearTimeout(touchTimer);
+    grid.addEventListener('touchmove',cancelTouch,{passive:true});grid.addEventListener('touchend',cancelTouch,{passive:true});grid.addEventListener('touchcancel',cancelTouch,{passive:true});
+    grid.addEventListener('focusin',e=>{const cell=e.target.closest('.cell');if(!cell)return;this._focusCell={r:+cell.dataset.r,c:+cell.dataset.c};grid.querySelectorAll('.cell').forEach(el=>{el.tabIndex=el===cell?0:-1;});this.inspectCell(+cell.dataset.r,+cell.dataset.c);});
+    grid.addEventListener('pointerover',e=>{if(e.pointerType==='touch')return;const t=this.getCellEl(e);if(t)this.inspectCell(t.r,t.c);});
+    grid.addEventListener('pointerleave',()=>{if(this.inputMode!=='inspect')this.clearInspection();});
+    grid.addEventListener('focusout',e=>{if(!grid.contains(e.relatedTarget)&&this.inputMode!=='inspect')this.clearInspection();});
     grid.addEventListener('keydown',e=>{
       const el=e.target.closest('.cell');if(!el)return;
-      const r=+el.dataset.r,c=+el.dataset.c,cols=this.game.cols,rows=this.game.rows;
+      const r=+el.dataset.r,c=+el.dataset.c,cols=g.cols,rows=g.rows;
       let nr=r,nc=c;
       if(e.key==='ArrowUp')nr=Math.max(0,r-1);
       else if(e.key==='ArrowDown')nr=Math.min(rows-1,r+1);
       else if(e.key==='ArrowLeft')nc=Math.max(0,c-1);
       else if(e.key==='ArrowRight')nc=Math.min(cols-1,c+1);
-      else if(e.key==='Enter'||e.key===' '){e.preventDefault();this.handleClick(e);return;}
-      else if(e.key==='f'||e.key==='F'){e.preventDefault();this.handleRightClick(e);return;}
+      else if(e.key==='Enter'||e.key===' '){e.preventDefault();if(this.inputMode==='inspect'||g.gameOver)this.inspectCell(r,c);else if(this.inputMode==='flag')this.handleRightClick(e);else this.handleClick(e);return;}
+      else if(e.key.toLowerCase()==='f'){e.preventDefault();this.handleRightClick(e);return;}
       else return;
-      if(nr!==r||nc!==c){e.preventDefault();const next=grid.children[nr*cols+nc];if(next)next.focus();}
+      e.preventDefault();grid.children[nr*cols+nc]?.focus();
     });
-
-    win.querySelector('#btn-new').addEventListener('click',()=>{sfx.init();this.game.reset();this.startLevel();});
-    win.querySelector('#btn-save').addEventListener('click',()=>this.saveGame());
-    win.querySelector('#btn-load').addEventListener('click',()=>this.loadGame());
-    win.querySelectorAll('.powerup-badge').forEach(el=>{el.addEventListener('click',()=>this.usePowerup(el.dataset.powerup));});
+    win.querySelector('#btn-new').addEventListener('click',()=>{this.pauseGame();this._autosave();this.showStart();});
+    win.querySelector('#btn-save')?.addEventListener('click',()=>this.saveGame());
+    win.querySelector('#btn-daily-link')?.addEventListener('click',e=>this._copyDaily(this._dailyLink(g.dailyDate),e.currentTarget));
+    win.querySelector('#btn-pause').addEventListener('click',()=>g.gameOver?(g.gameWon?this.showLevelComplete():this.showGameOver()):this._paused?this.resumeGame():this.pauseGame());
+    for(const mode of ['reveal','flag','inspect'])win.querySelector('#btn-'+mode).addEventListener('click',()=>{this.inputMode=mode;this.renderBoard();});
+    win.querySelectorAll('[data-modifier]').forEach(el=>el.addEventListener('click',()=>{win.querySelector('#board-hint').textContent=MODIFIERS.find(m=>m.id===el.dataset.modifier).desc;}));
+    win.querySelectorAll('.powerup-badge').forEach(el=>el.addEventListener('click',()=>this.usePowerup(el.dataset.powerup)));
+    if(this._paused&&!g.gameOver){
+      win.querySelector('.game-screen').classList.add('board-paused');
+      const cover=document.createElement('div');cover.className='exe-pause';
+      cover.innerHTML='<h2>Paused</h2><p>Your board is saved. Pick up where you left off.</p><button class="exe-btn default" id="resume-game">Resume game</button><button class="exe-btn" id="pause-home">Back to menu</button>';
+      cover.style.top=win.querySelector('.exe-titlebar').offsetHeight+'px';
+      win.appendChild(cover);
+      for(const child of win.children){if(child!==cover&&!child.classList.contains('exe-titlebar'))child.inert=true;}
+      cover.querySelector('#resume-game').addEventListener('click',()=>this.resumeGame());
+      cover.querySelector('#pause-home').addEventListener('click',()=>{this._autosave();this.showStart();});
+      cover.querySelector('#resume-game').focus({preventScroll:true});
+    }
+    grid.parentElement.scrollLeft=this._paused?0:scroll.left;grid.parentElement.scrollTop=this._paused?0:scroll.top;
+    if(g.dailyDate&&g.firstClick&&!this._paused){
+      const start=grid.querySelector('.daily-start');
+      if(start){grid.parentElement.scrollTop=start.offsetTop-(grid.parentElement.clientHeight-start.offsetHeight)/2;grid.parentElement.scrollLeft=start.offsetLeft-(grid.parentElement.clientWidth-start.offsetWidth)/2;}
+    }
+    if(keepFocus&&!this._paused)grid.querySelector('[tabindex="0"]')?.focus({preventScroll:true});
+    this._autosave();
   }
 
   applyCellClass(el,cell,r,c){
     el.className='cell';
     const g=this.game;
-    if(cell.revealed){
+    const review=g.gameOver&&!g.gameWon;
+    if(review&&cell.flagged){
+      el.classList.add(cell.mine?'flagged':'wrong-flag');el.innerHTML=cell.mine?ICONS.stake:'×';
+      el.setAttribute('aria-label',cell.mine?'Correct flag on a mine':'Incorrect flag: safe tile');
+      if(g.hitCell?.r===r&&g.hitCell?.c===c)el.classList.add('mine-hit');
+      return;
+    }
+    if(cell.revealed||review){
+      if(cell.dead){el.classList.add('revealed');el.textContent='·';el.setAttribute('aria-label','Dead tile: no number information');return;}
       if(cell.mine){
-        el.classList.add('mine-hit');el.innerHTML=ICONS.skull;
-        el.setAttribute('aria-label','Mine');
+        const hit=g.hitCell?.r===r&&g.hitCell?.c===c;
+        el.classList.add(hit?'mine-hit':'review-mine');el.innerHTML=ICONS.skull;
+        el.setAttribute('aria-label',hit?'Mine that ended the run':'Mine');
       }else{
         el.classList.add('revealed');
         const displayN=g.displayAdjacent(cell);
         let shown='';
         if(displayN>0){
-          const isCryptic=g.hasModifier('cryptic')&&displayN>=4;
+          const isCryptic=!review&&g.hasModifier('cryptic')&&displayN>=4;
           const val=isCryptic?'?':displayN;
           const color=isCryptic?'var(--text-muted)':NUM_COLORS[displayN];
           shown=`<span class="num-display" style="color:${color};text-shadow:0 0 6px ${color}33">${val}</span>`;
         }
         el.innerHTML=shown;
-        el.setAttribute('aria-label',displayN>0?displayN+' adjacent':'Empty');
-        if(g.hasModifier('echo')&&displayN>0)el.classList.add('echo-fade');
+        el.setAttribute('aria-label',!review&&g.hasModifier('cryptic')&&displayN>=4?'Hidden number':displayN>0?displayN+' adjacent':'Empty');
+        if(review&&!cell.revealed)el.classList.add('review-safe');
+        if(!review&&g.hasModifier('echo')&&displayN>0){
+          el.classList.add('echo-fade');
+          el.querySelector('.num-display').style.animationDelay=-Math.min(10000,Math.max(0,Date.now()-(cell.revealedAt||0)))+'ms';
+        }
       }
     }else if(cell.flagged){
       el.classList.add('flagged');el.innerHTML=ICONS.stake;
@@ -3361,21 +3923,71 @@ class GameUI{
       el.classList.add('unrevealed');
       el.innerHTML=this._cheats.mines&&cell.mine?ICONS.skull:'';
       el.setAttribute('aria-label','Unrevealed');
+      if(g.dailyDate&&g.firstClick&&r===DAILY_BOARD.startRow&&c===DAILY_BOARD.startCol){el.classList.add('daily-start');el.textContent='Start';el.setAttribute('aria-label','Start daily board here');}
       if(g.hasModifier('fog')&&r!=null&&c!=null&&!g.isVisible(r,c)){
         el.classList.add('fogged');
-        el.setAttribute('aria-label','Hidden in fog');
+        el.setAttribute('aria-label','Unrevealed, dimmed by fog');
       }
     }
+  }
+
+  boardHint(){
+    const g=this.game;
+    if(g.gameWon)return 'Board cleared. Every remaining covered tile is a mine.';
+    if(g.gameOver&&!g.gameWon)return 'Board review: × marks an incorrect flag.'+(g.hitCell?' The red tile ended the run.':'');
+    if(this.inputMode==='inspect')return g.firstClick?'Switch to Reveal to begin. Inspect reads clues without opening tiles.':'Select a clue to inspect its neighbors without revealing anything.';
+    if(g.dailyDate&&g.firstClick)return 'Reveal the marked Start tile. The clock waits until you begin.';
+    if(g.firstClick)return 'Choose a starting tile. Its neighbors are safe. The clock starts on reveal.';
+    if(this.inputMode==='flag')return 'Select a tile to place or remove a flag. A flag is your estimate, not a confirmed mine.';
+    return 'Reveal safe tiles. Right-click or F to flag. Inspect a number to check its neighbors.';
+  }
+
+  clearInspection(){
+    document.querySelectorAll('#grid .inspect-source,#grid .inspect-neighbor').forEach(el=>el.classList.remove('inspect-source','inspect-neighbor'));
+    const hint=document.getElementById('board-hint');if(hint)hint.textContent=this.boardHint();
+  }
+
+  inspectCell(r,c){
+    if(this._paused)return;
+    this.clearInspection();
+    const g=this.game,cell=g.board[r]?.[c];
+    const review=g.gameOver&&!g.gameWon;
+    if(!cell||(!cell.revealed&&!review)||cell.mine)return;
+    const hint=document.getElementById('board-hint');
+    const grid=document.getElementById('grid');if(!hint||!grid)return;
+    grid.children[r*g.cols+c]?.classList.add('inspect-source');
+    if(cell.dead){hint.textContent='This tile was cleared by SPYWARE. Its clue is unavailable.';return;}
+    if(!review&&g.hasModifier('cryptic')&&cell.adjacent>=4){hint.textContent='This clue is hidden by CORRUPT_DATA. Use surrounding clues; this tile cannot clear neighbors.';return;}
+    let flags=0,covered=0;
+    for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){
+      if(!dr&&!dc)continue;
+      const nr=r+dr,nc=c+dc,neighbor=g.board[nr]?.[nc];if(!neighbor)continue;
+      if(neighbor.flagged)flags++;
+      else if(!neighbor.revealed)covered++;
+      grid.children[nr*g.cols+nc]?.classList.add('inspect-neighbor');
+    }
+    const count=cell.adjacent;
+    const detail=review?'Review your flags against the revealed board.':!covered?'No covered neighbors remain.':flags===count?'Reveal this number to clear unflagged neighbors. Wrong flags can hit a mine.':flags>count?'Too many flags. Check their positions.':'Match the clue with flags before clearing its neighbors.';
+    hint.textContent=`${count} adjacent mine${count===1?'':'s'} · ${flags} flag${flags===1?'':'s'} · ${detail}`;
   }
 
   getCellEl(e){const el=e.target.closest('.cell');if(!el)return null;return{el,r:+el.dataset.r,c:+el.dataset.c};}
 
   handleClick(e){
-    const t=this.getCellEl(e);if(!t||this.game.gameOver)return;
+    const t=this.getCellEl(e);if(!t||this.game.gameOver||this._paused)return;
+    if(this.game.dailyDate){
+      this.advanceClock();if(this.game.gameOver)return;
+      if(this.game.firstClick){
+        if(t.r!==DAILY_BOARD.startRow||t.c!==DAILY_BOARD.startCol){this.showToast('Begin at the marked Start tile.');return;}
+        this._beginDailyAttempt();
+      }
+    }
+    this._focusCell={r:t.r,c:t.c};
     sfx.init();
     const cell=this.game.board[t.r][t.c];
-    if(this.game.hasModifier('fog')&&!cell.revealed&&!this.game.isVisible(t.r,t.c))return;
+    if(this.game.firstClick)this.timerLastTick=Date.now();
     const wasChord=cell.revealed;
+    if(wasChord)this.inspectCell(t.r,t.c);
     const results=wasChord?this.game.chord(t.r,t.c):this.game.reveal(t.r,t.c);
     if(!results.length)return;
 
@@ -3389,34 +4001,23 @@ class GameUI{
 
     if(this.game.consumeSurge())this.triggerSurge();
 
-    if(results[0]?.shieldBlocked){
-      sfx.shieldBlock();this.showToast('FIREWALL absorbed','var(--num-2)');this.setFlavor(NARRATOR.react('shieldBlock')||'');this.renderBoard();return;
-    }
-    if(results[0]?.scapegoatBlocked){
-      sfx.shieldBlock();this.showToast('BLOATWARE absorbed / time halved +5s','var(--danger)');this.renderBoard();return;
-    }
-    if(results[0]?.mine){
-      if(results[0]?.chordPenalty){
-        sfx.chordFail();
-        this.game.timeRemaining=Math.max(0,this.game.timeRemaining-1);
-        this.showToast('CHORD DISABLED 3s / -1s','var(--danger)');
-        const overlay=document.createElement('div');overlay.className='chord-disabled-overlay';
-        document.body.appendChild(overlay);
-        setTimeout(()=>overlay.remove(),700);
-      }
+    const hit=results.find(result=>result.mine);
+    if(hit){
+      if(results[0]?.chordPenalty){sfx.chordFail();this.showToast('A flag was misplaced.');}
       if(this._cheats.invincible){
-        const cell=this.game.board[t.r][t.c];
-        cell.revealed=false;this.game.revealedCount--;cell.mine=false;this.game.gameOver=false;
-        cell.adjacent=this.game.countAdj(t.r,t.c);
-        for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const nr=t.r+dr,nc=t.c+dc;if(nr>=0&&nr<this.game.rows&&nc>=0&&nc<this.game.cols&&!this.game.board[nr][nc].mine)this.game.board[nr][nc].adjacent=this.game.countAdj(nr,nc);}
-        this.showToast('BLOCKED','#888');this.renderBoard();return;
+        const cell=this.game.board[hit.r][hit.c];
+        cell.mine=false;cell.revealed=false;this.game.mineCount--;this.game.revealedCount--;this.game.gameOver=false;
+        for(let r=0;r<this.game.rows;r++)for(let c=0;c<this.game.cols;c++)this.game.board[r][c].adjacent=this.game.countAdj(r,c);
+        this.showToast('Mine removed in developer mode');this.renderBoard();return;
       }
-      this.onMineHit(t.r,t.c);return;
+      this.onMineHit(hit.r,hit.c);return;
     }
+    if(results.some(result=>result.shieldBlocked)){sfx.shieldBlock();this.showToast('FIREWALL absorbed a mine.');}
+    if(results.some(result=>result.scapegoatBlocked)){sfx.shieldBlock();this.showToast('BLOATWARE absorbed a mine. Time reduced.');}
 
     wasChord?sfx.chordSuccess():sfx.reveal();
     const now=Date.now();
-    const comboWindow=this.game.gameClass==='samson'?1000:800;
+    const comboWindow=this.game.dailyDate?0:this.game.gameClass==='samson'?1000:800;
     if(now-this.lastRevealTime<comboWindow){
       this.comboCount++;
       if(this.comboCount>=3){
@@ -3443,23 +4044,24 @@ class GameUI{
       if(cellEl)cellEl.classList.add(revealClass);
     });
 
-    if(this.game.gameWon){this.stopTimer();sfx.levelComplete();setTimeout(()=>this.showLevelComplete(),500);}
+    if(this.game.gameWon){this.stopTimer();sfx.levelComplete();this._queueResult(500);}
   }
 
   handleRightClick(e){
-    const t=this.getCellEl(e);if(!t||this.game.gameOver)return;
+    const t=this.getCellEl(e);if(!t||this.game.gameOver||this._paused)return;
+    if(this.game.dailyDate){this.advanceClock();if(this.game.gameOver)return;if(this.game.firstClick){this.showToast('Reveal Start before placing flags.');return;}}
+    if(this.game.gameClass==='solomon'&&this.game.firstClick){this.showToast('Reveal a tile before placing Solomon flags.');return;}
+    this._focusCell={r:t.r,c:t.c};
     const cell=this.game.board[t.r][t.c];
-    if(this.game.hasModifier('fog')&&!cell.revealed&&!this.game.isVisible(t.r,t.c))return;
     sfx.init();const was=cell.flagged;
     if(this.game.toggleFlag(t.r,t.c)){
       if(this.game.gameClass==='solomon'&&!was&&!this.game.firstClick){
         if(cell.mine){
-          this.game.timeRemaining=Math.min(this.game.timeRemaining+3,this.game.maxTime+30);
-          this.showToast('+3s','var(--accent)');sfx.flag();
+          if(!cell.flagRewarded){cell.flagRewarded=true;this.game.timeRemaining+=3;this.showToast('+3s','var(--accent)');}
+          sfx.flag();
         }else{
-          cell.flagged=false;
           this.game.gameOver=true;this.game.gameWon=false;
-          this.onMineHit(t.r,t.c);return;
+          this.onMineHit(t.r,t.c,'wrongFlag');return;
         }
       }else{was?sfx.unflag():sfx.flag();}
       this.renderBoard();
@@ -3469,20 +4071,17 @@ class GameUI{
   triggerSurge(){
     this.container.classList.remove('surge-flash');void this.container.offsetWidth;
     this.container.classList.add('surge-flash');
-    this.showToast('SURGE','var(--danger)');
+    this.showToast('Clock now runs 25% faster. Clues stay the same.','var(--danger)');
     sfx.explosion();
     setTimeout(()=>this.container.classList.remove('surge-flash'),900);
   }
 
-  onMineHit(r,c){
+  onMineHit(r,c,reason='mine'){
+    this.game.lossReason=reason;this.game.hitCell={r,c};
     sfx.explosion();
     this.wrapper.classList.remove('shake');void this.wrapper.offsetWidth;
     this.wrapper.classList.add('shake');
     setTimeout(()=>this.wrapper.classList.remove('shake'),400);
-
-    for(let row=0;row<this.game.rows;row++)
-      for(let col=0;col<this.game.cols;col++)
-        if(this.game.board[row][col].mine)this.game.board[row][col].revealed=true;
 
     this.renderBoard();
     const idx=r*this.game.cols+c;
@@ -3491,7 +4090,7 @@ class GameUI{
 
     this.setFlavor(NARRATOR.react('gameOver')||'');
     this.stopTimer();
-    setTimeout(()=>this.showGameOver(),900);
+    this._queueResult(900);
   }
 
   showCombo(x,y,count){
@@ -3504,19 +4103,25 @@ class GameUI{
   }
 
   showToast(msg,color){
+    document.querySelectorAll('.toast-msg').forEach(el=>el.remove());
     const el=document.createElement('div');
     el.className='toast-msg';el.textContent=msg;
+    el.setAttribute('role','status');
     el.style.color=color||'var(--accent)';
     document.body.appendChild(el);
-    setTimeout(()=>el.remove(),1000);
+    setTimeout(()=>el.remove(),2400);
   }
 
   showLevelComplete(){
-    const g=this.game;
-    const shardBonus=10*(g.level+1)+Math.floor(g.timeRemaining/5);
+    if(this.game.dailyDate){this.showDailyResult();return;}
+    if(!this._runActive||!this.game.gameWon||document.getElementById('modal'))return;
+    const g=this.game;this.stopTimer();
+    const baseBonus=10*(g.level+1)+Math.floor(g.timeRemaining/5);
+    const shardBonus=g.completionBonus??Math.floor(baseBonus*(g.gameClass==='manna'?2:1)*(g.bargainCurseTime>0?.5:1));
     const isLast=g.level>=g.totalDepths-1;
     const justUnlockedHard=isLast&&!g.hardMode&&localStorage.getItem('sweeper_hardUnlocked')!=='1';
-    if(justUnlockedHard)localStorage.setItem('sweeper_beatNormal','1');
+    if(justUnlockedHard){localStorage.setItem('sweeper_beatNormal','1');localStorage.setItem('sweeper_hardUnlocked','1');}
+    if(isLast)this._recordRun(true);
     const elapsed=this.levelStartTime?Math.floor((Date.now()-this.levelStartTime)/1000):60;
     const narratorLine=NARRATOR.react('levelComplete',{level:g.level,elapsed});
     this.setFlavor(narratorLine||'');
@@ -3524,7 +4129,7 @@ class GameUI{
     // Preview next level modifiers
     let nextModsHTML='';
     if(!isLast&&g.hardMode){
-      const preview=rollModifiers(g.level+1);
+      const preview=g._nextModifiers||rollModifiers(g.level+1);
       g._nextModifiers=preview;
       nextModsHTML=`<div class="modifier-preview-label">Next Level</div>
         <div class="modifier-preview">
@@ -3547,7 +4152,8 @@ class GameUI{
     ];
     cursedShop.push({id:'tithe',glyph:ICONS.tithe_glyph,name:'TROJAN',price:36,cursed:true});
     let items;
-    if(g.gameClass==='eden'){
+    if(this._shopItems){items=this._shopItems;}
+    else if(g.gameClass==='eden'){
       const shuffled=[...cursedShop].sort(()=>Math.random()-0.5);
       items=shuffled.slice(0,3);
     }else{
@@ -3559,8 +4165,10 @@ class GameUI{
       items=pool.sort(()=>Math.random()-0.5).slice(0,3);
     }
 
+    this._shopItems=items;
+    this._autosave();
     const lastTitle=g.hardMode?'SYSTEM CLEARED':'ALL SECTORS SWEPT';
-    const lastFlavor=justUnlockedHard?'Four levels cleared. A new file has appeared on your system.<br><br><span style="color:var(--accent);font-family:var(--font-mono);">Check C:\\ or the Desktop.</span>':(g.hardMode?'All levels swept. Process complete. Session terminated cleanly.':'Four levels cleared. Process complete.');
+    const lastFlavor=justUnlockedHard?'Four levels cleared. ROOT.ACCESS and two new modules are now available from the menu.':(g.hardMode?'All levels swept. Process complete. Session terminated cleanly.':'Four levels cleared. Process complete.');
 
     let html=`<div class="modal-overlay" id="modal"><div class="modal level-complete">
       <h2>${isLast?lastTitle:'Level '+(g.level+1)+' Cleared'}</h2>
@@ -3574,14 +4182,14 @@ class GameUI{
       html+=`<div class="shop-header">${shopLine||'DEPENDENCIES'}</div>
         <div class="shop-shards" id="shop-shards">${g.shards} keys</div>
         <div class="shop-grid">
-          ${items.map(p=>`<div class="shop-item ${p.cursed?'cursed':''} ${g.shards<p.price?'cant-afford':''}" data-pick="${p.id}" data-price="${p.price}" title="${p.name}" role="button" tabindex="${g.shards<p.price?'-1':'0'}" aria-disabled="${g.shards<p.price}" aria-label="${p.name}, ${p.price} keys${p.cursed?' (cursed)':''}">
+          ${items.map(p=>`<div class="shop-item ${p.cursed?'cursed':''} ${p.bought?'bought':g.shards<p.price?'cant-afford':''}" data-pick="${p.id}" data-price="${p.price}" title="${p.name}" role="button" tabindex="${g.shards<p.price?'-1':'0'}" aria-disabled="${g.shards<p.price}" aria-label="${p.name}, ${p.price} keys${p.cursed?' (cursed)':''}">
             <div class="s-name">${p.name}</div>
-            <div class="s-price" aria-hidden="true">${p.price}&#x26BF;</div>
+            <div class="s-price" aria-hidden="true">${p.bought?'Installed':p.price+' keys'}</div><div class="s-desc">${GAME_TOOLS[p.id].desc}</div>
           </div>`).join('')}
         </div>
         <button class="btn btn-primary shop-descend" id="shop-descend">Continue</button>`;
     }else{
-      html+=`<button class="btn btn-primary" id="modal-action">${justUnlockedHard?'Return':'Next Level'}</button>`;
+      html+=`<button class="btn btn-primary" id="modal-action">Back to menu</button>`;
     }
     html+='</div></div>';
     const _mt=document.body.classList.contains('exe-mode')&&document.getElementById('exe-win-sweeper')||document.body;
@@ -3590,8 +4198,7 @@ class GameUI{
     if(isLast){
       document.getElementById('modal-action').addEventListener('click',()=>{
         document.getElementById('modal').remove();
-        this.game.reset();
-        if(justUnlockedHard){this.showStart();}else{this.startLevel();}
+        writeStored('sweeper_autosave',null);this._runActive=false;this.showStart();
       });
     }else{
       const updateShop=()=>{
@@ -3600,11 +4207,12 @@ class GameUI{
         document.querySelectorAll('.shop-item').forEach(el=>{
           const price=+el.dataset.price;
           if(!el.classList.contains('bought')){
-            el.classList.toggle('cant-afford',g.shards<price);
+            el.classList.toggle('cant-afford',g.shards<price);el.setAttribute('aria-disabled',String(g.shards<price));el.tabIndex=g.shards<price?-1:0;
           }
         });
       };
       document.querySelectorAll('.shop-item').forEach(el=>{
+        el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});
         el.addEventListener('click',()=>{
           if(el.classList.contains('bought')||el.classList.contains('cant-afford'))return;
           const price=+el.dataset.price;
@@ -3613,7 +4221,8 @@ class GameUI{
           const pickId=el.dataset.pick;
           g.powerups.push(pickId);
           if(pickId==='scapegoat')g.scapegoatCharges+=2;
-          el.classList.add('bought');
+          const item=this._shopItems.find(p=>p.id===pickId);if(item)item.bought=true;
+          el.classList.add('bought');el.setAttribute('aria-disabled','true');el.tabIndex=-1;el.querySelector('.s-price').textContent='Installed';this._autosave();
           sfx.powerup();
           if(el.closest('.shop-item')?.classList.contains('cursed')){const line=NARRATOR.react('boughtCursed');if(line)this.setFlavor(line);}
           else if(pickId==='shield'){const line=NARRATOR.react('boughtWard');if(line)this.setFlavor(line);}
@@ -3630,33 +4239,43 @@ class GameUI{
         this.startLevel();
       });
     }
+    this._focusResult(isLast?'#modal-action':'.shop-item:not(.cant-afford):not(.bought)');
   }
 
   showGameOver(){
-    sfx.gameOver();
+    if(this.game.dailyDate){this.showDailyResult();return;}
+    if(!this._runActive||!this.game.gameOver||this.game.gameWon||document.getElementById('modal'))return;
+    const alreadyRecorded=this._recorded;
+    this._recordRun(false);this._autosave();sfx.gameOver();
     const g=this.game;
     // Increment session count on failed run
     const s=parseInt(localStorage.getItem('sweeper_sessions')||'47',10)+1;
-    localStorage.setItem('sweeper_sessions',String(s));
+    if(!alreadyRecorded)localStorage.setItem('sweeper_sessions',String(s));
     const _mt=document.body.classList.contains('exe-mode')&&document.getElementById('exe-win-sweeper')||document.body;
     _mt.insertAdjacentHTML('beforeend',`
       <div class="modal-overlay" id="modal"><div class="modal game-over">
-        <h2>PROCESS TERMINATED</h2>
-        <div class="flavor">${NARRATOR.react('gameOver')||''}</div>
+        <h2>Run over</h2>
+        <div class="flavor">${g.timeRemaining<=0?'Time ran out.':g.lossReason==='wrongFlag'?'A flag was placed on a safe tile.':'A mine ended this run.'}</div>
         <div class="go-body">
           <div class="go-stat"><span class="go-k">Level</span><span class="go-v">${g.level+1} of ${g.totalDepths}</span></div>
           <div class="go-stat"><span class="go-k">Keys</span><span class="go-v">${g.shards}</span></div>
-          <div class="go-stat"><span class="go-k">Status</span><span class="go-v go-dead">FAULT</span></div>
+          <div class="go-stat"><span class="go-k">Safe tiles</span><span class="go-v">${g.board.flat().filter(c=>c.revealed&&!c.mine).length} / ${g.rows*g.cols-g.mineCount}</span></div>
         </div>
-        <div class="go-actions"><button class="btn btn-primary" id="modal-action">Restart Process</button></div>
+        <div class="go-actions"><button class="btn" id="game-review">Review board</button><button class="btn" id="game-menu">Menu</button><button class="btn btn-primary" id="modal-action">Try again</button></div>
       </div></div>`);
-    document.getElementById('modal-action').addEventListener('click',()=>{document.getElementById('modal').remove();this.game.reset();this.startLevel();});
+    document.getElementById('modal-action').addEventListener('click',()=>this._newRun());
+    document.getElementById('game-menu').addEventListener('click',()=>{this._runActive=false;this.showStart();});
+    document.getElementById('game-review').addEventListener('click',()=>this.renderBoard());
+    this._focusResult('#modal-action');
   }
 
   usePowerup(type){
-    sfx.init();if(this.game.gameOver)return;
+    sfx.init();if(this.game.gameOver||this._paused)return;
+    if(this.game.firstClick&&['compass','oracle','lantern','hex','tithe','pyre'].includes(type)){this.showToast('Reveal a tile first.');return;}
     if(type==='timewarp'){
-      if(this.game.useTimeWarp()){sfx.powerup();this.showToast('+20s','var(--accent)');this.renderBoard();}
+      const before=this.game.timeRemaining;
+      if(this.game.useTimeWarp()){sfx.powerup();this.showToast('+'+(this.game.timeRemaining-before)+'s','var(--accent)');this.renderBoard();}
+      else this.showToast('Clock is full. BACKUP kept for later.');
     }else if(type==='compass'){
       const flagged=this.game.useCompass();
       if(flagged){sfx.powerup();this.showToast(flagged+' marked','var(--num-4)');this.renderBoard();}
@@ -3664,136 +4283,118 @@ class GameUI{
       const result=this.game.useOracle();
       if(result){sfx.powerup();this.showToast(result.revealed.length+' safe / '+result.flagged.length+' marked','var(--num-6)');this.renderBoard();
         result.revealed.forEach(({r,c})=>{const idx=r*this.game.cols+c;const el=document.getElementById('grid')?.children[idx];if(el)el.classList.add('just-revealed');});
-        if(this.game.gameWon){this.stopTimer();sfx.levelComplete();setTimeout(()=>this.showLevelComplete(),400);}
+        if(this.game.gameWon){this.stopTimer();sfx.levelComplete();this._queueResult(400);}
       }
     }else if(type==='lantern'){
       const result=this.game.useLantern();
       if(result.status==='ok'&&result.revealed?.length){
         sfx.powerup();this.showToast('LANTERN LIT','#C8A878');this.renderBoard();
         result.revealed.forEach(({r,c})=>{const idx=r*this.game.cols+c;const el=document.getElementById('grid')?.children[idx];if(el)el.classList.add('just-revealed');});
-        if(this.game.gameWon){this.stopTimer();sfx.levelComplete();setTimeout(()=>this.showLevelComplete(),400);}
+        if(this.game.gameWon){this.stopTimer();sfx.levelComplete();this._queueResult(400);}
       }else{this.showToast('NO GOOD MARKS','var(--text-dim)');}
     }else if(type==='hex'){
       const results=this.game.useHex();
-      if(results){sfx.powerup();this.showToast('5 DEAD TILES REVEALED','var(--danger)');this.renderBoard();
+      if(results){sfx.powerup();this.showToast(results.length+' dead tiles revealed','var(--danger)');this.renderBoard();
         results.forEach(({r,c})=>{const idx=r*this.game.cols+c;const el=document.getElementById('grid')?.children[idx];if(el)el.classList.add('just-revealed');});
-        if(this.game.gameWon){this.stopTimer();sfx.levelComplete();setTimeout(()=>this.showLevelComplete(),400);}
+        if(this.game.gameWon){this.stopTimer();sfx.levelComplete();this._queueResult(400);}
       }
     }else if(type==='tithe'){
       const result=this.game.useTithe();
       if(result){sfx.powerup();this.showToast(result.added+' MARKED / '+result.removed+' WIPED / -20s','var(--danger)');this.renderBoard();
-        if(this.game.timeRemaining<=0){this.game.gameOver=true;this.game.gameWon=false;this.stopTimer();sfx.gameOver();setTimeout(()=>this.showGameOver(),600);}
+        if(this.game.timeRemaining<=0){this.game.gameOver=true;this.game.gameWon=false;this.stopTimer();sfx.gameOver();this._queueResult(600);}
       }
     }else if(type==='bargain'){
-      if(this.game.useBargain()){sfx.powerup();this.showToast('+30s / -50% KEYS 60s','var(--danger)');this.renderBoard();}
+      const before=this.game.timeRemaining;
+      if(this.game.useBargain()){sfx.powerup();this.showToast('+'+(this.game.timeRemaining-before)+'s / half keys for 60s','var(--danger)');this.renderBoard();}
+      else this.showToast('Clock is full. ADWARE kept for later.');
     }else if(type==='pyre'){
       const result=this.game.usePyre();
       if(result.status==='badFlag'){
-        sfx.explosion();this.showToast('PYRE CONSUMES','var(--danger)');this.onMineHit(result.r,result.c);
+        sfx.explosion();this.onMineHit(result.r,result.c,'wrongFlag');
       }else if(result.status==='ok'&&result.revealed?.length){
         sfx.powerup();this.showToast('PYRE BURNS','var(--danger)');this.renderBoard();
         result.revealed.forEach(({r,c})=>{const idx=r*this.game.cols+c;const el=document.getElementById('grid')?.children[idx];if(el)el.classList.add('just-revealed');});
-        if(this.game.gameWon){this.stopTimer();sfx.levelComplete();setTimeout(()=>this.showLevelComplete(),400);}
+        if(this.game.gameWon){this.stopTimer();sfx.levelComplete();this._queueResult(400);}
       }else{this.showToast('NO MARKS','var(--text-dim)');}
     }else if(type==='scapegoat'){
       this.showToast('Passive — '+this.game.scapegoatCharges+' charge'+(this.game.scapegoatCharges===1?'':'s'),'var(--danger)');
     }
+    if(type==='shield')this.showToast('FIREWALL protects you automatically.');
     if(this.game.consumeSurge())this.triggerSurge();
+    this._autosave();
   }
 
   startTimer(){
     this.stopTimer();
+    if(this._paused||!this._runActive||this.game.gameOver)return;
     this.timerLastTick=Date.now();
-    this.timerInterval=setInterval(()=>{
-      if(this.game.gameOver){this.stopTimer();return;}
-      const now=Date.now();const elapsed=Math.floor((now-this.timerLastTick)/1000);
-      if(elapsed<1)return;
-      this.timerLastTick=now-(((now-this.timerLastTick)%1000));
-      for(let i=0;i<elapsed;i++){this.game.tick();if(this.game.gameOver)break;}
-      const tv=document.getElementById('timer-val');
-      const tb=document.getElementById('timer-bar');
-      const mv=document.getElementById('mines-val');
-      const isLow=this.game.timeRemaining<=15;
+    this.timerInterval=setInterval(()=>this.advanceClock(),250);
+  }
 
-      if(tv){tv.textContent=this.fmtTime(this.game.timeRemaining);tv.className=`status-value ${isLow?'danger-text':'accent'}`;if(isLow)sfx.tick();}
-      if(tb){const pct=this.game.maxTime>0?(this.game.timeRemaining/this.game.maxTime*100):0;tb.style.width=pct+'%';tb.className=`timer-bar ${isLow?'low':''}`;}
-      if(mv)mv.textContent=this.game.mineCount-this.game.flagCount;
-      const shv=document.getElementById('shard-val');if(shv)shv.textContent=this.game.shards;
+  advanceClock(){
+    if(!this.timerInterval||this._paused||!this._runActive||this.game.gameOver)return;
+    const now=Date.now();
+    if(this.game.firstClick){this.timerLastTick=now;return;}
+    const milliseconds=Math.max(0,now-this.timerLastTick)+this.game._clockRemainder;
+    this.timerLastTick=now;
+    this.game._clockRemainder=milliseconds%1000;
+    const elapsed=Math.floor(milliseconds/1000);
+    if(elapsed<1)return;
+    for(let i=0;i<elapsed;i++){this.game.tick();if(this.game.gameOver)break;}
+    const tv=document.getElementById('timer-val');
+    const tb=document.getElementById('timer-bar');
+    const mv=document.getElementById('mines-val');
+    const isLow=this.game.timeRemaining<=15;
 
-      this.container.classList.toggle('danger',isLow&&!this.game.gameOver);
-      if(isLow&&!this.dangerFlavorShown){this.dangerFlavorShown=true;this.setFlavor(randomFlavor('danger'));}
+    if(tv){tv.textContent=this.fmtTime(this.game.timeRemaining);tv.className=`status-value ${isLow?'danger-text':'accent'}`;if(isLow)sfx.tick();}
+    if(tb){const pct=this.game.maxTime>0?(this.game.timeRemaining/this.game.maxTime*100):0;tb.style.width=pct+'%';tb.className=`timer-bar ${isLow?'low':''}`;}
+    if(mv)mv.textContent=this.game.mineCount-this.game.flagCount;
+    const shv=document.getElementById('shard-val');if(shv)shv.textContent=this.game.dailyDate?this.game.board.flat().filter(c=>c.revealed&&!c.mine).length:this.game.shards;
 
-      if(this.game.gameOver&&!this.game.gameWon){
-        this.setFlavor(NARRATOR.react('gameOver')||'');
-        this.stopTimer();sfx.gameOver();setTimeout(()=>this.showGameOver(),600);
-      }
-    },1000);
+    if(this.game.timeRemaining%5===0)this._autosave();
+    this.container.classList.toggle('danger',isLow&&!this.game.gameOver);
+    if(isLow&&!this.dangerFlavorShown){this.dangerFlavorShown=true;this.setFlavor(randomFlavor('danger'));}
+
+    if(this.game.gameOver&&!this.game.gameWon){
+      this.setFlavor(NARRATOR.react('gameOver')||'');
+      this.stopTimer();sfx.gameOver();this._queueResult(600);
+    }
   }
 
   stopTimer(){if(this.timerInterval){clearInterval(this.timerInterval);this.timerInterval=null;}}
   fmtTime(s){const m=Math.floor(s/60);return`${String(m).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
 
   saveGame(){
-    this.stopTimer();
-    const g=this.game;
-    const saves=JSON.parse(localStorage.getItem('sweeper_saves')||'{}');
-    const num=Object.keys(saves).length+1;
-    const name=`THOMAS_${String(num).padStart(3,'0')}.SAV`;
-    const winHTML=`
-    <div class="exe-titlebar exe-titlebar-alert"><div class="exe-ttext"><span>SWEEPER.EXE</span></div><div class="exe-tbtns"><button class="exe-tbtn exe-close-btn" title="Close window" aria-label="Close">&times;</button></div></div>
-    <div class="exe-modal-body">
-      <div class="exe-modal-icon">&#x1F4BE;</div>
-      <div class="exe-modal-text">Write session data to disk?<br><br><span style="font-family:monospace;font-size:10px;color:#404040;">${name}<br>Level ${g.level+1} &middot; ${g.shards} keys &middot; ${Math.floor(g.timeRemaining/60)}:${String(g.timeRemaining%60).padStart(2,'0')}</span></div>
-    </div>
-    <div class="exe-btn-row"><button class="exe-btn default" id="save-confirm">Write</button><button class="exe-btn" id="save-cancel">Cancel</button></div>`;
-    const win=this._renderWin('saveconfirm',winHTML);
-    win.querySelector('#save-cancel').addEventListener('click',()=>{this._closeWin('saveconfirm');this.startTimer();});
-    win.querySelector('#save-confirm').addEventListener('click',()=>{
-      const s={level:g.level,shards:g.shards,timeRemaining:g.timeRemaining,maxTime:g.maxTime,
-        rows:g.rows,cols:g.cols,mineCount:g.mineCount,revealedCount:g.revealedCount,
-        firstClick:g.firstClick,powerups:[...g.powerups],
-        hardMode:g.hardMode,totalDepths:g.totalDepths,gameClass:g.gameClass,
-        modifiers:g.modifiers.map(m=>m.id),surged:g.surged,bargainCurseTime:g.bargainCurseTime,scapegoatCharges:g.scapegoatCharges,timeMultiplier:g.timeMultiplier,
-        board:g.board.map(row=>row.map(c=>({mine:c.mine,revealed:c.revealed,flagged:c.flagged,adjacent:c.adjacent})))};
-      saves[name]=s;
-      localStorage.setItem('sweeper_saves',JSON.stringify(saves));
-      sfx.diskWrite();
-      this._closeWin('saveconfirm');
-      this.startTimer();
-    });
+    if(this.game.dailyDate){this.showToast('Daily progress saves automatically.');return;}
+    this.advanceClock();
+    if(!this._runActive||this.game.gameOver)return;
+    const saved=readStored('sweeper_saves',{});
+    const saves=saved&&typeof saved==='object'&&!Array.isArray(saved)?saved:{};
+    const name=`RUN_${Date.now()}.SAV`;
+    saves[name]=this._snapshot();
+    if(writeStored('sweeper_saves',saves)){sfx.diskWrite();this.showToast('Run saved in this browser.');}
+    else this.showToast('Could not save. Browser storage is full or unavailable.');
   }
 
   loadGame(){
-    this.showMyComputer('C:\\PROGRAM FILES\\SWEEPER\\SAVES');
+    this.pauseGame();
+    const saved=readStored('sweeper_saves',{});
+    const entries=Object.entries(saved&&typeof saved==='object'&&!Array.isArray(saved)?saved:{}).reverse();
+    const win=this._renderWin('savedgames',`<div class="exe-titlebar"><div class="exe-ttext">Saved games</div><div class="exe-tbtns"><button class="exe-tbtn exe-close-btn" aria-label="Close saved games">&times;</button></div></div><div class="exe-save-list">${entries.length?entries.map(([name,s],i)=>`<div class="exe-save-row"><div><strong>${this._validSave(s)?`Level ${s.level+1} · ${escapeHTML(classById(s.gameClass).name)}`:escapeHTML(name)}</strong><small>${this._validSave(s)?`${s.shards} keys · ${this.fmtTime(s.timeRemaining)} remaining`:'Save unavailable'}</small><small>${s?.savedAt?escapeHTML(new Date(s.savedAt).toLocaleString()):'Earlier save'}</small></div><div class="exe-control-group"><button class="exe-btn" data-load="${i}" ${this._validSave(s)?'':'disabled'}>Load</button><button class="exe-btn" data-delete="${i}" aria-label="Delete save ${i+1}">Delete</button></div></div>`).join(''):'<p>No manual saves yet. Use Save during a run to keep a separate copy.</p>'}<p class="exe-launch-note">Saves are stored on this browser and device.</p></div>`);
+    win.querySelectorAll('[data-load]').forEach(b=>b.addEventListener('click',()=>this._loadSaveFile(entries[+b.dataset.load][0])));
+    win.querySelectorAll('[data-delete]').forEach(b=>b.addEventListener('click',()=>{
+      const name=entries[+b.dataset.delete][0];
+      this._confirm('Delete this save?','This removes the manual save. Your current run and automatic save are kept.',()=>{delete saved[name];if(writeStored('sweeper_saves',saved))this.loadGame();else this.showToast('Could not delete this save.');});
+    }));
   }
 
   _loadSaveFile(name){
-    const saves=JSON.parse(localStorage.getItem('sweeper_saves')||'{}');
-    const s=saves[name];
-    if(!s)return;
-    const cls=classById(s.gameClass||'sweeper');
-    const timeStr=Math.floor(s.timeRemaining/60)+':'+String(s.timeRemaining%60).padStart(2,'0');
-    const winHTML=`
-    <div class="exe-titlebar exe-titlebar-alert"><div class="exe-ttext"><span>SWEEPER.EXE</span></div><div class="exe-tbtns"><button class="exe-tbtn exe-close-btn" title="Close window" aria-label="Close">&times;</button></div></div>
-    <div class="exe-modal-body">
-      <div class="exe-modal-icon">&#x1F4BE;</div>
-      <div class="exe-modal-text">Load session from disk?<br>Current progress will be lost.<br><br><span style="font-family:monospace;font-size:10px;color:#404040;">${name}<br>Level ${s.level+1} &middot; ${cls.name} &middot; ${s.shards} keys &middot; ${timeStr}</span></div>
-    </div>
-    <div class="exe-btn-row"><button class="exe-btn default" id="load-confirm">Load</button><button class="exe-btn" id="load-cancel">Cancel</button></div>`;
-    const win=this._renderWin('loadconfirm',winHTML);
-    win.querySelector('#load-cancel').addEventListener('click',()=>this._closeWin('loadconfirm'));
-    win.querySelector('#load-confirm').addEventListener('click',()=>{
-      this._closeWin('loadconfirm');
-      const g=this.game;
-      g.level=s.level;g.shards=s.shards||0;g.timeRemaining=s.timeRemaining;g.maxTime=s.maxTime;
-      g.rows=s.rows;g.cols=s.cols;g.mineCount=s.mineCount;g.revealedCount=s.revealedCount;
-      g.firstClick=s.firstClick;g.powerups=s.powerups||[];g.gameOver=false;g.gameWon=false;g.board=s.board;
-      g.hardMode=!!s.hardMode;g.totalDepths=s.totalDepths||(g.hardMode?5:4);g.gameClass=s.gameClass||'sweeper';
-      g.modifiers=(s.modifiers||[]).map(id=>MODIFIERS.find(m=>m.id===id)).filter(Boolean);
-      g.surged=!!s.surged;g.bargainCurseTime=s.bargainCurseTime||0;g._fracShards=0;g.scapegoatCharges=s.scapegoatCharges||0;g.timeMultiplier=s.timeMultiplier||1;
-      this.renderBoard();this.startTimer();
-    });
+    const saves=readStored('sweeper_saves',{});const saved=saves?.[name];
+    if(!this._validSave(saved)){this.showToast('This save cannot be opened.');return;}
+    const load=()=>this._restoreSave(saved);
+    if(this._runActive&&!this.game.gameOver)this._confirm('Load this saved run?','Your current run will be replaced. Manual saves stay available.',load);else load();
   }
+
 }
 
 const ui=new GameUI();
