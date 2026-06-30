@@ -9,7 +9,7 @@
 ## Aesthetic Direction
 - **Direction:** Found Footage / Analog Horror
 - **Core concept:** You found an old hard drive. There's one program on it: SWEEPER.EXE. The trial expired 25 years ago. The tape is still recording. Something is wrong with session 00047.
-- **Decoration level:** Layered — CRT scanlines, VHS artifacts, tracking distortion, film grain. Each layer contributes to the feeling that you're watching a recording of someone using this computer in 1998.
+- **Decoration level:** Restrained CRT scanlines and VHS artifacts around a readable game window. The taskbar CRT switch turns the effects off; reduced-motion preferences default to off.
 - **Mood:** Uncanny, eerie, something-is-wrong. A 90s computer that shouldn't still be running. Not jump-scare horror — slow-burn wrongness. The kind of video you'd find on a cursed VHS tape.
 - **Reference:** Windows 95/98 desktop, VHS camcorder recordings, analog horror YouTube (Local 58, Backrooms, Mandela Catalogue), cursed shareware
 
@@ -38,13 +38,13 @@
 - **Danger/blood:** #7A1414 / #B02020 (error dialogs, warnings, analog horror red)
 - **Selection:** #08106A (Win98 highlight blue)
 - **VHS overlays:** White at 30-70% opacity, red for REC
-- **Number colors (muted for CRT):** 1=#4878A8, 2=#488848, 3=#A83838, 4=#684488, 5=#A86828, 6=#287878, 7=#888840, 8=#686860
+- **Number colors:** Dark blue, green, red, purple, brown, teal, and charcoal on light gray tiles, with stronger contrast than the original muted palette
 - **Dark mode:** Everything is dark. The CRT is the only light source.
 
 ## Spacing
 - **Base unit:** Win98 standard pixel sizes (2px borders, 3px padding on titlebars)
 - **Density:** Tight — Win98 was pixel-efficient
-- **CRT bezel padding:** 30px (gives the monitor depth)
+- **CRT bezel padding:** 22px on desktop; removed on small screens to give the board room
 
 ## Layout
 - **Approach:** CRT monitor centered on black void
@@ -54,16 +54,16 @@
 - **Windows:** Draggable, stackable, closable — full Win98 window chrome
 
 ## Motion / Effects
-- **CRT scanlines:** Repeating 3px horizontal lines at 22% opacity
+- **CRT scanlines:** Repeating 3px horizontal lines with a low-opacity overlay
 - **CRT vignette:** Radial gradient darkening edges, plus subtle curved glass highlight
 - **Tracking line:** Single bright line sweeping top to bottom (7s loop)
 - **Chromatic aberration:** Red/cyan fringing at screen edges
 - **VHS tear:** Intermittent horizontal displacement (4.5s cycle, appears ~4% of time)
 - **Horizontal hold:** Occasional frame shift band (18s cycle)
 - **Glitch bar:** White flash band (11s cycle)
-- **Film grain:** Animated noise texture at 60% overlay blend
+- **Film grain:** Animated noise texture at 14% overlay blend
 - **Screen flicker:** Subtle opacity dips (8s cycle)
-- **Boot sequence:** BIOS POST text → Win98 splash with loading bar
+- **Boot sequence:** Optional BIOS POST and Win98 splash through Start → Restart. The page opens directly to the game launcher.
 - **Window jitter:** Error modals have subtle position jitter
 
 ## Key Design Decisions
@@ -77,10 +77,17 @@
 - Entire game wrapped in a CRT monitor running Win98
 - Found footage overlays make you feel like you're watching a tape
 - Session counter that started at 47 (of 3 allowed) — something already happened
-- Trial expired years ago but somehow still runs
-- Boot sequence with BIOS POST and "TRIAL EXPIRED" warning
+- Trial-expired references remain in optional boot and desktop files
+- Optional boot sequence with BIOS POST and "TRIAL EXPIRED" warning
 - VHS timestamp frozen in January 1998
 - System messages that feel slightly wrong
+
+## Playability
+- Start a run or resume directly from the launcher. Module descriptions explain the rule changes.
+- The first reveal starts the clock; Pause, Escape, closing the game window, or switching tabs pauses it.
+- The board uses one keyboard tab stop and visible Reveal/Flag/Inspect controls for touch. Clue inspection highlights neighbors and explains the current flag count.
+- On phones, large boards scroll inside the game window instead of shrinking into tiny cells.
+- Automatic and manual saves remain local to the browser.
 
 ## Decisions Log
 | Date | Decision | Rationale |
