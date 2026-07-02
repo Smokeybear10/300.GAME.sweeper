@@ -4153,8 +4153,8 @@ class GameUI{
 
   handleClick(e){
     const t=this.getCellEl(e);if(!t||this.game.gameOver||this._paused)return;
+    this.advanceClock();if(this.game.gameOver)return;
     if(this.game.dailyDate){
-      this.advanceClock();if(this.game.gameOver)return;
       if(this.game.firstClick){
         if(t.r!==DAILY_BOARD.startRow||t.c!==DAILY_BOARD.startCol){this.showToast('Begin at the marked Start tile.');return;}
         this._beginDailyAttempt();
@@ -4227,7 +4227,8 @@ class GameUI{
 
   handleRightClick(e){
     const t=this.getCellEl(e);if(!t||this.game.gameOver||this._paused)return;
-    if(this.game.dailyDate){this.advanceClock();if(this.game.gameOver)return;if(this.game.firstClick){this.showToast('Reveal Start before placing flags.');return;}}
+    this.advanceClock();if(this.game.gameOver)return;
+    if(this.game.dailyDate&&this.game.firstClick){this.showToast('Reveal Start before placing flags.');return;}
     if(this.game.gameClass==='solomon'&&this.game.firstClick){this.showToast('Reveal a tile before placing Solomon flags.');return;}
     this._focusCell={r:t.r,c:t.c};
     const cell=this.game.board[t.r][t.c];
@@ -4441,6 +4442,7 @@ class GameUI{
 
   usePowerup(type){
     sfx.init();if(this.game.gameOver||this._paused)return;
+    this.advanceClock();if(this.game.gameOver)return;
     if(this.game.firstClick&&['compass','oracle','lantern','hex','tithe','pyre'].includes(type)){this.showToast('Reveal a tile first.');return;}
     if(type==='timewarp'){
       const before=this.game.timeRemaining;
