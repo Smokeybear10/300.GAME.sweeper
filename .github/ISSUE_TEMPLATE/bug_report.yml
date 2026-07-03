@@ -1,0 +1,29 @@
+name: Bug report
+description: Something in the game does not work as expected.
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce it
+      description: Include the mode, module, and daily-board date or URL if relevant.
+      placeholder: "1. Open a new run with genesis.dll..."
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened, and what should happen?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and device
+      placeholder: Chrome on Windows, Safari on iPhone, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshot or console error
+      description: Optional. Include a screenshot or a relevant error from the browser console.

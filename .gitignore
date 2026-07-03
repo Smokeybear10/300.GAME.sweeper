@@ -2,6 +2,7 @@
 target/
 *.class
 blitzsweepclass/
+__pycache__/
 
 # IDE
 .idea/

@@ -16,6 +16,8 @@ python3 -m http.server 2500
 
 Open [http://localhost:2500](http://localhost:2500). No package install or build step.
 
+Want to help? See the [contribution guide](CONTRIBUTING.md) for a code map, checks, and [starter issues](https://github.com/Smokeybear10/300.GAME.sweeper/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22).
+
 ## What It Does
 
 **Learn to play**
@@ -106,6 +108,9 @@ index.html              # game, desktop shell, and styles
 assets/                 # audio, favicon, and screenshots
 DESIGN.md               # Windows 98 / CRT visual system
 cis1200/                # original Java Swing game
+scripts/check_web.py    # inline JavaScript and JSON-LD syntax checks
 ```
+
+Original browser code and contribution tooling: [MIT](LICENSE). Media and the Java coursework archive are excluded; see [license scope](LICENSE-SCOPE.md).
 
 Built by Thomas Ou
