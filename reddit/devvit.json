@@ -1,0 +1,63 @@
+{
+  "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
+  "name": "sweeper-daily",
+  "post": {
+    "dir": "dist/client",
+    "entrypoints": {
+      "default": {
+        "entry": "index.html",
+        "height": "tall"
+      },
+      "game": {
+        "entry": "index.html",
+        "height": "tall"
+      }
+    }
+  },
+  "server": {
+    "dir": "dist/server",
+    "entry": "index.cjs"
+  },
+  "permissions": {
+    "redis": true,
+    "reddit": true
+  },
+  "menu": {
+    "items": [
+      {
+        "label": "Post today's SWEEPER",
+        "description": "Create today's two-sector challenge, or open its existing post.",
+        "location": "subreddit",
+        "forUserType": "moderator",
+        "endpoint": "/internal/menu/daily-post"
+      }
+    ]
+  },
+  "triggers": {
+    "onAppInstall": "/internal/install"
+  },
+  "scheduler": {
+    "tasks": {
+      "daily-post": {
+        "endpoint": "/internal/scheduler/daily-post",
+        "cron": "0 0 * * *"
+      }
+    }
+  },
+  "settings": {
+    "subreddit": {
+      "daily-posts": {
+        "type": "boolean",
+        "label": "Post a new SWEEPER challenge every day at 00:00 UTC",
+        "defaultValue": false
+      }
+    }
+  },
+  "scripts": {
+    "dev": "npm run watch",
+    "build": "npm run build"
+  },
+  "dev": {
+    "subreddit": "sweeper_daily_dev"
+  }
+}
