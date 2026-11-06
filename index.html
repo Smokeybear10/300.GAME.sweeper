@@ -1280,6 +1280,33 @@ body.exe-mode .combo{color:var(--xta,#0A1163)!important;text-shadow:1px 1px 0 va
   100%{opacity:0;transform:translate(-50%,-60%) scale(0.95);}
 }
 
+.lesson-content{padding:18px;color:#171717;font:13px/1.5 Tahoma,sans-serif;}
+.lesson-heading{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:#484848;}
+.lesson-instruction{margin:12px 0;min-height:85px;}
+.lesson-instruction h2{font:700 18px/1.3 Tahoma,sans-serif;color:#102b5a;margin:0 0 8px;}
+.lesson-instruction p{margin:0;max-width:430px;}
+.lesson-board{display:grid;grid-template-columns:repeat(4,44px);gap:2px;width:max-content;margin:16px auto;padding:6px;background:#999;border:2px inset #ddd;}
+body.exe-mode .lesson-board .cell{width:44px;height:44px;min-width:44px;padding:0;font:700 19px Tahoma,sans-serif;touch-action:manipulation;}
+body.exe-mode .lesson-board .lesson-target{outline:3px solid #173b6c;outline-offset:-4px;color:#102b5a;}
+body.exe-mode .lesson-board .cell.lesson-start{font-size:12px;}
+.lesson-modes,.lesson-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+.lesson-modes [aria-pressed="true"]{background:#ddd;box-shadow:inset 1px 1px #404040;}
+.lesson-modes .lesson-suggested{outline:1px solid #173b6c;outline-offset:2px;}
+.lesson-feedback{font-size:12px;min-height:36px;margin:14px 0 0;color:#444;text-align:center;}
+.lesson-next{margin:0 0 18px;}
+body.exe-mode .exe-wrap .exe-win[data-win-id="lesson"]{width:min(500px,calc(100% - 24px));left:50%;top:32px;transform:translateX(-50%);}
+@media(max-width:700px){.lesson-content{padding:12px;}.lesson-heading{gap:6px;flex-wrap:wrap;}.lesson-instruction{min-height:104px;}.lesson-board{margin:12px auto;}.lesson-feedback{margin-top:10px;}}
+@media(max-width:700px) and (max-height:650px){.lesson-complete .lesson-board{grid-template-columns:repeat(4,36px);}.lesson-complete .lesson-instruction{min-height:0;}body.exe-mode .lesson-complete .lesson-board .cell{width:36px;height:36px;min-width:36px;}}
+@media(min-width:600px) and (max-height:500px){
+ body.exe-mode .exe-wrap .exe-win[data-win-id="lesson"]{width:min(680px,calc(100% - 24px));}
+ .lesson-content{display:grid;grid-template-columns:minmax(0,1fr) 198px;gap:10px 20px;padding:12px;}
+ .lesson-heading{grid-column:1/-1;}
+ .lesson-instruction{grid-column:1;grid-row:2;min-height:0;margin:0;}
+ .lesson-board{grid-column:2;grid-row:2/span 3;align-self:start;margin:0;}
+ .lesson-modes,.lesson-next{grid-column:1;grid-row:3;margin:0;}
+ .lesson-feedback,.lesson-actions{grid-column:1;grid-row:4;margin:0;min-height:0;}
+}
+
 /* Readable play surfaces inside the original desktop. */
 :root{--num-1:#153e9f;--num-2:#17652b;--num-3:#9c2020;--num-4:#49247f;--num-5:#773b12;--num-6:#075b62;--num-7:#343420;--num-8:#333333;}
 body.exe-mode{padding:20px 16px;}
@@ -1360,6 +1387,11 @@ body.exe-mode .daily-result .go-actions{display:flex;flex-wrap:wrap;gap:6px;just
 #daily-copy-text{box-sizing:border-box;width:100%;font:13px/1.5 monospace;padding:10px;resize:vertical;}
 body.exe-mode .cell.daily-start{background:#fff2ba!important;color:#102b5a!important;font-size:12px!important;font-weight:bold;outline:2px solid #102b5a;outline-offset:-4px;}
 .exe-control-group [aria-pressed="true"]{background:#d9d9d9!important;box-shadow:inset 1px 1px #404040!important;}
+.exe-stage-list{display:flex;gap:8px;align-items:center;}
+body.exe-mode .exe-game-window .level-bar{justify-content:space-between;align-items:center;}
+.exe-board-size{font:11px Tahoma,sans-serif;min-height:28px;padding:4px 8px;color:#111;background:#c0c0c0;border:1px solid #777;box-shadow:inset 1px 1px #fff,inset -1px -1px #555;white-space:nowrap;cursor:pointer;}
+.exe-board-size[aria-pressed="true"]{background:#e4e4e4;box-shadow:inset 1px 1px #555;}
+body.exe-mode .exe-game-window .game-screen{touch-action:pan-x pan-y pinch-zoom;overscroll-behavior:contain;}
 .exe-board-hint{font:12px/1.5 Tahoma,sans-serif;color:#353535;padding:0 12px 10px;text-align:center;}
 body.exe-mode .cell.inspect-neighbor{box-shadow:inset 0 0 0 2px #ad7c18!important;}
 body.exe-mode .cell.inspect-source{outline:2px solid #173b6c;outline-offset:-2px;z-index:1;}
@@ -1426,6 +1458,23 @@ body.exe-mode .exe-module:focus-visible{outline-offset:-3px;outline-color:#fff!i
  body.exe-mode .exe-game-window .exe-board-hint{height:40px;min-height:40px;}
 }
 @media(prefers-reduced-motion:reduce){#screen,body.exe-mode::after,body.exe-mode .game-container::after{animation:none!important;}.exe-track,.exe-glitchbar,.vhs-tear,.vhs-hold{display:none!important;}}
+
+body.exe-mode .shop-dialog .shop-reward{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:14px 16px 12px;font:13px/1.4 Tahoma,sans-serif;}
+body.exe-mode .shop-dialog .shop-next{margin:0 16px 12px;padding:10px;background:#d4d4d4;border:1px solid #888;font:12px/1.5 Tahoma,sans-serif;}
+.shop-next-heading{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.shop-next p{margin:5px 0 0;}.shop-next p span{color:#444;}
+.shop-modifiers{padding:0;margin:8px 0 0;list-style:none;}.shop-modifiers li{margin-top:5px;}.shop-modifiers strong{display:block;color:#731c1c;font-size:11px;}
+.shop-loadout{margin:0 16px 12px;font:12px/1.5 Tahoma,sans-serif;}.shop-loadout summary{cursor:pointer;padding:5px 0;}
+.shop-loadout ul{list-style:none;padding:0;margin:5px 0;}.shop-loadout li{padding:5px 0;border-top:1px solid #999;}.shop-loadout li span{display:block;color:#333;}.shop-effect{margin:6px 0;color:#731c1c;}
+body.exe-mode .shop-dialog .shop-header{border-bottom:0;text-transform:none;letter-spacing:0;font-size:13px;padding:10px 16px 0;}
+.shop-note{margin:5px 16px 10px;font:12px/1.5 Tahoma,sans-serif;color:#333;}
+body.exe-mode .shop-dialog .shop-item{font-family:Tahoma,sans-serif;letter-spacing:0;text-transform:none;}
+body.exe-mode .shop-dialog .shop-item .s-name{text-align:left;white-space:normal;}.shop-item .s-name small{font:11px Tahoma,sans-serif;color:#731c1c;}
+.shop-item-status{grid-column:1/-1;font:11px/1.4 Tahoma,sans-serif;color:#444;}
+body.exe-mode .shop-dialog .shop-item.cant-afford,body.exe-mode .shop-dialog .shop-item.bought{opacity:1;text-decoration:none;background:#b7b7b7;box-shadow:none;cursor:default;}
+body.exe-mode .shop-dialog .shop-item.cant-afford .shop-item-status{color:#731c1c;}
+body.exe-mode .shop-dialog .shop-actions{position:sticky;bottom:0;z-index:2;background:#bcbcbc;border-top:1px solid #888;padding:10px 14px;}
+body.exe-mode .shop-dialog .shop-descend{margin:0;width:100%;min-height:44px;text-transform:none;}
 
 </style>
 </head>
@@ -2572,14 +2621,14 @@ class GameUI{
       this._resizeTimer=setTimeout(()=>{if(this._runActive&&!document.getElementById('modal'))this.renderBoard();},120);
     });
     document.addEventListener('keydown',e=>{
-      if(e.key==='Escape'&&this._runActive&&!this.game.gameOver&&!document.querySelector('#exe-win-confirm,#exe-win-savedgames')){
+      if(e.key==='Escape'&&this._runActive&&!this.game.gameOver&&!document.querySelector('#exe-win-confirm,#exe-win-savedgames,#exe-win-lesson')){
         e.preventDefault();this._paused?this.resumeGame():this.pauseGame();
       }
     });
   }
 
   _newRun(){
-    this.stopTimer();this._closeWin('savedgames');this._closeWin('lore');
+    this.stopTimer();this._closeWin('savedgames');this._closeWin('lore');this._closeWin('lesson');
     this._recorded=false;this._shopItems=null;this._runStartedAt=Date.now();this._focusCell={r:0,c:0};
     if(this.game.dailyDate&&this._regularOptions){this.game.gameClass=this._regularOptions.gameClass;this.game.hardMode=this._regularOptions.hardMode;}
     this.game.dailyDate=null;this.game.dailyAttempt=0;this._setDailyURL(null);
@@ -2610,7 +2659,7 @@ class GameUI{
     if(!sweeperDailyDate(date))return;
     this.pauseGame();this._autosave();
     if(!this.game.dailyDate)this._regularOptions={gameClass:this.game.gameClass,hardMode:this.game.hardMode};
-    this.stopTimer();this._closeWin('savedgames');this._closeWin('lore');
+    this.stopTimer();this._closeWin('savedgames');this._closeWin('lore');this._closeWin('lesson');
     const g=new Game();g.dailyDate=date;g.reset();this.game=g;
     this._recorded=false;this._runStartedAt=Date.now();this._cheats={mines:false,invincible:false,infTime:false};
     this._setDailyURL(date);this.startLevel();
@@ -2768,7 +2817,7 @@ class GameUI{
   _restoreSave(s){
     if(!this._validSave(s)){this.showToast('This save cannot be opened. Start a new run.');return;}
     if(s.dailyDate&&!this.game.dailyDate)this._regularOptions={gameClass:this.game.gameClass,hardMode:this.game.hardMode};
-    this.stopTimer();this._closeWin('savedgames');this._closeWin('mycomp');this._closeWin('confirm');this._closeWin('lore');
+    this.stopTimer();this._closeWin('savedgames');this._closeWin('mycomp');this._closeWin('confirm');this._closeWin('lore');this._closeWin('lesson');
     const g=new Game();
     for(const key of Object.keys(g)){if(Object.hasOwn(s,key)&&!['board','modifiers','chordDisabledUntil'].includes(key))g[key]=s[key];}
     g.board=s.board.map(row=>row.map(c=>({...c})));g.modifiers=(s.modifiers||[]).map(id=>MODIFIERS.find(m=>m.id===id)).filter(Boolean);
@@ -3002,7 +3051,7 @@ class GameUI{
   _syncTaskbarApps(){
     const bar=document.getElementById('exe-taskbar-apps');
     if(!bar)return;
-    const LABELS={sweeper:'SWEEPER.EXE',lore:'LORE.HLP',mycomp:'My Computer',recycle:'Recycle Bin',sysalert:'System Alert',terminal:'TERMINAL'};
+    const LABELS={sweeper:'SWEEPER.EXE',lore:'LORE.HLP',lesson:'Learn to play',mycomp:'My Computer',recycle:'Recycle Bin',sysalert:'System Alert',terminal:'TERMINAL'};
     const ICONS={sweeper:'S',lore:'?',mycomp:'PC',recycle:'\u2718',sysalert:'!',terminal:'>_'};
     const wins=this.root.querySelectorAll('.exe-win');
     const apps=[];
@@ -3083,6 +3132,7 @@ class GameUI{
       win.dataset.winId=winId;
       wrap.appendChild(win);
     }
+    win.ontouchstart=null;win.onkeydown=null;
     win.classList.remove('exe-game-window');win.innerHTML=innerHTML;win.scrollTop=0;
     this._applyWinPosition(winId);
     this._raiseWin(winId);
@@ -3113,6 +3163,7 @@ class GameUI{
     const win=this.root.querySelector(`#exe-win-${winId}`);
     if(winId==='confirm')this._confirmAction=null;
     if(win){win.remove();sfx.winClose();}
+    if(winId==='lesson'&&win){this._lesson=null;this._lessonReturnFocus?.focus({preventScroll:true});this._lessonReturnFocus=null;}
     // If SWEEPER closed during game, stop the timer
     if(winId==='sweeper'&&this._runActive){this.advanceClock();if(!this._paused)this._pausedAt=Date.now();this._paused=!this.game.gameOver;this.stopTimer();this._autosave();}
     if(winId==='share')document.querySelector('#modal button:not([disabled]),#resume-game')?.focus({preventScroll:true});
@@ -3361,7 +3412,7 @@ class GameUI{
       dailyStats.attempts?'First attempt started. Replays count as practice.':'No attempts yet.';
     const win=this._renderWin('sweeper',`
       <div class="exe-titlebar"><div class="exe-ttext"><span class="exe-ic">S</span>SWEEPER.EXE</div><div class="exe-tbtns"><button class="exe-tbtn exe-close-btn" aria-label="Close game window">&times;</button></div></div>
-      <nav class="exe-toolbar" aria-label="Game menu"><button id="exe-saves">Saved games</button><button id="exe-help">How to play</button></nav>
+      <nav class="exe-toolbar" aria-label="Game menu"><button id="exe-lesson">${readStored('sweeper_learned',false)===true?'Practice basics':'Learn to play'}</button><button id="exe-saves">Saved games</button><button id="exe-help">Reference</button></nav>
       <div class="exe-launcher">
         <header class="exe-launch-header"><h1>SWEEPER.EXE</h1><p>Clear every safe tile before the clock runs out. Four levels, a growing minefield, and a few useful tools between rounds.</p></header>
         <section class="exe-daily-card" aria-label="Daily board">
@@ -3390,12 +3441,99 @@ class GameUI{
     win.querySelector('#exe-daily-copy').addEventListener('click',e=>this._copyDaily(this._dailyLink(dailyDate),e.currentTarget));
     win.querySelector('#exe-daily-today')?.addEventListener('click',()=>{this._setDailyURL(null);this.showStart();});
     win.querySelector('#exe-help').addEventListener('click',()=>this._openApp('lore'));
+    win.querySelector('#exe-lesson').addEventListener('click',()=>this.showLesson());
     win.querySelector('#exe-saves').addEventListener('click',()=>this.loadGame());
     win.querySelector('#exe-resume')?.addEventListener('click',()=>this._restoreSave(saved));
     win.querySelector('#exe-run').addEventListener('click',()=>{
       if(resumable)this._confirm('Start a new run?','This replaces your automatic save. Manual saves stay available.',()=>this._newRun());
       else this._newRun();
     });
+  }
+
+  showLesson(restart=false){
+    if(!restart&&document.getElementById('exe-win-lesson')){this._raiseWin('lesson');return;}
+    if(!restart)this._lessonReturnFocus=document.activeElement;
+    this.pauseGame();
+    const game=new Game();
+    game.rows=4;game.cols=4;game.mineCount=2;game.firstClick=false;
+    game.board=Array.from({length:4},(_,r)=>Array.from({length:4},(_,c)=>({mine:r===0&&c===1||r===3&&c===0,revealed:false,flagged:false,adjacent:0})));
+    for(let r=0;r<4;r++)for(let c=0;c<4;c++)game.board[r][c].adjacent=game.countAdj(r,c);
+    this._lesson={game,step:0,mode:'reveal',focus:10};
+    this._renderLesson();
+  }
+
+  _renderLesson(){
+    const lesson=this._lesson;if(!lesson)return;
+    const g=lesson.game,done=g.gameWon;
+    const steps=[
+      {title:'Open a safe area',text:'Reveal the marked Start tile. Empty tiles open their safe neighbors too.',r:2,c:2,mode:'reveal'},
+      {title:'Read a number',text:'Choose Inspect, then select the outlined 1. It touches one mine, including diagonally.',r:0,c:2,mode:'inspect'},
+      {title:'Mark the mine',text:'That 1 has only one covered neighbor. Choose Flag and mark the outlined tile.',r:0,c:1,mode:'flag'},
+      {title:'Clear around a clue',text:'This 1 now has one flag beside it. Choose Reveal and select the outlined 1 to open its other neighbors.',r:1,c:1,mode:'reveal'}
+    ];
+    const step=steps[Math.min(lesson.step,3)];
+    const saved=readStored('sweeper_autosave',null);
+    const win=this._renderWin('lesson',`
+      <div class="exe-titlebar"><div class="exe-ttext">Learn to play</div><div class="exe-tbtns"><button class="exe-tbtn exe-close-btn" aria-label="Close lesson">&times;</button></div></div>
+      <div class="lesson-content ${done?'lesson-complete':''}">
+        <div class="lesson-heading"><span>${done?'Complete':'Step '+(lesson.step+1)+' of 4'}</span><span>No timer · separate practice board</span></div>
+        <section class="lesson-instruction" aria-live="polite" aria-atomic="true"><h2 id="lesson-title">${done?'Every safe tile is clear':step.title}</h2><p>${done?'You cleared all 14 safe tiles. The two covered tiles were mines; you only needed to flag one of them.':step.text}</p></section>
+        <div class="lesson-board" role="grid" aria-label="Practice minefield" aria-rowcount="4" aria-colcount="4">${g.board.map((row,r)=>row.map((cell,c)=>{
+          const target=!done&&r===step.r&&c===step.c;
+          const neighbor=!done&&lesson.step===2&&Math.abs(r)<=1&&Math.abs(c-2)<=1&&(r!==0||c!==2);
+          const label=cell.flagged?'Flagged':cell.revealed?cell.adjacent+' adjacent mines':done&&cell.mine?'Mine':'Covered';
+          const text=cell.flagged?ICONS.stake:cell.revealed?(cell.adjacent?`<span style="color:${NUM_COLORS[cell.adjacent]}">${cell.adjacent}</span>`:''):done&&cell.mine?ICONS.skull:lesson.step===0&&target?'Start':'';
+          return `<button class="cell ${cell.revealed?'revealed':'unrevealed'} ${cell.flagged?'flagged':''} ${target?'lesson-target':''} ${lesson.step===0&&target?'lesson-start':''} ${neighbor?'inspect-neighbor':''} ${lesson.step===2&&r===0&&c===2?'inspect-source':''} ${done&&cell.mine?'review-mine':''}" data-r="${r}" data-c="${c}" role="gridcell" aria-rowindex="${r+1}" aria-colindex="${c+1}" aria-label="Row ${r+1}, column ${c+1}: ${label}${target?', next move':''}" tabindex="${!done&&r*4+c===lesson.focus?'0':'-1'}">${text}</button>`;
+        }).join('')).join('')}</div>
+        ${done?`<p class="lesson-next">In a run, your first reveal starts the clock. Clear four boards and spend your keys on tools between levels.</p><div class="lesson-actions"><button class="exe-btn" id="lesson-again">Practice again</button><button class="exe-btn default" id="lesson-play">${this._runActive?'Back to game':this._validSave(saved)?'Resume run':'Play a run'}</button></div>`:
+        `<div class="lesson-modes" role="group" aria-label="Practice action">${['reveal','flag','inspect'].map(mode=>`<button class="exe-btn ${mode===step.mode?'lesson-suggested':''}" data-lesson-mode="${mode}" aria-pressed="${lesson.mode===mode}">${mode[0].toUpperCase()+mode.slice(1)}</button>`).join('')}</div><p class="lesson-feedback" role="status">${lesson.step===0?'This lesson leaves your saved games untouched.':lesson.step===2?'Only the covered tile can contain that mine.':lesson.step===3?'Matching flags let you clear several tiles in one move.':'Inspect reads a clue without opening anything.'}</p>`}
+      </div>`);
+    win.setAttribute('role','dialog');win.setAttribute('aria-labelledby','lesson-title');
+    const board=win.querySelector('.lesson-board');
+    const act=e=>{const cell=e.target.closest('.cell');if(cell)this._lessonAction(+cell.dataset.r,+cell.dataset.c);};
+    board.addEventListener('click',act);
+    board.addEventListener('contextmenu',e=>{e.preventDefault();const cell=e.target.closest('.cell');if(cell)this._lessonAction(+cell.dataset.r,+cell.dataset.c,'flag');});
+    board.addEventListener('focusin',e=>{const cell=e.target.closest('.cell');if(!cell)return;lesson.focus=+cell.dataset.r*4+(+cell.dataset.c);board.querySelectorAll('.cell').forEach(el=>el.tabIndex=el===cell?0:-1);});
+    board.addEventListener('keydown',e=>{
+      const cell=e.target.closest('.cell');if(!cell||done)return;
+      const r=+cell.dataset.r,c=+cell.dataset.c;
+      if(e.key.toLowerCase()==='f'){e.preventDefault();this._lessonAction(r,c,'flag');return;}
+      const offsets={ArrowUp:[-1,0],ArrowDown:[1,0],ArrowLeft:[0,-1],ArrowRight:[0,1]};
+      const offset=offsets[e.key];if(!offset)return;
+      e.preventDefault();board.children[Math.max(0,Math.min(3,r+offset[0]))*4+Math.max(0,Math.min(3,c+offset[1]))]?.focus();
+    });
+    win.onkeydown=e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();this._closeWin('lesson');}};
+    win.querySelectorAll('[data-lesson-mode]').forEach(button=>button.addEventListener('click',()=>{
+      lesson.mode=button.dataset.lessonMode;lesson.focus=step.r*4+step.c;this._renderLesson();
+    }));
+    win.querySelector('#lesson-again')?.addEventListener('click',()=>this.showLesson(true));
+    win.querySelector('#lesson-play')?.addEventListener('click',()=>{
+      this._closeWin('lesson');
+      const latestSave=readStored('sweeper_autosave',null);
+      if(this._runActive)this._openApp('sweeper');
+      else if(this._validSave(latestSave))this._restoreSave(latestSave);
+      else this._newRun();
+    });
+    (done?win.querySelector('#lesson-play'):board.children[lesson.focus])?.focus({preventScroll:true});
+  }
+
+  _lessonAction(r,c,mode=this._lesson?.mode){
+    const lesson=this._lesson;if(!lesson||lesson.game.gameWon)return;
+    const moves=[{r:2,c:2,mode:'reveal'},{r:0,c:2,mode:'inspect'},{r:0,c:1,mode:'flag'},{r:1,c:1,mode:'reveal'}];
+    const move=moves[lesson.step];
+    if(r!==move.r||c!==move.c||mode!==move.mode){
+      const hint=document.querySelector('#exe-win-lesson .lesson-feedback');
+      if(hint)hint.textContent=`Choose ${move.mode[0].toUpperCase()+move.mode.slice(1)}, then select the outlined ${lesson.step===0?'Start tile':lesson.step===1||lesson.step===3?'1':'covered tile'}.`;
+      return;
+    }
+    sfx.init();
+    if(lesson.step===0){lesson.game.reveal(r,c);sfx.reveal();}
+    if(lesson.step===2){lesson.game.toggleFlag(r,c);sfx.flag();}
+    if(lesson.step===3){lesson.game.chord(r,c);sfx.chordSuccess();}
+    lesson.step++;
+    const next=moves[lesson.step];if(next)lesson.focus=next.r*4+next.c;
+    if(lesson.game.gameWon){writeStored('sweeper_learned',true);sfx.levelComplete();}
+    this._renderLesson();
   }
 
   showSystemAlert(sessionStr){
@@ -3467,6 +3605,10 @@ class GameUI{
       <div class="exe-sb-cell">help system v2.1</div>
     </div>`;
     const win=this._renderWin('lore',winHTML);
+    const practice=document.createElement('button');practice.className='exe-btn';practice.textContent='Open practice board';
+    practice.addEventListener('click',()=>this.showLesson());
+    win.querySelector('[data-content="objective"] .exe-cbody').prepend(practice);
+    win.querySelector('[data-content="controls"] .exe-cbody').insertAdjacentHTML('beforeend','<div class="exe-kvr"><span class="exe-k">tile size</span><span class="exe-v">Larger tiles gives more room to tap. Scroll the board to reach its edges. Your size preference is remembered.</span></div>');
 
     win.querySelectorAll('.exe-topic').forEach(t=>{
       t.addEventListener('click',()=>{
@@ -3753,7 +3895,25 @@ class GameUI{
     if(this.game.dailyDate)document.querySelector('#grid .daily-start')?.focus({preventScroll:true});
   }
 
+  _toggleTileSize(){
+    const grid=document.getElementById('grid'),screen=grid?.parentElement;
+    if(!screen)return;
+    const focused=grid.contains(document.activeElement);
+    const gridRect=grid.getBoundingClientRect(),screenRect=screen.getBoundingClientRect();
+    const step=grid.firstElementChild.offsetWidth+1;
+    const center={x:(screenRect.left+screen.clientLeft+screen.clientWidth/2-gridRect.left-4)/step,y:(screenRect.top+screen.clientTop+screen.clientHeight/2-gridRect.top-4)/step};
+    this._largeTiles=!this._largeTiles;writeStored('sweeper_largeTiles',this._largeTiles);
+    this.renderBoard();
+    const nextGrid=document.getElementById('grid'),nextScreen=nextGrid.parentElement;
+    const nextGridRect=nextGrid.getBoundingClientRect(),nextScreenRect=nextScreen.getBoundingClientRect();
+    const nextStep=nextGrid.firstElementChild.offsetWidth+1;
+    nextScreen.scrollLeft+=nextGridRect.left+4+center.x*nextStep-(nextScreenRect.left+nextScreen.clientLeft+nextScreen.clientWidth/2);
+    nextScreen.scrollTop+=nextGridRect.top+4+center.y*nextStep-(nextScreenRect.top+nextScreen.clientTop+nextScreen.clientHeight/2);
+    if(!focused)document.getElementById('btn-tile-size').focus({preventScroll:true});
+  }
+
   renderBoard(){
+    clearTimeout(this._boardHoldTimer);this._boardHoldTimer=null;
     const g=this.game;
     const priorGrid=document.getElementById('grid');
     const keepFocus=!!priorGrid?.contains(document.activeElement);
@@ -3762,7 +3922,8 @@ class GameUI{
     if(this._paused)this._pausedBoardScroll=scroll;
     const wrapEl=this.root.querySelector('.exe-wrap');
     const winWidth=Math.min(720,wrapEl.clientWidth-(window.innerWidth<=700?12:110));
-    const cellSize=Math.max(28,Math.min(44,Math.floor((winWidth-42-g.cols)/g.cols),Math.floor((wrapEl.clientHeight-340)/g.rows)));
+    this._largeTiles??=readStored('sweeper_largeTiles',false)===true;
+    const cellSize=this._largeTiles?44:Math.max(28,Math.min(44,Math.floor((winWidth-42-g.cols)/g.cols),Math.floor((wrapEl.clientHeight-340)/g.rows)));
 
     let powerupsHTML='';
     if(g.powerups.length>0){
@@ -3800,7 +3961,7 @@ class GameUI{
       <div class="status-item"><span class="status-label">Time</span><span class="status-value ${isLow?'danger-text':'accent'}" id="timer-val">${this.fmtTime(g.timeRemaining)}</span></div>
       <div class="status-item"><span class="status-label">Mines left</span><span class="status-value" id="mines-val">${g.mineCount-g.flagCount}</span></div>
     </div>
-    <div class="level-bar">${g.dailyDate?`<span class="daily-attempt-label">${g.dailyAttempt>1?'Practice · attempt '+g.dailyAttempt:g.dailyAttempt===1?'First attempt':'Same starting tile for everyone'}</span>`:runesHTML}</div>
+    <div class="level-bar">${g.dailyDate?`<span class="daily-attempt-label">${g.dailyAttempt>1?'Practice · attempt '+g.dailyAttempt:g.dailyAttempt===1?'First attempt':'Begin at the marked tile'}</span>`:`<div class="exe-stage-list">${runesHTML}</div>`}<button class="exe-board-size" id="btn-tile-size" aria-pressed="${this._largeTiles}" title="Use larger tiles. Drag the board to move around it.">Larger tiles</button></div>
     ${modBarHTML}
     <div class="timer-bar-wrap"><div class="timer-bar ${isLow?'low':''}" id="timer-bar" style="width:${timerPct}%"></div></div>
     <div class="powerup-bar" id="powerup-bar">${powerupsHTML}</div>
@@ -3832,12 +3993,28 @@ class GameUI{
       }
     }
 
-    let touchTimer=null;
+    let touch=null,suppressTouchClick=false;
+    const cancelTouch=(suppressClick=false)=>{clearTimeout(this._boardHoldTimer);this._boardHoldTimer=null;if(suppressClick){suppressTouchClick=true;this._ignoreTouchClickUntil=Date.now()+750;}};
     grid.addEventListener('click',e=>{if(Date.now()<(this._ignoreTouchClickUntil||0)){e.preventDefault();return;}const t=this.getCellEl(e);if(!t)return;if(this.inputMode==='inspect'||g.gameOver){this.inspectCell(t.r,t.c);return;}this.inputMode==='flag'?this.handleRightClick(e):this.handleClick(e);});
     grid.addEventListener('contextmenu',e=>{e.preventDefault();if(Date.now()>=(this._ignoreTouchClickUntil||0))this.handleRightClick(e);});
-    grid.addEventListener('touchstart',e=>{if(this.inputMode==='inspect'||g.gameOver)return;touchTimer=setTimeout(()=>{this._ignoreTouchClickUntil=Date.now()+750;this.handleRightClick(e);},450);},{passive:true});
-    const cancelTouch=()=>clearTimeout(touchTimer);
-    grid.addEventListener('touchmove',cancelTouch,{passive:true});grid.addEventListener('touchend',cancelTouch,{passive:true});grid.addEventListener('touchcancel',cancelTouch,{passive:true});
+    grid.addEventListener('touchstart',e=>{
+      cancelTouch();touch=null;suppressTouchClick=false;
+      if(e.touches.length!==1){cancelTouch(true);return;}
+      if(this.inputMode==='inspect'||g.gameOver||this._paused||!this.getCellEl(e))return;
+      const first=e.touches[0];touch={x:first.clientX,y:first.clientY,id:first.identifier,held:false};
+      this._boardHoldTimer=setTimeout(()=>{
+        if(!grid.isConnected||this.game!==g||this._paused||!touch)return;
+        touch.held=true;cancelTouch(true);this.handleRightClick(e);
+      },450);
+    },{passive:true});
+    grid.addEventListener('touchmove',e=>{
+      if(!touch)return;
+      const point=e.touches[0];
+      if(e.touches.length!==1||point.identifier!==touch.id||Math.hypot(point.clientX-touch.x,point.clientY-touch.y)>8){cancelTouch(true);touch=null;}
+    },{passive:true});
+    grid.addEventListener('touchend',()=>{cancelTouch(suppressTouchClick||touch?.held===true);touch=null;suppressTouchClick=false;},{passive:true});
+    grid.addEventListener('touchcancel',()=>{cancelTouch(true);touch=null;},{passive:true});
+    win.ontouchstart=e=>{if(e.touches.length>1){cancelTouch(true);touch=null;}};
     grid.addEventListener('focusin',e=>{const cell=e.target.closest('.cell');if(!cell)return;this._focusCell={r:+cell.dataset.r,c:+cell.dataset.c};grid.querySelectorAll('.cell').forEach(el=>{el.tabIndex=el===cell?0:-1;});this.inspectCell(+cell.dataset.r,+cell.dataset.c);});
     grid.addEventListener('pointerover',e=>{if(e.pointerType==='touch')return;const t=this.getCellEl(e);if(t)this.inspectCell(t.r,t.c);});
     grid.addEventListener('pointerleave',()=>{if(this.inputMode!=='inspect')this.clearInspection();});
@@ -3856,6 +4033,7 @@ class GameUI{
       e.preventDefault();grid.children[nr*cols+nc]?.focus();
     });
     win.querySelector('#btn-new').addEventListener('click',()=>{this.pauseGame();this._autosave();this.showStart();});
+    win.querySelector('#btn-tile-size').addEventListener('click',()=>this._toggleTileSize());
     win.querySelector('#btn-save')?.addEventListener('click',()=>this.saveGame());
     win.querySelector('#btn-daily-link')?.addEventListener('click',e=>this._copyDaily(this._dailyLink(g.dailyDate),e.currentTarget));
     win.querySelector('#btn-pause').addEventListener('click',()=>g.gameOver?(g.gameWon?this.showLevelComplete():this.showGameOver()):this._paused?this.resumeGame():this.pauseGame());
@@ -4123,77 +4301,70 @@ class GameUI{
     if(justUnlockedHard){localStorage.setItem('sweeper_beatNormal','1');localStorage.setItem('sweeper_hardUnlocked','1');}
     if(isLast)this._recordRun(true);
     const elapsed=this.levelStartTime?Math.floor((Date.now()-this.levelStartTime)/1000):60;
-    const narratorLine=NARRATOR.react('levelComplete',{level:g.level,elapsed});
-    this.setFlavor(narratorLine||'');
+    this.setFlavor(NARRATOR.react('levelComplete',{level:g.level,elapsed})||'');
 
-    // Preview next level modifiers
     let nextModsHTML='';
     if(!isLast&&g.hardMode){
       const preview=g._nextModifiers||rollModifiers(g.level+1);
       g._nextModifiers=preview;
-      nextModsHTML=`<div class="modifier-preview-label">Next Level</div>
-        <div class="modifier-preview">
-          ${preview.map(m=>`<div class="mp-item"><div class="mp-icon">${m.icon}</div><div class="mp-name">${m.name}</div><div class="mp-desc">${m.desc}</div></div>`).join('')}
-        </div>`;
+      nextModsHTML=`<ul class="shop-modifiers">${preview.map(m=>`<li><strong>${m.name}</strong> ${m.desc}</li>`).join('')}</ul>`;
     }
 
-    const shop=[
-      {id:'timewarp',glyph:ICONS.time_glyph,name:'BACKUP',price:30},
-      {id:'shield',glyph:ICONS.shield_glyph,name:'FIREWALL',price:46},
-      {id:'compass',glyph:ICONS.compass_glyph,name:'SCANDISK',price:36},
-      {id:'oracle',glyph:ICONS.oracle_glyph,name:'DEFRAG',price:42},
-      {id:'lantern',glyph:ICONS.lantern_glyph,name:'TRACERT',price:48},
-    ];
-    const cursedShop=[
-      {id:'hex',glyph:ICONS.hex_glyph,name:'SPYWARE',price:40,cursed:true},
-      {id:'bargain',glyph:ICONS.bargain_glyph,name:'ADWARE',price:30,cursed:true},
-      {id:'scapegoat',glyph:ICONS.scapegoat_glyph,name:'BLOATWARE',price:46,cursed:true},
-      {id:'pyre',glyph:ICONS.pyre_glyph,name:'ROOTKIT',price:48,cursed:true},
-    ];
-    cursedShop.push({id:'tithe',glyph:ICONS.tithe_glyph,name:'TROJAN',price:36,cursed:true});
+    const shop=['timewarp','shield','compass','oracle','lantern'].map(id=>({id,...GAME_TOOLS[id]}));
+    const cursedShop=['hex','bargain','scapegoat','pyre','tithe'].map(id=>({id,...GAME_TOOLS[id]}));
     let items;
     if(this._shopItems){items=this._shopItems;}
     else if(g.gameClass==='eden'){
-      const shuffled=[...cursedShop].sort(()=>Math.random()-0.5);
-      items=shuffled.slice(0,3);
+      items=[...cursedShop].sort(()=>Math.random()-0.5).slice(0,3);
     }else{
       const pool=g.gameClass==='wraith'?shop.filter(p=>p.id!=='shield'):[...shop];
-      if(Math.random()<0.3){
-        const cursed=cursedShop[Math.floor(Math.random()*cursedShop.length)];
-        pool.push(cursed);
-      }
+      if(Math.random()<0.3)pool.push(cursedShop[Math.floor(Math.random()*cursedShop.length)]);
       items=pool.sort(()=>Math.random()-0.5).slice(0,3);
     }
-
     this._shopItems=items;
     this._autosave();
     const lastTitle=g.hardMode?'SYSTEM CLEARED':'ALL SECTORS SWEPT';
     const lastFlavor=justUnlockedHard?'Four levels cleared. ROOT.ACCESS and two new modules are now available from the menu.':(g.hardMode?'All levels swept. Process complete. Session terminated cleanly.':'Four levels cleared. Process complete.');
-
-    let html=`<div class="modal-overlay" id="modal"><div class="modal level-complete">
-      <h2>${isLast?lastTitle:'Level '+(g.level+1)+' Cleared'}</h2>
-      <div class="flavor">${isLast?lastFlavor:(FLAVORS.levelComplete[g.level]||'Level cleared.')}</div>
-      <div class="big-number">+${shardBonus}</div>
-      <div class="big-label">Keys recovered</div>`;
-
-    if(!isLast){
-      html+=nextModsHTML;
-      const shopLine=NARRATOR.react('shopOpen',{shards:g.shards});
-      html+=`<div class="shop-header">${shopLine||'DEPENDENCIES'}</div>
-        <div class="shop-shards" id="shop-shards">${g.shards} keys</div>
-        <div class="shop-grid">
-          ${items.map(p=>`<div class="shop-item ${p.cursed?'cursed':''} ${p.bought?'bought':g.shards<p.price?'cant-afford':''}" data-pick="${p.id}" data-price="${p.price}" title="${p.name}" role="button" tabindex="${g.shards<p.price?'-1':'0'}" aria-disabled="${g.shards<p.price}" aria-label="${p.name}, ${p.price} keys${p.cursed?' (cursed)':''}">
-            <div class="s-name">${p.name}</div>
-            <div class="s-price" aria-hidden="true">${p.bought?'Installed':p.price+' keys'}</div><div class="s-desc">${GAME_TOOLS[p.id].desc}</div>
-          </div>`).join('')}
-        </div>
-        <button class="btn btn-primary shop-descend" id="shop-descend">Continue</button>`;
+    const carryTime=g.gameClass==='wraith'?0:Math.floor(g.timeRemaining*0.3);
+    const loadoutHTML=()=>{
+      const held=[...g.powerups];
+      if(g.gameClass==='wraith'&&!held.includes('shield'))held.push('shield');
+      const counts=held.reduce((all,id)=>({...all,[id]:(all[id]||0)+1}),{});
+      const entries=Object.entries(counts);
+      const tools=entries.map(([id,count])=>`<li><strong>${GAME_TOOLS[id].name}${id==='scapegoat'?' · '+g.scapegoatCharges+' hits':count>1?' × '+count:''}</strong><span>${GAME_TOOLS[id].desc}</span></li>`).join('');
+      const curse=g.bargainCurseTime>0?`<p class="shop-effect">ADWARE remains active: half the keys for ${g.bargainCurseTime} more seconds.</p>`:'';
+      const slowdown=g.gameClass==='eden'?`<p class="shop-effect">These held dependencies slow the clock by ${Math.round((1-g.edenSlowdown)*100)}%.</p>`:'';
+      return `<summary tabindex="0">Your tools for level ${g.level+2} · ${entries.length?entries.length+' type'+(entries.length===1?'':'s'):'none yet'}</summary><ul>${tools||'<li>No tools installed. You can keep your keys for the next shop.</li>'}</ul>${g.gameClass==='wraith'?'<p class="shop-effect">lazarus.dll supplies a fresh FIREWALL for every level.</p>':''}${curse}${slowdown}`;
+    };
+    const itemStatus=p=>p.bought?'Ready for the next level':g.shards<p.price?`Need ${p.price-g.shards} more keys`:'Install for the next level';
+    let html=`<div class="modal-overlay" id="modal"><div class="modal level-complete ${isLast?'':'shop-dialog'}">
+      <h2>${isLast?lastTitle:'Level '+(g.level+1)+' cleared'}</h2>`;
+    if(isLast){
+      html+=`<div class="flavor">${lastFlavor}</div><div class="big-number">+${shardBonus}</div><div class="big-label">Keys recovered</div><button class="btn btn-primary" id="modal-action">Back to menu</button>`;
     }else{
-      html+=`<button class="btn btn-primary" id="modal-action">Back to menu</button>`;
+      const next=LEVELS[g.level+1],extra=g.gameClass==='wraith'?1:0;
+      const baseTime=g.gameClass==='samson'?Math.floor(next.time*.85):next.time;
+      html+=`<div class="shop-reward"><span>+${shardBonus} keys recovered</span><strong id="shop-shards" aria-live="polite">${g.shards} keys available</strong></div>
+        <section class="shop-next" aria-label="Next level">
+          <div class="shop-next-heading"><strong>Level ${g.level+2} of ${g.totalDepths}</strong><span>${next.rows+extra} × ${next.cols+extra} · ${next.mines} mines</span></div>
+          <p>Starting clock <strong>${this.fmtTime(baseTime+carryTime)}</strong> <span>${carryTime?`(${this.fmtTime(baseTime)} + ${carryTime}s carried)`:`(${g.gameClass==='wraith'?'no time carry with lazarus.dll':'no time carried'})`}</span></p>
+          ${nextModsHTML}
+        </section>
+        <details class="shop-loadout" id="shop-loadout">${loadoutHTML()}</details>
+        <div class="shop-header">Choose your tools</div>
+        <p class="shop-note">Buy what helps your run, or save your keys. Unused tools carry forward.</p>
+        <div class="shop-grid">
+          ${items.map(p=>`<button type="button" class="shop-item ${p.cursed?'cursed':''} ${p.bought?'bought':g.shards<p.price?'cant-afford':''}" data-pick="${p.id}" data-price="${p.price}" ${p.bought||g.shards<p.price?'disabled':''} aria-disabled="${!!p.bought||g.shards<p.price}" aria-label="${p.bought?'Installed':'Install'} ${p.name}${p.bought?'':', '+p.price+' keys'}" aria-describedby="shop-desc-${p.id} shop-status-${p.id}">
+            <span class="s-name">${p.name}${p.cursed?' <small>Trade-off</small>':''}</span>
+            <span class="s-price" aria-hidden="true">${p.bought?'Installed':p.price+' keys'}</span><span class="s-desc" id="shop-desc-${p.id}">${GAME_TOOLS[p.id].desc}</span>
+            <span class="shop-item-status" id="shop-status-${p.id}">${itemStatus(p)}</span>
+          </button>`).join('')}
+        </div>
+        <div class="shop-actions"><button class="btn btn-primary shop-descend" id="shop-descend">Start level ${g.level+2}</button></div>`;
     }
     html+='</div></div>';
-    const _mt=document.body.classList.contains('exe-mode')&&document.getElementById('exe-win-sweeper')||document.body;
-    _mt.insertAdjacentHTML('beforeend',html);
+    const target=document.body.classList.contains('exe-mode')&&document.getElementById('exe-win-sweeper')||document.body;
+    target.insertAdjacentHTML('beforeend',html);
 
     if(isLast){
       document.getElementById('modal-action').addEventListener('click',()=>{
@@ -4202,44 +4373,43 @@ class GameUI{
       });
     }else{
       const updateShop=()=>{
-        const shardsEl=document.getElementById('shop-shards');
-        if(shardsEl)shardsEl.textContent=g.shards+' keys';
+        document.getElementById('shop-shards').textContent=g.shards+' keys available';
+        document.getElementById('shop-loadout').innerHTML=loadoutHTML();
         document.querySelectorAll('.shop-item').forEach(el=>{
-          const price=+el.dataset.price;
-          if(!el.classList.contains('bought')){
-            el.classList.toggle('cant-afford',g.shards<price);el.setAttribute('aria-disabled',String(g.shards<price));el.tabIndex=g.shards<price?-1:0;
-          }
+          const item=items.find(p=>p.id===el.dataset.pick);
+          const unavailable=!!item.bought||g.shards<item.price;
+          el.classList.toggle('bought',!!item.bought);
+          el.classList.toggle('cant-afford',!item.bought&&g.shards<item.price);
+          el.disabled=unavailable;el.setAttribute('aria-disabled',String(unavailable));
+          el.setAttribute('aria-label',item.bought?'Installed '+item.name:`Install ${item.name}, ${item.price} keys`);
+          el.querySelector('.s-price').textContent=item.bought?'Installed':item.price+' keys';
+          el.querySelector('.shop-item-status').textContent=itemStatus(item);
         });
       };
       document.querySelectorAll('.shop-item').forEach(el=>{
-        el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});
         el.addEventListener('click',()=>{
-          if(el.classList.contains('bought')||el.classList.contains('cant-afford'))return;
-          const price=+el.dataset.price;
-          if(g.shards<price)return;
-          g.shards-=price;sfx.purchase();
-          const pickId=el.dataset.pick;
-          g.powerups.push(pickId);
-          if(pickId==='scapegoat')g.scapegoatCharges+=2;
-          const item=this._shopItems.find(p=>p.id===pickId);if(item)item.bought=true;
-          el.classList.add('bought');el.setAttribute('aria-disabled','true');el.tabIndex=-1;el.querySelector('.s-price').textContent='Installed';this._autosave();
-          sfx.powerup();
-          if(el.closest('.shop-item')?.classList.contains('cursed')){const line=NARRATOR.react('boughtCursed');if(line)this.setFlavor(line);}
-          else if(pickId==='shield'){const line=NARRATOR.react('boughtWard');if(line)this.setFlavor(line);}
+          const item=items.find(p=>p.id===el.dataset.pick);
+          if(item.bought||g.shards<item.price)return;
+          g.shards-=item.price;sfx.purchase();
+          g.powerups.push(item.id);
+          if(item.id==='scapegoat')g.scapegoatCharges+=2;
+          item.bought=true;
+          this._autosave();sfx.powerup();
+          if(item.cursed){const line=NARRATOR.react('boughtCursed');if(line)this.setFlavor(line);}
+          else if(item.id==='shield'){const line=NARRATOR.react('boughtWard');if(line)this.setFlavor(line);}
           updateShop();
+          (document.querySelector('.shop-item:not(:disabled)')||document.getElementById('shop-descend')).focus({preventScroll:true});
         });
       });
       document.getElementById('shop-descend').addEventListener('click',()=>{
-        const carryTime=g.gameClass==='wraith'?0:Math.floor(g.timeRemaining*0.3);
         g.level++;g.initLevel();
-        // Use previewed modifiers if available (so descent matches what player saw)
         if(g._nextModifiers){g.modifiers=g._nextModifiers;g._nextModifiers=null;}
         if(carryTime>0){g.timeRemaining+=carryTime;g.maxTime+=carryTime;}
         document.getElementById('modal').remove();
         this.startLevel();
       });
     }
-    this._focusResult(isLast?'#modal-action':'.shop-item:not(.cant-afford):not(.bought)');
+    this._focusResult(isLast?'#modal-action':document.querySelector('.shop-item:not(:disabled)')?'.shop-item:not(:disabled)':'#shop-descend');
   }
 
   showGameOver(){

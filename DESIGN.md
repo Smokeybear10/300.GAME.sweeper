@@ -84,9 +84,11 @@
 
 ## Playability
 - Start a run or resume directly from the launcher. Module descriptions explain the rule changes.
+- Learn to play uses a separate, untimed board for revealing, inspecting, flagging, and clearing neighbors. It never replaces a saved run.
 - The first reveal starts the clock; Pause, Escape, closing the game window, or switching tabs pauses it.
 - The board uses one keyboard tab stop and visible Reveal/Flag/Inspect controls for touch. Clue inspection highlights neighbors and explains the current flag count.
-- On phones, large boards scroll inside the game window instead of shrinking into tiny cells.
+- On phones, large boards scroll inside the game window. The Larger tiles control sets 44-pixel targets and remembers the preference.
+- Between levels, the shop previews the next board and starting time alongside the carried tools and purchase costs.
 - Automatic and manual saves remain local to the browser.
 
 ## Decisions Log
