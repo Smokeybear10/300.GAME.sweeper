@@ -1,6 +1,6 @@
 # SWEEPER.EXE
 
-**Live demo: [sweeperexe.vercel.app](https://sweeperexe.vercel.app/)**
+**Live demo: [sweeper.play.thomasou.com](https://sweeper.play.thomasou.com/)**
 
 Timed Minesweeper with four-level runs, a shared daily board, and a Windows 98 desktop.
 
