@@ -1,0 +1,236 @@
+.cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  font:
+    700 clamp(12px, 4.5vw, 21px) / 1 "Lucida Console",
+    Monaco,
+    monospace;
+  border: 2px solid;
+  border-color: #f2f4e8 #727b68 #727b68 #f2f4e8;
+  background: #d0d3c7;
+  color: #172723;
+  box-shadow: inset -1px -1px #a5ad97;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-x pan-y;
+}
+.cell svg {
+  width: 62%;
+  height: 62%;
+  max-width: 26px;
+  max-height: 26px;
+  pointer-events: none;
+}
+.cell:focus-visible {
+  z-index: 6;
+  outline: 2px solid #263d93;
+  outline-offset: -3px;
+}
+.cell.unrevealed:hover {
+  background: #dfe4d2;
+}
+.cell.unrevealed:active {
+  border-color: #737e66 #eef0e4 #eef0e4 #737e66;
+}
+.cell.revealed {
+  border: 1px solid #a6af9a;
+  background: #dce0d3;
+  box-shadow: none;
+  cursor: default;
+}
+.cell.revealed[data-number="1"] {
+  color: #123d92;
+}
+.cell.revealed[data-number="2"] {
+  color: #1c6331;
+}
+.cell.revealed[data-number="3"] {
+  color: #a12228;
+}
+.cell.revealed[data-number="4"] {
+  color: #52358e;
+}
+.cell.revealed[data-number="5"] {
+  color: #753b1f;
+}
+.cell.revealed[data-number="6"] {
+  color: #07656b;
+}
+.cell.revealed[data-number="7"] {
+  color: #17251a;
+}
+.cell.revealed[data-number="8"] {
+  color: #48543d;
+}
+.cell.flagged {
+  background: #d5d7c5;
+}
+.cell.daily-start {
+  background: #ecedbf;
+  box-shadow: inset 0 0 0 2px #78823c;
+  animation: start-breathe 2.6s ease-in-out infinite;
+}
+.cell.daily-start::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed #6d8259;
+}
+.cell.daily-start .start-label {
+  font: 700 10px var(--mono);
+  color: #1f4e31;
+}
+.cell.linked {
+  background: #e6d4a7;
+  box-shadow:
+    inset 0 0 0 2px #a2803f,
+    inset -1px -1px #ad986c;
+}
+.cell.linked::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  bottom: 4px;
+  right: 4px;
+  background: #8b6728;
+}
+.cell.anchor {
+  box-shadow: inset 0 0 0 2px #90642c;
+}
+.cell.known-safe {
+  background: #bdd4d2;
+  box-shadow: inset 0 0 0 2px #437e7e;
+}
+.cell.known-safe::after {
+  content: "◇";
+  color: #23615e;
+  font-size: 19px;
+}
+.cell.inspect-source {
+  outline: 2px solid #243580;
+  outline-offset: -2px;
+  z-index: 5;
+}
+.cell.inspect-neighbor {
+  box-shadow: inset 0 0 0 2px #9c9b4a;
+}
+.cell.review-mine {
+  background: #c7cbbd;
+  border: 1px solid #a0a98f;
+  box-shadow: none;
+}
+.cell.mine-hit,
+.cell.wrong-flag {
+  background: #b74a3f;
+  border: 1px solid #822420;
+  color: #fff5d9;
+  box-shadow: inset 0 0 0 2px #df8b6b;
+}
+.cell.review-safe {
+  opacity: 0.6;
+}
+.cell.just-revealed {
+  animation: reveal-pop 0.2s ease-out both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+.cell.rootkit-reveal {
+  animation: rootkit-open 0.48s ease-out both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+.cell.flag-pop svg {
+  animation: flag-pop 0.17s ease-out;
+}
+.network-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  overflow: visible;
+}
+.network-lines line {
+  stroke: #8f6323;
+  stroke-width: 0.45;
+  stroke-dasharray: 1.2 1;
+  opacity: 0.58;
+}
+.network-lines circle {
+  fill: none;
+  stroke: #2d6437;
+  stroke-width: 0.65;
+}
+.rootkit-fired {
+  animation: network-fire 0.5s ease-out;
+}
+.mine-shake {
+  animation: mine-shake 0.2s ease-out;
+}
+@keyframes start-breathe {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 2px #78823c;
+  }
+  50% {
+    box-shadow: inset 0 0 0 3px #a8ae62;
+  }
+}
+@keyframes reveal-pop {
+  0% {
+    transform: scale(0.88);
+    background: #f4efd0;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes rootkit-open {
+  0% {
+    background: #e6ffc6;
+    box-shadow: inset 0 0 0 3px #a8ec84;
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes flag-pop {
+  0% {
+    transform: translateY(3px) scale(0.7);
+  }
+  70% {
+    transform: translateY(-2px) scale(1.07);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes network-fire {
+  0% {
+    box-shadow:
+      0 0 0 2px #c9efaa,
+      0 0 22px #b6df91;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+@keyframes mine-shake {
+  0%,
+  100% {
+    transform: none;
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
